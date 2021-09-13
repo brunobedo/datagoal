@@ -9,7 +9,7 @@ function[]=campo(tam)
 % Cria um grafico com o campo de futebol
 % Digite o nome da rotina "campo" na janela de comando
 
-if nargin==0,tam=[100 70];end
+if nargin==0,tam=[100 65];end
 
 %
 %

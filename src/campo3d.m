@@ -1,5 +1,5 @@
 function[]=campo3d(tam)
-if nargin==0,tam=[105 68];end
+if nargin==0,tam=[100 65];end
 %
 %
 comp=tam(1);larg=tam(2);
