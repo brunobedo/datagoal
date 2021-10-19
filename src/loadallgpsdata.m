@@ -68,12 +68,29 @@ switch selections.GPSType
         dat = [[1:length(x_coord)]',x_coord , y_coord];
        
     case 'WIMU'
-        rawdata = importwimu(playerdata);
-        mTime = rawdata(:,1:3);
-        LATITUDE = rawdata(:,5);
-        LONGITUDE = rawdata(:,6);
+
+%             # Versão enviada pelo Prof. João (Março/2021)
+%             rawdata = importwimu(playerdata);
+%             mTime = rawdata(:,1:3);
+%             LATITUDE = rawdata(:,5);
+%             LONGITUDE = rawdata(:,6);
+%             [x_coord, y_coord, lat_origin, long_origin] = GPS2Cart_GPSports(LATITUDE,LONGITUDE,matcalib);  
+%             dat = [[1:length(x_coord)]',x_coord , y_coord];
+        
+        % Versão enviada pelo Alberto (Out/2021)
+        rawdata = importdata(playerdata);
+        LATITUDE = rawdata.data(:,1); 
+        LONGITUDE = rawdata.data(:,2);
+        text = rawdata.textdata;
+        mTime = cell2mat(text(2:end,1));
+        mTime = mTime(:,1:end-4);
+        
+        
         [x_coord, y_coord, lat_origin, long_origin] = GPS2Cart_GPSports(LATITUDE,LONGITUDE,matcalib);  
-        dat = [[1:length(x_coord)]',x_coord , y_coord];
+        dat = [[1:length(x_coord)]',x_coord , y_coord];            
+
+            
+            
     otherwise 
         disp(' ')
         disp('This GPS brand is not available yet.')
@@ -87,7 +104,8 @@ end
             case 'Dvideo'
                 mTimes = [(0:size(dat,1)-1)/str2double(freq)]';
             case 'WIMU'
-                mTimes =  (mTime(:,1)*3600) + (mTime(:,2)*60) +mTime(:,3); %vetor do tempo de jogo ('xx:yy:zz')
+                mTime =  datevec(mTime); %vetor do tempo de jogo ('xx:yy:zz')
+                mTimes = (mTime(:,4)*3600) + (mTime(:,5)*60) +mTime(:,6); %vetor em segundos
             otherwise
                 mTime = datevec(LOCALTIME); %vetor do tempo de jogo ('xx:yy:zz')
                 mTimes = (mTime(:,4)*3600) + (mTime(:,5)*60) +mTime(:,6); %vetor em segundos
