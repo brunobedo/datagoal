@@ -65,13 +65,13 @@ global selections
 
         
 %       Distance in different speed ranges (meters)
-        velrange1 = find(0       <= veldat & veldat <= (7.1/3.6));      % 0-7.1 km·h-1 (walking), 
-        velrange2 = find((7.2/3.6) <  veldat & veldat <= (14.399/3.6)); % 7.2-14.3 km·h-1 (low-speed running - LSR)
-        velrange3 = find((14.4/3.6)<  veldat & veldat <= (19.79/3.6));  % 14.4-19.7km·h-1 (moderate-speed running - MSR)
-        velrange4 = find((19.9/3.6)<  veldat & veldat <= (25.2/3.6));   % 19.8-25.2 km·h-1 (high-speed running - HSR)
-        velrange5 = find(veldat > (25.21/3.6) );                        % >25.2 km·h-1 (sprinting - SPR);
-                                                                        % >14.4 km·h-1 (high-intensity activities - HIA)
-                                                                        % - >19.8 km·h-1 (very-high-intensity activities - VHIA) 
+        velrange1 = find(0       <= veldat & veldat <= (7.1/3.6));      % 0-7.1 kmï¿½h-1 (walking), 
+        velrange2 = find((7.2/3.6) <  veldat & veldat <= (14.399/3.6)); % 7.2-14.3 kmï¿½h-1 (low-speed running - LSR)
+        velrange3 = find((14.4/3.6)<  veldat & veldat <= (19.79/3.6));  % 14.4-19.7kmï¿½h-1 (moderate-speed running - MSR)
+        velrange4 = find((19.9/3.6)<  veldat & veldat <= (25.2/3.6));   % 19.8-25.2 kmï¿½h-1 (high-speed running - HSR)
+        velrange5 = find(veldat > (25.21/3.6) );                        % >25.2 kmï¿½h-1 (sprinting - SPR);
+                                                                        % >14.4 kmï¿½h-1 (high-intensity activities - HIA)
+                                                                        % - >19.8 kmï¿½h-1 (very-high-intensity activities - VHIA) 
 
 %       Number of sprints 
         n_s_local = diff(velrange5)~=1;
@@ -157,7 +157,7 @@ global selections
                     
         tit = {'Name','Total distance','Mean velocity','Max Velocity','Max Acel','Max Desacel','Distance walking'...
                'Dist. low-speed running - LSR.','Dist. Mmoderate-speed running - MSR','Dist. high-speed running - HSR','Dst. sprinting - SPR',...
-               'Dist. HSR + SPR','Nº Sprints',...
+               'Dist. HSR + SPR','Nï¿½ Sprints',...
                'Distance high acceleration','Distance high deceleration',...
                'Moving Average Distance 1min TD','Moving Average Distance 3min TD','Moving Average Distance 5min TD',...
                'Moving Average Distance 1min VHIA','Moving Average Distance 3min VHIA','Moving Average Distance 5min VHIA',...
@@ -204,7 +204,7 @@ global selections
         f2 = figure(2); clf; hold on; set(f2,'Name','Velocity','units','normalized','outerposition',[0 0 1 1])
         plot(vtempm,veldat,'LineWidth',0.5,'Color','k')
 
-        xlabel ('Time (min)'); ylabel ('Percentage (%)')
+        xlabel ('Time (min)'); ylabel ('Faixas de velocidade (m/s)')
         line ([0 max(vtempm)],[7.1/3.6 7.1/3.6],'LineWidth',1.5,'Color','k','LineStyle','- -');
         line ([0 max(vtempm)],[14.3/3.6 14.3/3.6],'LineWidth',1.5,'Color','k','LineStyle','- -');
         line ([0 max(vtempm)],[19.7/3.6 19.7/3.6],'LineWidth',1.5,'Color','k','LineStyle','- -');
@@ -252,7 +252,7 @@ global selections
             ave(1,1)=ave(1,1)*-1;
             
             % Ellipse rotation
-            giro=-acos(ave(1)); % Calculating angle (º) of ellipse rotation
+            giro=-acos(ave(1)); % Calculating angle (ï¿½) of ellipse rotation
             ex=sv1;             % X axis
             ey=sv2;             % T axis
             
@@ -278,7 +278,7 @@ global selections
             
         else
             % Ellipse rotation
-            giro=-acos(ave(1)); % Calculating angle (º) of ellipse rotation
+            giro=-acos(ave(1)); % Calculating angle (ï¿½) of ellipse rotation
             ex=sv1;             % X axis
             ey=sv2;             % T axis
             
@@ -337,7 +337,7 @@ global selections
                 dist_t = sum(normdat(gapsspm(q,1):gapsspm(q,2)));
                 t61(q,1) = text(p2(1,1),p2(1,2)+2,[num2str(round(dist_t,2)),' m'],'Color','Blue','FontWeight','bold','FontSize',20);
                 title({['Sprints direction'];[char(sct),' - ',ppname];['The athlete peformed ', num2str(round(d_range5,2)),' m sprinting']});
-                legend ([p6_f5(1,1)],'Direção e Distância do Sprint')
+                legend ([p6_f5(1,1)],'Direï¿½ï¿½o e Distï¿½ncia do Sprint')
             end
            
         else
