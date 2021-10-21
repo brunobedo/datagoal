@@ -75,8 +75,13 @@ global selections
 
 %       Number of sprints 
         n_s_local = diff(velrange5)~=1;
-        n_sprints = [sum(n_s_local(:) == 1)+1];
-                
+        n_sprints_pre = sum(n_s_local(:) == 1);
+        if n_sprints_pre ~= 0 
+            n_sprints = n_sprints_pre +1;
+        else
+            n_sprints = 0;
+        end 
+        
 %       Distance in differenc speed ranges (meters)
         d_range1 = sum(normdat(velrange1));
         d_range2 = sum(normdat(velrange2));
