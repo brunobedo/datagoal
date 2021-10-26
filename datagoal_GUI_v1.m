@@ -929,6 +929,7 @@ elseif  hObject.Value == 2
                             'Spatial Exploration Index',...
                             'Individual Playing Area (1 team)',...
                             'Voronoi regions',...
+                            'ComprimentoLargura - Area - DistGoal',...
                             'Figure for illustrative purposes'};
         set(handles.ColLinearAnalysisType,'String',ColLinearVariables);
 elseif  hObject.Value == 3
@@ -1131,6 +1132,15 @@ switch selections.ColLinTyp
         disp('Saving results...')
         disp(['Done: ', selections.ColLinTyp])
         disp('---------------------------------------------------')
+   
+    case 'ComprimentoLargura - Area - DistGoal'
+        disp(' ')
+        disp(['Calculating: ', selections.ColLinTyp])
+        ResTeamCompLargAreaDist = TeamCompLargAreaDist(selections.collectivedata);
+        selections.ResTeamCompLargAreaDist = ResTeamCompLargAreaDist;
+        disp('Saving results...')
+        disp(['Done: ', selections.ColLinTyp])
+        disp('---------------------------------------------------')  
         
     case 'Figure for illustrative purposes'
         disp(' ')
@@ -1411,8 +1421,8 @@ else
     set(handles.LongCorner3,'Enable','on');
     set(handles.LongCorner4,'Enable','on');
     set(handles.text19,'String','(hh:mm:ss)');
-    set(handles.StartTime,'String','15:42:00');
-    set(handles.EndTime,'String','15:52:00');
+    set(handles.StartTime,'String','18:10:00');
+    set(handles.EndTime,'String','18:30:00');
     set(handles.FreqAc,'String','1');
     set(handles.LowPass,'String','0.3');
     
