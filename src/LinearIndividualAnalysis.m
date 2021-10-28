@@ -342,7 +342,7 @@ global selections
                 dist_t = sum(normdat(gapsspm(q,1):gapsspm(q,2)));
                 t61(q,1) = text(p2(1,1),p2(1,2)+2,[num2str(round(dist_t,2)),' m'],'Color','Blue','FontWeight','bold','FontSize',20);
                 title({['Sprints direction'];[char(sct),' - ',ppname];['The athlete peformed ', num2str(round(d_range5,2)),' m sprinting']});
-                legend ([p6_f5(1,1)],'Direï¿½ï¿½o e Distï¿½ncia do Sprint')
+                legend ([p6_f5(1,1)],'Direção e distância do Sprint')
             end
            
         else
