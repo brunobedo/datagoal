@@ -118,8 +118,8 @@ end
             dat = dat(:,1:3);
     
     %       Eliminando ruídos/picos
-            datSmothX_S = smooth(dat(:,2), 0.00160617, 'rloess'); % Smooth
-            datSmothY_S = smooth(dat(:,3), 0.00160617, 'rloess'); % Smooth
+%             datSmothX_S = smooth(dat(:,2), 0.00160617, 'rloess'); % Smooth
+%             datSmothY_S = smooth(dat(:,3), 0.00160617, 'rloess'); % Smooth
             datSmothX_M = medfilt1 (dat(:,2));                    % Medfilt    
             datSmothY_M = medfilt1 (dat(:,3));                    % Medfilt             
 %             figure
@@ -129,7 +129,7 @@ end
 %             plot(datSmothX_M,datSmothY_M,'k.')
 %             plot(dat(:,2),dat(:,3),'r-')
 
-             dat = [dat(:,1),datSmothX_S(:,1),datSmothY_S(:,1)];
+             dat = [dat(:,1),datSmothX_M(:,1),datSmothY_M(:,1)];
 
     %       Filtro
             clear a, clear b
