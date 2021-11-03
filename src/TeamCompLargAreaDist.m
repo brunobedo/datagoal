@@ -105,8 +105,8 @@ PlayersMeanY = mean(ydata,1);
     titfil = char(inputdlg(prompt,dlgtitle,[1 60],definput));
     fname = [dirsave filesep 'Results' filesep titfil];
     
-    res = [Area_Mean Area_Median Area_STD,
-           Largura_Mean,Largura_Median,Largura_STD,
+    res = [Area_Mean Area_Median Area_STD,...
+           Largura_Mean,Largura_Median,Largura_STD,...
            Comprimento_Mean,Comprimento_Median,Comprimento_STD]; 
 
     tit = {'Mean Area (m^2)','Median Area(m^2)','Standard deviation Area(m^2)',...
