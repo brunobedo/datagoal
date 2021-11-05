@@ -1,4 +1,4 @@
-function[]=quadra(tam)
+function[]=campo_pequeno(tam)
 if nargin==0,tam=[40 20];end
 %
 % Rotina criada por Sergio Cunha em 26/09/04
@@ -49,28 +49,37 @@ plot(x1,y1,'w','LineWidth',2.5)
 % line([0 15],[(larg/2)-14.00 (larg/2)-15.00],'Color','w','LineWidth',2.5)
 % line([0 15],[(larg/2)+14.00 (larg/2)+15.00],'Color','w','LineWidth',2.5)
 
-% Area esquerda 
-line([6.5 6.5],[(larg/2)-5 (larg/2)+5],'Color','w','LineWidth',2.5)
-line([0 6.5],[(larg/2)-5 (larg/2)-5],'Color','w','LineWidth',2.5)
-line([0 6.5],[(larg/2)+5 (larg/2)+5],'Color','w','LineWidth',2.5)
+% Area esquerda
+% Grande
+line([comp*0.16 comp*0.16],[(larg/2)-comp*0.16 (larg/2)+comp*0.16],'Color','w','LineWidth',2.5)
+line([0 comp*0.16],[(larg/2)-comp*0.16 (larg/2)-comp*0.16],'Color','w','LineWidth',2.5)
+line([0 comp*0.16],[(larg/2)+comp*0.16 (larg/2)+comp*0.16],'Color','w','LineWidth',2.5)
+% Pequena
+line([comp*0.07 comp*0.07],[(larg/2)-comp*0.07 (larg/2)+comp*0.07],'Color','w','LineWidth',2.5)
+line([0 comp*0.07],[(larg/2)-comp*0.07 (larg/2)-comp*0.07],'Color','w','LineWidth',2.5)
+line([0 comp*0.07],[(larg/2)+comp*0.07 (larg/2)+comp*0.07],'Color','w','LineWidth',2.5)
+
+
 
 % Area direita
-line([comp-6.5 comp-6.5],[(larg/2)-5 (larg/2)+5],'Color','w','LineWidth',2.5)
-line([comp-6.5 comp],[(larg/2)-5 (larg/2)-5],'Color','w','LineWidth',2.5)
-line([comp-6.5 comp],[(larg/2)+5 (larg/2)+5],'Color','w','LineWidth',2.5)
-
-line([comp-16.5 comp],[(larg/2)-20.16 (larg/2)-20.16],'Color','w','LineWidth',2.5)
-line([comp-16.5 comp],[(larg/2)+20.16 (larg/2)+20.16],'Color','w','LineWidth',2.5)
+% Grande
+line([comp*0.84 comp*0.84],[(larg/2)-comp*0.16 (larg/2)+comp*0.16],'Color','w','LineWidth',2.5)
+line([comp-comp*0.16 comp],[(larg/2)-comp*0.16 (larg/2)-comp*0.16],'Color','w','LineWidth',2.5)
+line([comp-comp*0.16 comp],[(larg/2)+comp*0.16 (larg/2)+comp*0.16],'Color','w','LineWidth',2.5)
+% Pequena
+line([comp*0.93 comp*0.93],[(larg/2)-comp*0.07 (larg/2)+comp*0.07],'Color','w','LineWidth',2.5)
+line([comp-comp*0.07 comp],[(larg/2)-comp*0.07 (larg/2)-comp*0.07],'Color','w','LineWidth',2.5)
+line([comp-comp*0.07 comp],[(larg/2)+comp*0.07 (larg/2)+comp*0.07],'Color','w','LineWidth',2.5)
 
 
 %penalti
-plot(8,larg/2,'w.','MarkerSize',15)
-plot(32,larg/2,'w.','MarkerSize',15)
+plot(comp*0.1,larg/2,'w.','MarkerSize',15)
+plot(comp-comp*0.1,larg/2,'w.','MarkerSize',15)
 plot(comp/2,larg/2,'w.','MarkerSize',15)
 
 % linha do 10 m
-plot([15 15],[9.5 10.5],'w','LineWidth',2.5)
-plot([25 25],[9.5 10.5],'w','LineWidth',2.5)
+% plot([10 10],[9.5 10.5],'w','LineWidth',2.5)
+% plot([comp 25],[9.5 10.5],'w','LineWidth',2.5)
 
 % quadrantes1=[10 10; 0 20];
 % quadrantes2=[30 30; 0 20];
@@ -94,8 +103,14 @@ plot([25 25],[9.5 10.5],'w','LineWidth',2.5)
 % text(comp/1-12,-5,'ATAQUE','color','k')
 % text(106/1.5,-11,'ATAQUE') % Sugestão para colocar o texto qdo usar o
 %subplot
-% daspect([1 1 1]);
+% daspttect([1 1 1]);
 % set(gca,'XColor','k');
 % set(gca,'YColor','k');
 % axis off
+daspect([1 1 1])
+
+% set(gca,'TickLength',[0 0])
+set(gca,'XTick',[], 'YTick', [],'XColor',c,'YColor',c)
+% text(comp/4.4,-3,'ATAQUE','FontSize',12)
+% text(comp/1.375,-3,'DEFESA','FontSize',12)
 end

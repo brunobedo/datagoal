@@ -11,7 +11,7 @@
 function varargout = datagoal_GUI_v1(varargin)
 % Edit the above text to modify the response to help datagoal_GUI_v1
 
-% Last Modified by GUIDE v2.5 30-Aug-2021 13:45:55
+% Last Modified by GUIDE v2.5 04-Nov-2021 11:19:41
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -82,6 +82,8 @@ set(handles.LatCorner3,'Enable','off');
 set(handles.LongCorner3,'Enable','off');
 set(handles.LatCorner4,'Enable','off');
 set(handles.LongCorner4,'Enable','off');
+set(handles.fieldwidth,'Enable','off');
+set(handles.fieldheight,'Enable','off');
 
 %   Load GPS data
 set(handles.LoadData,'Enable','off')
@@ -125,6 +127,8 @@ selections.LatCorner3 = get(handles.LatCorner3,'String');
 selections.LongCorner3 = get(handles.LongCorner3,'String');
 selections.LatCorner4 = get(handles.LatCorner4,'String');
 selections.LongCorner4 = get(handles.LongCorner4,'String');
+selections.fieldwidth = get(handles.fieldwidth,'String');
+selections.fieldheight = get(handles.fieldheight,'String');
 
 %   Load GPS data
 selections.LoadData = get(handles.LoadData,'Value');
@@ -214,6 +218,8 @@ set(handles.LatCorner3,'Enable','on');
 set(handles.LongCorner3,'Enable','on');
 set(handles.LatCorner4,'Enable','on');
 set(handles.LongCorner4,'Enable','on');
+set(handles.fieldwidth,'Enable','on');
+set(handles.fieldheight,'Enable','on');
 
 %   Load GPS data
 set(handles.LoadData,'Enable','on');
@@ -771,6 +777,9 @@ set(handles.LatCorner3,'String','');
 set(handles.LongCorner3,'String','');
 set(handles.LatCorner4,'String','');
 set(handles.LongCorner4,'String','');
+set(handles.fieldwidth,'String','');
+set(handles.fieldheight,'String','');
+
 set(handles.StartTime,'Enable','off');
 set(handles.EndTime,'Enable','off');
 set(handles.FreqAc,'Enable','off');
@@ -783,6 +792,8 @@ set(handles.LatCorner3,'Enable','off');
 set(handles.LongCorner3,'Enable','off');
 set(handles.LatCorner4,'Enable','off');
 set(handles.LongCorner4,'Enable','off');
+set(handles.fieldwidth,'Enable','off');
+set(handles.fieldheight,'Enable','off');
 
 %   Load GPS data
 set(handles.LoadData,'Enable','off');
@@ -837,6 +848,9 @@ selections.TacticalComponentType = [];
 selections.ColNonLinearTypeAll = [];
 selections.ColNonLinTyp = []; 
 selections.ColLinTyp = [];
+selections.fieldwidth = [];
+selections.fieldheight = [];
+
 
 % --- Executes on button press in ExitBotton.
 function ExitBotton_Callback(hObject, eventdata, handles)
@@ -1408,7 +1422,7 @@ if strcmp(GPSType,'Dvideo')
     set(handles.text19,'String','(Minutes)');
     set(handles.FreqAc,'String','30');
     set(handles.LowPass,'String','0.4');
-    
+
     selections.FreqAc = '30';
     selections.LowPass = '3';
 else
@@ -1446,3 +1460,61 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 GPSType = {' ','QStarz','Stats Sports','PlayerTek','Dvideo','WIMU'};
 set(hObject,'String',GPSType); 
+
+
+
+function fieldwidth_Callback(hObject, eventdata, handles)
+% hObject    handle to fieldwidth (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of fieldwidth as text
+%        str2double(get(hObject,'String')) returns contents of fieldwidth as a double
+global selections
+if  isempty(get(hObject,'String'))
+    selections.fieldwidth = '0';
+else
+    selections.fieldwidth = (get(hObject,'String'));
+end
+
+
+% --- Executes during object creation, after setting all properties.
+function fieldwidth_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to fieldwidth (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function fieldheight_Callback(hObject, eventdata, handles)
+% hObject    handle to fieldheight (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of fieldheight as text
+%        str2double(get(hObject,'String')) returns contents of fieldheight as a double
+global selections
+if  isempty(get(hObject,'String'))
+    selections.fieldheight = '0';
+else
+    selections.fieldheight = (get(hObject,'String'));
+end
+
+
+% --- Executes during object creation, after setting all properties.
+function fieldheight_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to fieldheight (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
