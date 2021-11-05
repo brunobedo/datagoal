@@ -103,7 +103,7 @@ x3=(9.15*cos(ang3))+comp-11;
 y3=(9.15*sin(ang3))+larg/2;
 line(x3,y3,'Color','w','LineWidth',2.5)
 
-% daspect([1 1 1])
+daspect([1 1 1])
 
 % set(gca,'TickLength',[0 0])
 set(gca,'XTick',[], 'YTick', [],'XColor',c,'YColor',c)

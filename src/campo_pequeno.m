@@ -107,4 +107,10 @@ plot(comp/2,larg/2,'w.','MarkerSize',15)
 % set(gca,'XColor','k');
 % set(gca,'YColor','k');
 % axis off
+daspect([1 1 1])
+
+% set(gca,'TickLength',[0 0])
+set(gca,'XTick',[], 'YTick', [],'XColor',c,'YColor',c)
+% text(comp/4.4,-3,'ATAQUE','FontSize',12)
+% text(comp/1.375,-3,'DEFESA','FontSize',12)
 end
