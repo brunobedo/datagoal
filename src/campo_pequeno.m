@@ -54,6 +54,7 @@ plot(x1,y1,'w','LineWidth',2.5)
 line([comp*0.16 comp*0.16],[(larg/2)-comp*0.16 (larg/2)+comp*0.16],'Color','w','LineWidth',2.5)
 line([0 comp*0.16],[(larg/2)-comp*0.16 (larg/2)-comp*0.16],'Color','w','LineWidth',2.5)
 line([0 comp*0.16],[(larg/2)+comp*0.16 (larg/2)+comp*0.16],'Color','w','LineWidth',2.5)
+
 % Pequena
 line([comp*0.07 comp*0.07],[(larg/2)-comp*0.07 (larg/2)+comp*0.07],'Color','w','LineWidth',2.5)
 line([0 comp*0.07],[(larg/2)-comp*0.07 (larg/2)-comp*0.07],'Color','w','LineWidth',2.5)
@@ -66,6 +67,7 @@ line([0 comp*0.07],[(larg/2)+comp*0.07 (larg/2)+comp*0.07],'Color','w','LineWidt
 line([comp*0.84 comp*0.84],[(larg/2)-comp*0.16 (larg/2)+comp*0.16],'Color','w','LineWidth',2.5)
 line([comp-comp*0.16 comp],[(larg/2)-comp*0.16 (larg/2)-comp*0.16],'Color','w','LineWidth',2.5)
 line([comp-comp*0.16 comp],[(larg/2)+comp*0.16 (larg/2)+comp*0.16],'Color','w','LineWidth',2.5)
+
 % Pequena
 line([comp*0.93 comp*0.93],[(larg/2)-comp*0.07 (larg/2)+comp*0.07],'Color','w','LineWidth',2.5)
 line([comp-comp*0.07 comp],[(larg/2)-comp*0.07 (larg/2)-comp*0.07],'Color','w','LineWidth',2.5)
