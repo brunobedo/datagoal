@@ -4,14 +4,14 @@
 %                   INDIVIDUAL AND COLLECTIVE ANALYSIS                    %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   Author: M.Sc. Bruno Luiz Souza Bedo
-%           bruno.bedo@usp.br or bruno.bedo92@gmail.com
+%           bruno.bedo@usp.br or brunos.bedo@gmail.com
 
 %   GUI main file.
 
 function varargout = datagoal_GUI_v1(varargin)
 % Edit the above text to modify the response to help datagoal_GUI_v1
 
-% Last Modified by GUIDE v2.5 04-Nov-2021 11:19:41
+% Last Modified by GUIDE v2.5 08-Nov-2021 10:37:37
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -84,6 +84,7 @@ set(handles.LatCorner4,'Enable','off');
 set(handles.LongCorner4,'Enable','off');
 set(handles.fieldwidth,'Enable','off');
 set(handles.fieldheight,'Enable','off');
+set(handles.select_field,'Enable','off'); 
 
 %   Load GPS data
 set(handles.LoadData,'Enable','off')
@@ -189,6 +190,7 @@ set(handles.OpponentList,'Enable','on');
 selections.GamePathName = gamestr; 
 selections.Gamedir = gamepathstr; 
 
+% Athletes info
 nplayers=dir(gamepathstr);
     playersnameall = {nplayers.name};
     playersname = [];
@@ -199,31 +201,12 @@ for i = 1:size(playersnameall,2)
     end
     
 end
-    
+ 
 set(handles.DefenderList,'String',playersname)
 set(handles.MidfielderList,'String',playersname)
 set(handles.ForwardsList,'String',playersname)
 set(handles.OpponentList,'String',playersname)
 
-%   Input information
-set(handles.StartTime,'Enable','on');
-set(handles.EndTime,'Enable','on');
-set(handles.FreqAc,'Enable','on');
-set(handles.LowPass,'Enable','on');
-set(handles.LatCorner1,'Enable','on');
-set(handles.LongCorner1,'Enable','on');
-set(handles.LatCorner2,'Enable','on');
-set(handles.LongCorner2,'Enable','on');
-set(handles.LatCorner3,'Enable','on');
-set(handles.LongCorner3,'Enable','on');
-set(handles.LatCorner4,'Enable','on');
-set(handles.LongCorner4,'Enable','on');
-set(handles.fieldwidth,'Enable','on');
-set(handles.fieldheight,'Enable','on');
-
-%   Load GPS data
-set(handles.LoadData,'Enable','on');
-set(handles.Resetbutton,'Enable','on')
 
 
 % --- Executes on selection change in DefenderList.
@@ -711,7 +694,6 @@ set(handles.NLColLinearAnalysisType,'Enable','off')
 set(handles.NLTacticalComponentType,'Enable','off')
 set(handles.NLColLinearAnalysisType,'Value',1)
 set(handles.NLTacticalComponentType,'Value',1)
-pause(0.0001)
 
 selections.RecordVideo = get(handles.RecordVideo,'Value');
 selections.TacticalComponentType = [''];
@@ -728,6 +710,29 @@ matcalib = [str2num(selections.LatCorner1) str2num(selections.LongCorner1); ...
             str2num(selections.LatCorner3) str2num(selections.LongCorner3); ...
             str2num(selections.LatCorner4) str2num(selections.LongCorner4)];
 selections.matcalib = matcalib; 
+
+if handles.select_field.Value == 1
+    newfield_answer = questdlg('Do you want to register a new field??', ...
+                        'New soccer field', ...
+                        'Yes','No','No');
+    if strcmp(newfield_answer,'Yes')
+        definput = {'Estádio'};
+        dims = [1 40];
+        opts.Interpreter = 'tex';
+        newfieldname_answer = inputdlg('Please enter the soccer field name:','Soccer field name',dims,definput,opts);
+        col1 = {'Corner 1'; 'Corner 2'; 'Corner 3'; 'Corner 4'}; 
+        restitle = [selections.soccerfielddir, filesep, char(newfieldname_answer),'.xlsx']; 
+        xlswrite(restitle,{col1},1,'A1');
+        xlswrite(restitle,matcalib,1,'B1');
+        e = actxserver('Excel.Application');
+        ewb = e.Workbooks.Open(restitle);
+        ewb.Save 
+        ewb.Close(false)
+        e.Quit        
+    end
+    
+end
+
 
 if isfield(selections,'PlayersList') == 0
     error('Please select the players!')   
@@ -1407,6 +1412,41 @@ function GPSType_Callback(hObject, eventdata, handles)
 % Hints: contents = cellstr(get(hObject,'String')) returns GPSType contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from GPSType
 global selections
+% Soccer field info
+soccerfielddir = [pwd,filesep,'fields'];
+selections.soccerfielddir = soccerfielddir;
+fields_info_dir = [dir([soccerfielddir,filesep, '**/*.xlsx']);dir([soccerfielddir,filesep, '**/*.xls']);dir([soccerfielddir,filesep, '**/*.csv'])];
+fields_all = {fields_info_dir.name};
+fields_names = [];
+for i = 1:size(fields_all,2)
+    if strcmp(fields_all{i},'.') || strcmp(fields_all{i},'..') || strcmp(fields_all{i},'Results') || strcmp(fields_all{i},'MatCalib.txt') 
+    else
+       fields_names{i+1} = (fields_all{i});
+    end
+end
+set(handles.select_field,'Enable','on'); 
+set(handles.select_field,'String',fields_names)
+
+%   Input information
+set(handles.StartTime,'Enable','on');
+set(handles.EndTime,'Enable','on');
+set(handles.FreqAc,'Enable','on');
+set(handles.LowPass,'Enable','on');
+set(handles.LatCorner1,'Enable','on');
+set(handles.LongCorner1,'Enable','on');
+set(handles.LatCorner2,'Enable','on');
+set(handles.LongCorner2,'Enable','on');
+set(handles.LatCorner3,'Enable','on');
+set(handles.LongCorner3,'Enable','on');
+set(handles.LatCorner4,'Enable','on');
+set(handles.LongCorner4,'Enable','on');
+set(handles.fieldwidth,'Enable','on');
+set(handles.fieldheight,'Enable','on');
+
+%   Load GPS data
+set(handles.LoadData,'Enable','on');
+set(handles.Resetbutton,'Enable','on')
+
 GPSType = char(hObject.String(hObject.Value));
 if strcmp(GPSType,'Dvideo')
     set(handles.LatCorner1,'Enable','off');
@@ -1518,3 +1558,101 @@ function fieldheight_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on selection change in select_field.
+function select_field_Callback(hObject, eventdata, handles)
+% hObject    handle to select_field (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: contents = cellstr(get(hObject,'String')) returns select_field contents as cell array
+%        contents{get(hObject,'Value')} returns selected item from select_field
+global selections
+fields_info_dir = [dir([selections.soccerfielddir,filesep, '**/*.xlsx']);dir([selections.soccerfielddir,filesep, '**/*.xls']);dir([selections.soccerfielddir,filesep, '**/*.csv'])];
+fields_all = {fields_info_dir.name};
+fields_names = [];
+for i = 1:size(fields_all,2)
+    if strcmp(fields_all{i},'.') || strcmp(fields_all{i},'..') || strcmp(fields_all{i},'Results') || strcmp(fields_all{i},'MatCalib.txt') 
+    else
+       fields_names{i+1} = (fields_all{i});
+    end
+end
+set(handles.select_field,'Enable','on'); 
+set(handles.select_field,'String',fields_names)
+
+if hObject.Value > 1 
+    set(handles.LatCorner1,'Enable','off');
+    set(handles.LatCorner2,'Enable','off');
+    set(handles.LatCorner3,'Enable','off');
+    set(handles.LatCorner4,'Enable','off');
+    set(handles.LongCorner1,'Enable','off');
+    set(handles.LongCorner2,'Enable','off');
+    set(handles.LongCorner3,'Enable','off');
+    set(handles.LongCorner4,'Enable','off');
+    
+    dir_field = [selections.soccerfielddir, filesep,char(hObject.String(hObject.Value))];
+    data = xlsread(dir_field);
+    data = compose('%.9f',data);
+    
+    handles.LatCorner1.String = char(data(1,1));
+    handles.LatCorner2.String = char(data(2,1));
+    handles.LatCorner3.String = char(data(3,1));
+    handles.LatCorner4.String = char(data(4,1));
+    
+    handles.LongCorner1.String = char(data(1,2));
+    handles.LongCorner2.String = char(data(2,2));
+    handles.LongCorner3.String = char(data(3,2));
+    handles.LongCorner4.String = char(data(4,2));
+    
+    
+    selections.LatCorner1 = handles.LatCorner1.String; 
+    selections.LatCorner2 = handles.LatCorner2.String; 
+    selections.LatCorner3 = handles.LatCorner3.String; 
+    selections.LatCorner4 = handles.LatCorner4.String; 
+    selections.LongCorner1 = handles.LongCorner1.String; 
+    selections.LongCorner2 = handles.LongCorner2.String; 
+    selections.LongCorner3 = handles.LongCorner3.String; 
+    selections.LongCorner4 = handles.LongCorner4.String;     
+
+else
+    set(handles.LatCorner1,'Enable','on');
+    set(handles.LatCorner2,'Enable','on');
+    set(handles.LatCorner3,'Enable','on');
+    set(handles.LatCorner4,'Enable','on');
+    set(handles.LongCorner1,'Enable','on');
+    set(handles.LongCorner2,'Enable','on');
+    set(handles.LongCorner3,'Enable','on');
+    set(handles.LongCorner4,'Enable','on');
+    
+    selections.LatCorner1 = handles.LatCorner1.String; 
+    selections.LatCorner2 = handles.LatCorner2.String; 
+    selections.LatCorner3 = handles.LatCorner3.String; 
+    selections.LatCorner4 = handles.LatCorner4.String; 
+    selections.LongCorner1 = handles.LongCorner1.String; 
+    selections.LongCorner2 = handles.LongCorner2.String; 
+    selections.LongCorner3 = handles.LongCorner3.String; 
+    selections.LongCorner4 = handles.LongCorner4.String; 
+    
+    
+end
+
+
+
+
+% --- Executes during object creation, after setting all properties.
+function select_field_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to select_field (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: popupmenu controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+
+
