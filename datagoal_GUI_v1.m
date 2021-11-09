@@ -716,7 +716,7 @@ if handles.select_field.Value == 1
                         'New soccer field', ...
                         'Yes','No','No');
     if strcmp(newfield_answer,'Yes')
-        definput = {'Estádio'};
+        definput = {'Estádio - '};
         dims = [1 40];
         opts.Interpreter = 'tex';
         newfieldname_answer = inputdlg('Please enter the soccer field name:','Soccer field name',dims,definput,opts);
