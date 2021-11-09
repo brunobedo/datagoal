@@ -4,7 +4,7 @@
 %                   INDIVIDUAL AND COLLECTIVE ANALYSIS                    %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %   Author: M.Sc. Bruno Luiz Souza Bedo
-%           bruno.bedo@usp.br or bruno.bedo92@gmail.com
+%           bruno.bedo@usp.br or brunos.bedo@gmail.com
 
 %   GUI main file.
 
@@ -710,6 +710,29 @@ matcalib = [str2num(selections.LatCorner1) str2num(selections.LongCorner1); ...
             str2num(selections.LatCorner3) str2num(selections.LongCorner3); ...
             str2num(selections.LatCorner4) str2num(selections.LongCorner4)];
 selections.matcalib = matcalib; 
+
+if handles.select_field.Value == 1
+    newfield_answer = questdlg('Do you want to register a new field??', ...
+                        'New soccer field', ...
+                        'Yes','No','No');
+    if strcmp(newfield_answer,'Yes')
+        definput = {'Estádio'};
+        dims = [1 40];
+        opts.Interpreter = 'tex';
+        newfieldname_answer = inputdlg('Please enter the soccer field name:','Soccer field name',dims,definput,opts);
+        col1 = {'Corner 1'; 'Corner 2'; 'Corner 3'; 'Corner 4'}; 
+        restitle = [selections.soccerfielddir, filesep, char(newfieldname_answer),'.xlsx']; 
+        xlswrite(restitle,{col1},1,'A1');
+        xlswrite(restitle,matcalib,1,'B1');
+        e = actxserver('Excel.Application');
+        ewb = e.Workbooks.Open(restitle);
+        ewb.Save 
+        ewb.Close(false)
+        e.Quit        
+    end
+    
+end
+
 
 if isfield(selections,'PlayersList') == 0
     error('Please select the players!')   
@@ -1546,6 +1569,18 @@ function select_field_Callback(hObject, eventdata, handles)
 % Hints: contents = cellstr(get(hObject,'String')) returns select_field contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from select_field
 global selections
+fields_info_dir = [dir([selections.soccerfielddir,filesep, '**/*.xlsx']);dir([selections.soccerfielddir,filesep, '**/*.xls']);dir([selections.soccerfielddir,filesep, '**/*.csv'])];
+fields_all = {fields_info_dir.name};
+fields_names = [];
+for i = 1:size(fields_all,2)
+    if strcmp(fields_all{i},'.') || strcmp(fields_all{i},'..') || strcmp(fields_all{i},'Results') || strcmp(fields_all{i},'MatCalib.txt') 
+    else
+       fields_names{i+1} = (fields_all{i});
+    end
+end
+set(handles.select_field,'Enable','on'); 
+set(handles.select_field,'String',fields_names)
+
 if hObject.Value > 1 
     set(handles.LatCorner1,'Enable','off');
     set(handles.LatCorner2,'Enable','off');
@@ -1576,7 +1611,7 @@ if hObject.Value > 1
     selections.LatCorner3 = handles.LatCorner3.String; 
     selections.LatCorner4 = handles.LatCorner4.String; 
     selections.LongCorner1 = handles.LongCorner1.String; 
-    selections.LongCorner2 = handles.LongCorner1.String; 
+    selections.LongCorner2 = handles.LongCorner2.String; 
     selections.LongCorner3 = handles.LongCorner3.String; 
     selections.LongCorner4 = handles.LongCorner4.String;     
 
