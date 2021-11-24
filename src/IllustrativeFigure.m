@@ -211,8 +211,9 @@ disp(['Processing: Frame ',num2str(i),' of ',num2str(size(xdata,1))])
     legend([p3a,p3b,p3c(1,1)],'Players','Centroid','Team Spread')
     title({'Team Spread';[num2str(spread(i)),' m']})
 
-%%  Figure 3. 
+%%  Figure 4. 
     axes(f1d)
+    title('Distance between sectors')
 
 %       Defenders
         DX = mean(xdataD(i,:)); 

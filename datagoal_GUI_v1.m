@@ -949,7 +949,7 @@ elseif  hObject.Value == 2
                             'Individual Playing Area (1 team)',...
                             'Voronoi regions',...
                             'ComprimentoLargura - Area - DistGoal',...
-                            'Figure for illustrative purposes'};
+                            'Video for illustrative purposes'};
         set(handles.ColLinearAnalysisType,'String',ColLinearVariables);
 elseif  hObject.Value == 3
         set(handles.ColLinearAnalysisType,'Enable','on')
@@ -988,10 +988,14 @@ if hObject.Value ==1
     set(handles.RunColletiveLinearAnalysis,'Enable','off')
     set(handles.RecordVideo,'Value',0)
     set(handles.RecordVideo,'Enable','off')
+    selections.RecordVideo = 0; 
+
 else
     set(handles.RunColletiveLinearAnalysis,'Enable','on')
     set(handles.RecordVideo,'Value',0)
     set(handles.RecordVideo,'Enable','on')
+    selections.RecordVideo = 0; 
+
 end
 
 
@@ -1161,7 +1165,7 @@ switch selections.ColLinTyp
         disp(['Done: ', selections.ColLinTyp])
         disp('---------------------------------------------------')  
         
-    case 'Figure for illustrative purposes'
+    case 'Video for illustrative purposes'
         disp(' ')
         disp(['Creating: ', selections.ColLinTyp])
         IllustrativeFigure(selections.collectivedata);

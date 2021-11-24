@@ -131,7 +131,7 @@ if selections.RecordVideo ==1
 f1 = figure(1); clf; set(f1,'name','Players position','units','normalized','outerposition',[0 0 1 1])
 campo
 hold on
-axis off
+% axis off
 pause
 for i = 1:size(xdata,1)
     pA = plot(xdata(i,:),ydata(i,:),'ro','MarkerSize',5,'LineWidth',3);
