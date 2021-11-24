@@ -138,7 +138,7 @@ if selections.RecordVideo ==1
 f1 = figure(1); clf; set(f1,'name','Players position','units','normalized','outerposition',[0 0 1 1])
 campo
 hold on
-% pause
+pause
 for i = 1:size(xdata)
    
     x_eq = xdata(i,:);
@@ -188,8 +188,9 @@ disp(['Processing: Frame ',num2str(i),' of ',num2str(size(xdata,1))])
 f(i) = getframe(f1);
 writeVideo(vidObj,f(i));
 
-
 end
+close(f1)
+
 
 
 

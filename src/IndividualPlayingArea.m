@@ -171,7 +171,7 @@ for i = 1:size(xdata,1)
 subplot(1,2,1)    
 campo
 hold on
-axis off
+% axis off
    p2a(i) = plot(xdata(i,:),ydata(i,:),'or','MarkerSize',5,'LineWidth',3);
    
    p2c(i) = plot([xdata(i,Pminp(i,:)) xdata(i,Pmaxp(i,:))],[ydata(i,Aminp(i,:)) ydata(i,Aminp(i,:))],'LineWidth',1,'Color','k','LineStyle','- -');
@@ -190,7 +190,7 @@ axis off
 subplot(1,2,2)
 campo
 hold on
-axis off
+% axis off
    K = convhull(xdata(i,:),ydata(i,:));
    SufAreaP = polyarea(xdata(i,K),ydata(i,K));
    p3a(i) = plot(xdata(i,:),ydata(i,:),'or','MarkerSize',5,'LineWidth',3);
