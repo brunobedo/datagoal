@@ -129,7 +129,7 @@ end
 %             plot(datSmothX_M,datSmothY_M,'k.')
 %             plot(dat(:,2),dat(:,3),'r-')
 
-            dat = [dat(:,1),datSmothX_M(:,1),datSmothY_M(:,1)];
+             dat = [datSmothX_M(:,1),datSmothY_M(:,1)];
 
     %       Filtro
             clear a, clear b

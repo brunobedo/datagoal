@@ -187,9 +187,9 @@ end
 disp(['Processing: Frame ',num2str(i),' of ',num2str(size(xdata,1))])
 f(i) = getframe(f1);
 writeVideo(vidObj,f(i));
-
-end
 close(f1)
+end
+
 
 
 
