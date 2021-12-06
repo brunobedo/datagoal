@@ -317,10 +317,10 @@ global selections
         %   Figure 5 - Arrows during sprinting
         % Find gaps to draw arrows
         Ra = velrange5;
-        f5 = figure(6); clf; hold on; set(f5,'Name','Arrows during sprinting','units','normalized','outerposition',[0 0 1 1])
+        f5 = figure(5); clf; hold on; set(f5,'Name','Arrows during sprinting','units','normalized','outerposition',[0 0 1 1])
         campo;
-        set(gca,'XColor', 'none','YColor','none')
         hold on
+        set(gca,'XColor', 'none','YColor','none')
         set(gca,'XTick',[], 'YTick', [],'XColor','none','YColor','none')
 %         p1_f5 =  plot(datap(:,1),datap(:,2),'k.','MarkerSize',0.05);
         if size(Ra,1)>=1
@@ -347,7 +347,6 @@ global selections
                 title({['Sprints direction'];[char(sct),' - ',ppname];['The athlete peformed ', num2str(round(d_range5,2)),' m sprinting']});
                 legend ([p6_f5(1,1)],'Direção e distância do Sprint')
             end
-           
         else
             title({['Sprints'];[char(sct),' - ',ppname];['The athlete has not sprinted']});
         end
@@ -357,7 +356,7 @@ global selections
         pause(1)
 
         %   Figure 6 - etc...
-%         f5 = figure(6); clf; hold on; set(f6,'Name','Player Major Range','units','normalized','outerposition',[0 0 1 1])
+%         f6 = figure(6); clf; hold on; set(f6,'Name','Player Major Range','units','normalized','outerposition',[0 0 1 1])
         close (f1)
         close (f2)  
         close (f3)

@@ -9,12 +9,14 @@ global selections
         timeIs = (str2double(timeS)*60);
         timeFs = (str2double(timeF)*60);
     else
+        timeS_String = timeS;
+        timeF_String = timeF;
         timeS = datevec(timeS); 
         timeIs = (timeS(:,4)*3600) + (timeS(:,5)*60) +timeS(:,6); 
         timeF = datevec(timeF);
         timeFs = (timeF(:,4)*3600) + (timeF(:,5)*60) +timeF(:,6); 
     end
-    selections.totalGametime = num2str((timeFs-timeIs)/60);
+    selections.totalGametime = num2str((timeFs-timeIs)/60); % Tempo total de jogo em minutos
     
     sects = fieldnames(selections.PlayersList); 
     h1 =  waitbar(0,'Loading GPS data...');
@@ -110,6 +112,8 @@ end
                 mTime = datevec(LOCALTIME); %vetor do tempo de jogo ('xx:yy:zz')
                 mTimes = (mTime(:,4)*3600) + (mTime(:,5)*60) +mTime(:,6); %vetor em segundos
         end
+            testeS = find(LOCALTIME==timeS_String,1);
+            testeF = find(LOCALTIME==timeF_String,1);
             ITime = find(mTimes==timeIs,1);
             FTime = find(mTimes==timeFs,1);
             dat = dat(ITime:FTime,:);
