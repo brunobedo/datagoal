@@ -123,15 +123,11 @@ end
             line_ecxpeted = (timeFs - timeIs) * str2double(freq);
             vtime = [(0:line_ecxpeted-1)/str2double(freq)]';
 
-            % Caso seja menor, foi interpolar os dados
+    %       Caso seja menor, é necessário interpolar os dados
             if size(dat,1) < line_ecxpeted
-                x = dat(:,2); 
-                xq = linspace(min(x), max(x), line_ecxpeted);
-                yq = interp1(x, xq, 'linear', 'extrap')
-
-
-                
-                
+                data = dat(:,2:3);
+                dat = interpoladat(data,line_ecxpeted);
+                dat = [vtime,dat];
             end
             
     
