@@ -112,14 +112,28 @@ end
                 mTime = datevec(LOCALTIME); %vetor do tempo de jogo ('xx:yy:zz')
                 mTimes = (mTime(:,4)*3600) + (mTime(:,5)*60) +mTime(:,6); %vetor em segundos
         end
-            testeS = find(LOCALTIME==timeS_String,1);
-            testeF = find(LOCALTIME==timeF_String,1);
             ITime = find(mTimes==timeIs,1);
             FTime = find(mTimes==timeFs,1);
             dat = dat(ITime:FTime,:);
                 
     %       Selecionado conjunto de dados
             dat = dat(:,1:3);
+            
+    %       Conferindo o valor de linhas de acordo com a frequencia 
+            line_ecxpeted = (timeFs - timeIs) * str2double(freq);
+            vtime = [(0:line_ecxpeted-1)/str2double(freq)]';
+
+            % Caso seja menor, foi interpolar os dados
+            if size(dat,1) < line_ecxpeted
+                x = dat(:,2); 
+                xq = linspace(min(x), max(x), line_ecxpeted);
+                yq = interp1(x, xq, 'linear', 'extrap')
+
+
+                
+                
+            end
+            
     
     %       Eliminando ruídos/picos
 %             datSmothX_S = smooth(dat(:,2), 0.00160617, 'rloess'); % Smooth
@@ -133,7 +147,7 @@ end
 %             plot(datSmothX_M,datSmothY_M,'k.')
 %             plot(dat(:,2),dat(:,3),'r-')
 
-            dat = [dat(:,1),datSmothX_M(:,1),datSmothY_M(:,1)];
+            dat = [vtime,datSmothX_M(:,1),datSmothY_M(:,1)];
 
     %       Filtro
             clear a, clear b
