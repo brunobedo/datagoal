@@ -81,6 +81,9 @@ global selections
         n_sprints_pre = sum(n_s_local(:) == 1);
         if n_sprints_pre ~= 0 
             n_sprints = n_sprints_pre +1;
+        
+        elseif ~isempty (n_s_local)
+            n_sprints = 1;
         else
             n_sprints = 0;
         end 
@@ -205,7 +208,7 @@ global selections
         title({[char(sct),' - ',ppname];[num2str(dist_total),' meters']});
         titsavef1 = ['Distance_',nplay{d}(1:p(end)-1)];
         export_fig([dirsave filesep 'Results' filesep titsavef1],'-jpg') %'-transparent'
-        pause(1)
+%         pause(1)
         
         
         %   Figure 2 - Velocity by ranges
@@ -234,7 +237,7 @@ global selections
     
         titsavef2 = ['Velocity_',nplay{d}(1:p(end)-1)];
         export_fig([dirsave filesep 'Results' filesep titsavef2],'-jpg') %'-transparent'
-        pause(1)
+%         pause(1)
 
         %   Figure 3 - Heat Map
         f3 = figure(3); clf; hold on; set(f3,'Name','Heat Map','units','normalized','outerposition',[0 0 1 1])
@@ -242,7 +245,7 @@ global selections
         title({['Heat map'];[char(sct),' - ',ppname]});
         titsavef4 = ['HeatMap_',nplay{d}(1:p(end)-1)];
         export_fig([dirsave filesep 'Results' filesep titsavef4],'-jpg')
-        pause(1)
+%         pause(1)
 
         %   Figure 4 - Player Major Range
         f4 = figure(4); clf; hold on; set(f4,'Name','Player Major Range','units','normalized','outerposition',[0 0 1 1])
@@ -312,7 +315,7 @@ global selections
         p6_f4 = plot(xCenter,yCenter,'ro','MarkerSize',5,'LineWidth',2);
         titsavef5 = ['PlayerMajorRange_',nplay{d}(1:p(end)-1)];
         export_fig([dirsave filesep 'Results' filesep titsavef5],'-jpg') %,'-transparent'
-        pause(1)
+%         pause(1)
         
         %   Figure 5 - Arrows during sprinting
         % Find gaps to draw arrows
@@ -353,7 +356,7 @@ global selections
         
         titsavef6 = ['SprintArrows_',nplay{d}(1:p(end)-1)];
         export_fig([dirsave filesep 'Results' filesep titsavef6],'-jpg') %,'-transparent'
-        pause(1)
+%         pause(1)
 
         %   Figure 6 - etc...
 %         f6 = figure(6); clf; hold on; set(f6,'Name','Player Major Range','units','normalized','outerposition',[0 0 1 1])
