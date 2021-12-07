@@ -9,12 +9,14 @@ global selections
         timeIs = (str2double(timeS)*60);
         timeFs = (str2double(timeF)*60);
     else
+        timeS_String = timeS;
+        timeF_String = timeF;
         timeS = datevec(timeS); 
         timeIs = (timeS(:,4)*3600) + (timeS(:,5)*60) +timeS(:,6); 
         timeF = datevec(timeF);
         timeFs = (timeF(:,4)*3600) + (timeF(:,5)*60) +timeF(:,6); 
     end
-    selections.totalGametime = num2str((timeFs-timeIs)/60);
+    selections.totalGametime = num2str((timeFs-timeIs)/60); % Tempo total de jogo em minutos
     
     sects = fieldnames(selections.PlayersList); 
     h1 =  waitbar(0,'Loading GPS data...');
@@ -116,6 +118,18 @@ end
                 
     %       Selecionado conjunto de dados
             dat = dat(:,1:3);
+            
+    %       Conferindo o valor de linhas de acordo com a frequencia 
+            line_ecxpeted = (timeFs - timeIs) * str2double(freq);
+            vtime = [(0:line_ecxpeted-1)/str2double(freq)]';
+
+    %       Caso seja menor, é necessário interpolar os dados
+            if size(dat,1) < line_ecxpeted
+                data = dat(:,2:3);
+                dat = interpoladat(data,line_ecxpeted);
+                dat = [vtime,dat];
+            end
+            
     
     %       Eliminando ruídos/picos
 %             datSmothX_S = smooth(dat(:,2), 0.00160617, 'rloess'); % Smooth
@@ -129,7 +143,7 @@ end
 %             plot(datSmothX_M,datSmothY_M,'k.')
 %             plot(dat(:,2),dat(:,3),'r-')
 
-            dat = [dat(:,1),datSmothX_M(:,1),datSmothY_M(:,1)];
+            dat = [vtime,datSmothX_M(:,1),datSmothY_M(:,1)];
 
     %       Filtro
             clear a, clear b
