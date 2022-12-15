@@ -91,8 +91,14 @@ switch selections.GPSType
         [x_coord, y_coord, lat_origin, long_origin] = GPS2Cart_GPSports(LATITUDE,LONGITUDE,matcalib);  
         dat = [[1:length(x_coord)]',x_coord , y_coord];            
 
-            
-            
+    case 'Vector S7'
+        rawdata = importVectorS7(playerdata);
+        LATITUDE    = str2double (strrep(rawdata(:,2), ',', '.'));
+        LONGITUDE   = str2double (strrep(rawdata(:,3), ',', '.')); 
+        LOCALTIME = datestr(rawdata(:,1), 'HH:MM:SS');
+        [x_coord, y_coord, lat_origin, long_origin] = GPS2Cart_GPSports(LATITUDE,LONGITUDE,matcalib);
+        dat = [[1:length(x_coord)]',x_coord , y_coord];  
+        
     otherwise 
         disp(' ')
         disp('This GPS brand is not available yet.')
@@ -127,6 +133,10 @@ end
             if size(dat,1) < line_ecxpeted
                 data = dat(:,2:3);
                 dat = interpoladat(data,line_ecxpeted);
+                dat = [vtime,dat];
+            elseif size(dat,1) > line_ecxpeted
+                data = dat(:,2:3);
+                vtime = [(0:line_ecxpeted)/str2double(freq)]';
                 dat = [vtime,dat];
             end
             
