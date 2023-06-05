@@ -137,7 +137,7 @@ end
             elseif size(dat,1) > line_ecxpeted
                 data = dat(:,2:3);
                 vtime = [(0:line_ecxpeted)/str2double(freq)]';
-                dat = [vtime,dat];
+                dat = [vtime,data];
             end
             
     
