@@ -89,7 +89,7 @@ global selections
     TMediant2 = [TMedianXt2 TMedianYt2];
 
 %%
-%   Calculating the Teams’ Separateness
+%   Calculating the Teamsï¿½ Separateness
 %   Team 1 to Team 2
 h1 =  waitbar(0,'Calculating distance between Team 1 of Team 2');
 set(h1,'name','Teams'' Separateness')

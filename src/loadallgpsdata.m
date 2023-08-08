@@ -80,24 +80,61 @@ switch selections.GPSType
 %             dat = [[1:length(x_coord)]',x_coord , y_coord];
         
         % Versão enviada pelo Alberto (Out/2021)
-        rawdata = importdata(playerdata);
-        LATITUDE = rawdata.data(:,1); 
-        LONGITUDE = rawdata.data(:,2);
-        text = rawdata.textdata;
-        mTime = cell2mat(text(2:end,1));
-        mTime = mTime(:,1:end-4);
-        
+        rawdata     = importdata(playerdata);
+        LATITUDE    = rawdata.data(:,1); 
+        LONGITUDE   = rawdata.data(:,2);
+        text        = rawdata.textdata;
+        mTime       = cell2mat(text(2:end,1));
+        mTime       = mTime(:,1:end-4);
         
         [x_coord, y_coord, lat_origin, long_origin] = GPS2Cart_GPSports(LATITUDE,LONGITUDE,matcalib);  
         dat = [[1:length(x_coord)]',x_coord , y_coord];            
 
     case 'Vector S7'
-        rawdata = importVectorS7(playerdata);
+        rawdata     = importVectorS7(playerdata);
         LATITUDE    = str2double (strrep(rawdata(:,2), ',', '.'));
         LONGITUDE   = str2double (strrep(rawdata(:,3), ',', '.')); 
-        LOCALTIME = datestr(rawdata(:,1), 'HH:MM:SS');
+        LOCALTIME   = datestr(rawdata(:,1), 'HH:MM:SS');
         [x_coord, y_coord, lat_origin, long_origin] = GPS2Cart_GPSports(LATITUDE,LONGITUDE,matcalib);
-        dat = [[1:length(x_coord)]',x_coord , y_coord];  
+        dat = [[1:length(x_coord)]',x_coord , y_coord];
+        
+        
+    case 'Polar Team'
+        % Lat and Long
+        gpxfiles = dir(fullfile(playerdata, '*.gpx'));
+        gpxfile = [playerdata,filesep,gpxfiles.name];
+        rawdata     = gpxread(gpxfile);
+        LATITUDE    = rawdata.Latitude';
+        LONGITUDE   = rawdata.Longitude';
+        
+        % Time
+        csvfiles = dir(fullfile(playerdata, '*.csv'));
+        csvfile = [playerdata,filesep,csvfiles.name];
+        opts = detectImportOptions(csvfile);  % Automatically detect data types
+        data = readtable(csvfile, opts);  % Read data using the detected options
+        LOCALTIME   = datestr(data.Hora, 'HH:MM:SS');
+        if size(LOCALTIME,1)>size(LATITUDE,1)
+            dat_lat_long = [LATITUDE, LONGITUDE];
+            dat_lat_long = interpoladat(dat_lat_long,size(LOCALTIME,1));
+            LATITUDE = dat_lat_long(:,1);
+            LONGITUDE = dat_lat_long(:,2);
+        end
+        [x_coord, y_coord, lat_origin, long_origin] = GPS2Cart_GPSports(LATITUDE,LONGITUDE,matcalib);
+        dat = [[1:length(LOCALTIME)]',x_coord , y_coord];
+    
+    case 'Kinexon'
+        rawdata     = readtable(playerdata); 
+        LATITUDE    = rawdata.latitudeInDeg;
+        LONGITUDE   = rawdata.longitudeInDeg;
+        LOCALTIME   = datestr(rawdata.formattedLocalTime, 'HH:MM:SS');
+        if size(LOCALTIME,1)>size(LATITUDE,1)
+            dat_lat_long = [LATITUDE, LONGITUDE];
+            dat_lat_long = interpoladat(dat_lat_long,size(LOCALTIME,1));
+            LATITUDE = dat_lat_long(:,1);
+            LONGITUDE = dat_lat_long(:,2);
+        end
+        [x_coord, y_coord, lat_origin, long_origin] = GPS2Cart_GPSports(LATITUDE,LONGITUDE,matcalib);
+        dat = [[1:length(LOCALTIME)]',x_coord , y_coord];
         
     otherwise 
         disp(' ')
@@ -111,16 +148,25 @@ end
         switch selections.GPSType
             case 'Dvideo'
                 mTimes = [(0:size(dat,1)-1)/str2double(freq)]';
+            
             case 'WIMU'
                 mTime =  datevec(mTime); %vetor do tempo de jogo ('xx:yy:zz')
                 mTimes = (mTime(:,4)*3600) + (mTime(:,5)*60) +mTime(:,6); %vetor em segundos
+            
+            case 'Polar Team'
+                mTime = datevec(LOCALTIME); %vetor do tempo de jogo ('xx:yy:zz')
+                mTimes = (mTime(:,4)*3600) + (mTime(:,5)*60) +mTime(:,6); %vetor em segundos
+            
             otherwise
                 mTime = datevec(LOCALTIME); %vetor do tempo de jogo ('xx:yy:zz')
                 mTimes = (mTime(:,4)*3600) + (mTime(:,5)*60) +mTime(:,6); %vetor em segundos
         end
+        
+            % Ajudando o tempo 
             ITime = find(mTimes==timeIs,1);
             FTime = find(mTimes==timeFs,1);
             dat = dat(ITime:FTime,:);
+            
                 
     %       Selecionado conjunto de dados
             dat = dat(:,1:3);

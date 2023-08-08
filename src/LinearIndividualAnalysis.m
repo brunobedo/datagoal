@@ -45,7 +45,7 @@ global selections
         med_vel = mean(veldat)*3.6;                 %   Average velocity(k/h)
         max_vel = max(veldat)*3.6;                  %   Max Velocity (k/h)
         
-%       Desvio padrão da velocidade (m/s) 
+%       Desvio padrï¿½o da velocidade (m/s) 
         std_vel = std(veldat)*3.6; 
         
 %       Aceleration (m.s^2)
@@ -185,7 +185,12 @@ global selections
         fname = [dirsave filesep 'Results' filesep titfil];
         warning off
         p = strfind(nplay{d},'.');
+        if isempty(p)
+            nplay{d} = [nplay{d},'.csv'];
+            p = strfind(nplay{d},'.');
+        end
         p1 = nplay{d}(1:p(end)-1);
+        
         xlswrite(fname,tit,i,'A1')
         xlswrite(fname,{p1},i,['A',num2str(d+1)])
         xlswrite(fname,res,i,['B',num2str(d+1)])
@@ -348,7 +353,7 @@ global selections
                 dist_t = sum(normdat(gapsspm(q,1):gapsspm(q,2)));
                 t61(q,1) = text(p2(1,1),p2(1,2)+2,[num2str(round(dist_t,2)),' m'],'Color','Blue','FontWeight','bold','FontSize',20);
                 title({['Sprints direction'];[char(sct),' - ',ppname];['The athlete peformed ', num2str(round(d_range5,2)),' m sprinting']});
-                legend ([p6_f5(1,1)],'Direção e distância do Sprint')
+                legend ([p6_f5(1,1)],'Direï¿½ï¿½o e distï¿½ncia do Sprint')
             end
         else
             title({['Sprints'];[char(sct),' - ',ppname];['The athlete has not sprinted']});
