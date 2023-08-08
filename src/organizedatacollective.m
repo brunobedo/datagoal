@@ -12,7 +12,10 @@ global selections
     sizeOpo = size(selections.PlayersList.Opponent,1);
     sizeTotal = sum([sizeDef sizeMid sizeFow sizeOpo]);
     tmin = str2num(selections.totalGametime);
-    tseg = tmin*60;
+    minutes = floor(tmin);
+    seconds = round((tmin - minutes) * 100);
+    tseg = minutes * 60 + seconds;
+
     sects = fieldnames(selections.PlayersList);
     
     for i = 1:size(sects)
