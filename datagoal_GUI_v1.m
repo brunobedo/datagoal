@@ -1502,7 +1502,7 @@ function GPSType_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
-GPSType = {' ','QStarz','Stats Sports','PlayerTek','Dvideo','WIMU','Vector S7'};
+GPSType = {' ','QStarz','Stats Sports','PlayerTek','Dvideo','WIMU','Vector S7','Polar Team','Kinexon'};
 set(hObject,'String',GPSType); 
 
 
