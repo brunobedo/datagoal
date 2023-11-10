@@ -949,6 +949,7 @@ elseif  hObject.Value == 2
                             'Individual Playing Area (1 team)',...
                             'Voronoi regions',...
                             'ComprimentoLargura - Area - DistGoal',...
+                            'Tactical Analysis of Team Sectors',...
                             'Video for illustrative purposes'};
         set(handles.ColLinearAnalysisType,'String',ColLinearVariables);
 elseif  hObject.Value == 3
@@ -1169,6 +1170,15 @@ switch selections.ColLinTyp
         disp(' ')
         disp(['Creating: ', selections.ColLinTyp])
         IllustrativeFigure(selections.collectivedata);
+        disp('Saving video...')
+        disp(['Done: ', selections.ColLinTyp])
+        disp('---------------------------------------------------')
+    
+    case 'Tactical Analysis of Team Sectors'
+        disp(' ')
+        disp(['Creating: ', selections.ColLinTyp])
+        ResTeamTacticalAnalysisSectors = tacticalanalysisteamectors(selections.collectivedata);
+        selections.ResTeamCompLargAreaDist = ResTeamTacticalAnalysisSectors;
         disp('Saving video...')
         disp(['Done: ', selections.ColLinTyp])
         disp('---------------------------------------------------')
@@ -1479,12 +1489,12 @@ else
     set(handles.LongCorner3,'Enable','on');
     set(handles.LongCorner4,'Enable','on');
     set(handles.text19,'String','(hh:mm:ss)');
-    set(handles.StartTime,'String','18:10:00');
-    set(handles.EndTime,'String','18:30:00');
-    set(handles.FreqAc,'String','1');
+    set(handles.StartTime,'String','11:00:00');
+    set(handles.EndTime,'String','11:05:00');
+    set(handles.FreqAc,'String','10');
     set(handles.LowPass,'String','0.3');
     
-    selections.FreqAc = '1';
+    selections.FreqAc = '10';
     selections.LowPass = '0.3';
 end
 
