@@ -107,7 +107,8 @@ global selections
     TMean = [TMeanX TMeanY];
     
 %%  Calculating Streat Index of each sector
-for i = 1:size(TMean,1)
+
+for i = 1:size(xdata,1)
     % Defender 
     linXD = xdataD(i,:); 
     linYD = ydataD(i,:); 
@@ -121,6 +122,7 @@ for i = 1:size(TMean,1)
     linYM = ydataM(i,:); 
     MMeanX = mean(linXM,2);
     MMeanY = mean(linYM,2);
+    MMatXY = [linXM' linYM']; 
     MMean = [MMeanX MMeanY];  
         
     % Forwards 
@@ -128,14 +130,28 @@ for i = 1:size(TMean,1)
     linYF = ydataF(i,:);
     FMeanX = mean(linXF,2);
     FMeanY = mean(linYF,2);
+    FMatXY = [linXF' linYF']; 
     FMean = [FMeanX FMeanY];
     
     % SI - Defenders
-    for w = 1:size(DMatXY,1)
-        ST_D(i,w) = pdist([DMatXY(w,:);TMean(i,:)]); 
-    end  
-    a=2
+    for d = 1:size(DMatXY,1)
+        ST_D(i,d) = pdist([DMatXY(d,:);DMean]); 
+    end
+   
+    
+    % SI - Midfields
+    for m = 1:size(MMatXY,1)
+        ST_M(i,m) = pdist([MMatXY(m,:);MMean]); 
+    end
+    
+    % SI - Forwards
+    for f = 1:size(FMatXY,1)
+        ST_F(i,f) = pdist([FMatXY(f,:);FMean]); 
+    end     
 end 
+
+%%  Calculating Vector Coding of Strech Index (SI)
+
 
 
 
