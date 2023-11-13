@@ -5,26 +5,14 @@ function res = organizedatacollective(dataraw)
 %   Organize all the collective data
     
 global selections
-
-    sizeDef = size(selections.PlayersList.Defender,1);
-    sizeMid = size(selections.PlayersList.Midfielder,1);
-    sizeFow = size(selections.PlayersList.Forwards,1);
-    sizeOpo = size(selections.PlayersList.Opponent,1);
-    sizeTotal = sum([sizeDef sizeMid sizeFow sizeOpo]);
-    tmin = str2num(selections.totalGametime);
-    minutes = floor(tmin);
-    seconds = round((tmin - minutes) * 100);
-    tseg = minutes * 60 + seconds;
-
-    sects = fieldnames(selections.PlayersList);
-    
+    sects = fieldnames(selections.PlayersList);   
     for i = 1:size(sects)
         sct = sects{i};
         eval(['nplay = selections.PlayersList.',sct,';'])
         for d = 1:size(nplay)
             eval(['data = dataraw.',sct,'{',num2str(d),',1};']);
-            eval(['datx_',sct,'(:,d) = timenormalize(data(:,2),1,size(data(:,2),1),tseg);'])
-            eval(['daty_',sct,'(:,d) = timenormalize(data(:,3),1,size(data(:,3),1),tseg);'])           
+            eval(['datx_',sct,'(:,d) = data(:,2);'])
+            eval(['daty_',sct,'(:,d) = data(:,3);'])           
         end
         if size(nplay) == 0 
             eval(['datx_',sct,' = [];'])
