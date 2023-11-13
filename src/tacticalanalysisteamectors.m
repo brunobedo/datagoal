@@ -35,41 +35,10 @@ global selections
     xdataF = xdata(:,1+sD+sM:sM+sD+sF); 
     ydataF = ydata(:,1+sD+sM:sM+sD+sF);
 
-%%  Calculating the averages positions of each sector
-%   Averages of each player     
-%   Defender
-    DPlayMeanX = mean(xdataD,1);
-    DPlayMeanY = mean(ydataD,1);
-%   Midfielder
-    MPlayMeanX = mean(xdataM,1);
-    MPlayMeanY = mean(ydataM,1);
-%   Forwards
-    FPlayMeanX = mean(xdataF,1);
-    FPlayMeanY = mean(ydataF,1);
-
-%   Sector average
-%   Defender
-    DSecMeanX = mean(DPlayMeanX);
-    DSecMeanY = mean(DPlayMeanY);
-%   Midfielder
-    MSecMeanX = mean(MPlayMeanX);
-    MSecMeanY = mean(MPlayMeanY);
-%   Forwards
-    FSecMeanX = mean(FPlayMeanX);
-    FSecMeanY = mean(FPlayMeanY);
-
-%   Calculating distance between the avaregares betweem sectors (Euclidian distance)
-%   Defender - Midfielder
-    distmeanDM = pdist([DSecMeanX DSecMeanY;MSecMeanX MSecMeanY],'euclidean');
-
-%   Midfielder - Forwards
-    distmeanMF = pdist([MSecMeanX MSecMeanY;FSecMeanX FSecMeanY],'euclidean');
-
-%   Defender - Forwards
-    distmeanDF = pdist([DSecMeanX DSecMeanY;FSecMeanX FSecMeanY],'euclidean');
-
    
 %%  Calculating Streat Index of each sector
+figure()
+campo 
 
 for i = 1:size(xdata,1)
     % Defender 
@@ -95,28 +64,34 @@ for i = 1:size(xdata,1)
     FMeanY = mean(linYF,2);
     FMatXY = [linXF' linYF']; 
     FMean = [FMeanX FMeanY];
+
+
+
     
     % SI - Defenders
-    disp(DMean)
-    for d = 1:size(DMatXY,1)
-        ST_D(i,d) = pdist([DMatXY(d,:);DMean]); 
+    for w = 1:size(DMatXY,1)
+        ST_D(i,w) = pdist([DMatXY(w,:); DMeanX DMeanY]);
+        p1a{w} = plot(DMatXY(w,1),DMatXY(w,2),'ro','MarkerSize',5,'LineWidth',3);
     end
-   
-    % SI - Midfields
-    for m = 1:size(MMatXY,1)
-        ST_M(i,m) = pdist([MMatXY(m,:);MMean]); 
-    end
-    
-    % SI - Forwards
-    for f = 1:size(FMatXY,1)
-        ST_F(i,f) = pdist([FMatXY(f,:);FMean]); 
-    end   
-if i == 300
-    a=2;
-end 
+    p2a = plot(DMeanX,DMeanY,'^b','MarkerSize',5,'LineWidth',3);
+    pause(0.25)
+    delete(p1a)
+    delete(p2a)
+    disp(['Processing: Frame ',num2str(i),' of ',num2str(size(xdata,1))])
 
+%     % SI - Midfields
+%     for m = 1:size(MMatXY,1)
+%         ST_M(i,m) = pdist([MMatXY(m,:);MMean]); 
+%     end
+%     
+%     % SI - Forwards
+%     for f = 1:size(FMatXY,1)
+%         ST_F(i,f) = pdist([FMatXY(f,:);FMean]); 
+%     end  
+
+
+end
 %%  Calculating Vector Coding of Strech Index (SI)
-a=2;
 
 
 
