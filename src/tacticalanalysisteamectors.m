@@ -68,44 +68,7 @@ global selections
 %   Defender - Forwards
     distmeanDF = pdist([DSecMeanX DSecMeanY;FSecMeanX FSecMeanY],'euclidean');
 
-%%  Calculating the medians positions of each sector
-%   Medians of each player     
-%   Defender
-    DPlaymedianX = median(xdataD,1);
-    DPlaymedianY = median(ydataD,1);
-%   Midfielder
-    MPlaymedianX = median(xdataM,1);
-    MPlaymedianY = median(ydataM,1);
-%   Forwards
-    FPlaymedianX = median(xdataF,1);
-    FPlaymedianY = median(ydataF,1);
-
-%   Sector median
-%   Defender
-    DSecmedianX = median(DPlaymedianX);
-    DSecmedianY = median(DPlaymedianY);
-%   Midfielder
-    MSecmedianX = median(MPlaymedianX);
-    MSecmedianY = median(MPlaymedianY);
-%   Forwards
-    FSecmedianX = median(FPlaymedianX);
-    FSecmedianY = median(FPlaymedianY);
-
-%   Calculating distance between the avaregares betweem sectors (Euclidian distance)
-%   Defender - Midfielder
-    distmedianDM = pdist([DSecmedianX DSecmedianY;MSecmedianX MSecmedianY],'euclidean');
-
-%   Midfielder - Forwards
-    distmedianMF = pdist([MSecmedianX MSecmedianY;FSecmedianX FSecmedianY],'euclidean');
-
-%   Defender - Forwards
-    distmedianDF = pdist([DSecmedianX DSecmedianY;FSecmedianX FSecmedianY],'euclidean');
-    
-%   Team mean vector
-    TMeanX = mean(xdata,2); 
-    TMeanY = mean(ydata,2);
-    TMean = [TMeanX TMeanY];
-    
+   
 %%  Calculating Streat Index of each sector
 
 for i = 1:size(xdata,1)
@@ -134,11 +97,11 @@ for i = 1:size(xdata,1)
     FMean = [FMeanX FMeanY];
     
     % SI - Defenders
+    disp(DMean)
     for d = 1:size(DMatXY,1)
         ST_D(i,d) = pdist([DMatXY(d,:);DMean]); 
     end
    
-    
     % SI - Midfields
     for m = 1:size(MMatXY,1)
         ST_M(i,m) = pdist([MMatXY(m,:);MMean]); 
@@ -147,11 +110,13 @@ for i = 1:size(xdata,1)
     % SI - Forwards
     for f = 1:size(FMatXY,1)
         ST_F(i,f) = pdist([FMatXY(f,:);FMean]); 
-    end     
+    end   
+if i == 300
+    a=2;
 end 
 
 %%  Calculating Vector Coding of Strech Index (SI)
-
+a=2;
 
 
 
