@@ -1489,12 +1489,12 @@ else
     set(handles.LongCorner3,'Enable','on');
     set(handles.LongCorner4,'Enable','on');
     set(handles.text19,'String','(hh:mm:ss)');
-    set(handles.StartTime,'String','11:00:00');
-    set(handles.EndTime,'String','11:05:00');
-    set(handles.FreqAc,'String','10');
+    set(handles.StartTime,'String','18:00:00');
+    set(handles.EndTime,'String','18:45:00');
+    set(handles.FreqAc,'String','1');
     set(handles.LowPass,'String','0.3');
     
-    selections.FreqAc = '10';
+    selections.FreqAc = '1';
     selections.LowPass = '0.3';
 end
 
