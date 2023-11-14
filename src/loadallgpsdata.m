@@ -182,8 +182,8 @@ end
                 dat = [vtime,dat];
             elseif size(dat,1) > line_ecxpeted
                 data = dat(:,2:3);
-                vtime = [(0:line_ecxpeted)/str2double(freq)]';
-                dat = [vtime,data];
+                dat = interpoladat(data,line_ecxpeted);
+                dat = [vtime,dat];
             end
             
     
