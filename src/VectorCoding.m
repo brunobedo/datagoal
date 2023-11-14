@@ -133,6 +133,5 @@ res1 = [vtime res];
     ewb.Worksheets.Item(1).Name = char(selections.ColNonLinTyp(1:end));
     ewb.Save 
     ewb.Close(false)
-
 end
 
