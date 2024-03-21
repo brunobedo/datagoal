@@ -1,4 +1,4 @@
-function [res] = IndividualPlayingArea(dataraw)
+function [res1] = individual_playing_area(dataraw)
 % This file is part of DataGoal Toolbox: 
 % 
 % Author:   Bruno Luiz Souza Bedo <bruno.bedo@usp.br> 
@@ -30,6 +30,10 @@ global selections
     TMeanX = mean(xdata,2); 
     TMeanY = mean(ydata,2);
 
+%%
+%   Time Vector
+    vtime = [(0:size(xdata,1)-1)/str2double(selections.FreqAc)]'; 
+    vtime = vtime./60; 
 %%  Calculating the Individual Playing Area
 for i = 1:size(xdata,1)
 %   Width (Largura - Latera/Lateral)
@@ -51,31 +55,33 @@ for i = 1:size(xdata,1)
 
 %   Distance to the goal
     DistGoal1(i,:) = [Pminv(i,1) Pminp(i,:)];
-    DistGoal2(i,:) = [110-Pmaxv(i,1) Pmaxp(i,:)];
+    DistGoal2(i,:) = [str2double(selections.fieldwidth)-Pmaxv(i,1) Pmaxp(i,:)];
 
 %   Rectangle
     IndAreaRec(i,1) = (DistW(i,1)*DistL(i,1))/size(xdata,2); 
 
 %   Polygon
     IndAreaPol(i,1) = SufArea(i,:)/size(xdata,2);
+    
 end
 %%  Results 
-    res(1,1) = mean(IndAreaRec);
-    res(2,1) = median(IndAreaRec);
-    res(3,1) = std(IndAreaRec);
+    res1(1,1) = mean(IndAreaRec);
+    res1(2,1) = median(IndAreaRec);
+    res1(3,1) = std(IndAreaRec);
 
-    res(1,2) = mean(IndAreaPol);
-    res(2,2) = median(IndAreaPol);
-    res(3,2) = std(IndAreaPol);
+    res1(1,2) = mean(IndAreaPol);
+    res1(2,2) = median(IndAreaPol);
+    res1(3,2) = std(IndAreaPol);
 
-    res(1,3) = mean(DistGoal1(:,1));
-    res(2,3) = median(DistGoal1(:,1));
-    res(3,3) = std(DistGoal1(:,1));
+    res1(1,3) = mean(DistGoal1(:,1));
+    res1(2,3) = median(DistGoal1(:,1));
+    res1(3,3) = std(DistGoal1(:,1));
 
-    res(1,4) = mean(DistGoal2(:,1));
-    res(2,4) = median(DistGoal2(:,1));
-    res(3,4) = std(DistGoal2(:,1));
-
+    res1(1,4) = mean(DistGoal2(:,1));
+    res1(2,4) = median(DistGoal2(:,1));
+    res1(3,4) = std(DistGoal2(:,1));
+    
+    res2 = [vtime,DistGoal1(:,1), DistGoal2(:,1), IndAreaRec, IndAreaPol];
 %%  Saving results
     prompt = {'Enter file name:'};
     dlgtitle = 'Input title';
@@ -83,11 +89,15 @@ end
     titfil = char(inputdlg(prompt,dlgtitle,[1 60],definput));
     fname = [dirsave filesep 'Results' filesep titfil];
 
-    titvar1 = {'Individual playing area(Rectangle)','Individual playing area(Polygon)','Distance Goal 1','Distance Goal 2'};
-    titvar2 = {'Mean';'Median';'STD'};
-    xlswrite(fname,titvar1,1,'B1')
-    xlswrite(fname,titvar2,1,'A2')
-    xlswrite(fname,res,1,'B2')
+    tit1 = {'Individual playing area(Rectangle)','Individual playing area(Polygon)','Distance Goal 1','Distance Goal 2'};
+    tit2 = {'Mean';'Median';'STD'};
+    tit3 = {'vtime','Distance Goal 1', 'Distance Goal 2', 'Area Rectangle', 'Area Polygon'};
+    
+    xlswrite(fname,tit1,1,'B1')
+    xlswrite(fname,tit2,1,'A2')
+    xlswrite(fname,tit3,1,'F1')
+    xlswrite(fname,res1,1,'B2')
+    xlswrite(fname,res2,1,'F2')
 %   Sheet's name
     e = actxserver('Excel.Application');
     ewb = e.Workbooks.Open(fname);
@@ -121,7 +131,7 @@ end
 
 %   Distance to the goal
     DistGoal1M = [PminvM PminpM];
-    DistGoal2M = [110-PmaxvM PmaxpM];
+    DistGoal2M = [str2double(selections.fieldwidth)-PmaxvM PmaxpM];
 
     K = convhull(matx,maty);
     SufAreaM = polyarea(matx(1,K),maty(1,K));
@@ -141,10 +151,10 @@ end
     l4 = plot([matx(1,PminpM) matx(1,PminpM)],[maty(1,AminpM) maty(1,AmaxpM)],'LineWidth',1,'Color','k','LineStyle','- -');
 
     l1g = plot([0 matx(1,PminpM)]  ,[maty(1,PminpM) maty(1,PminpM)],'LineWidth',1,'Color','k','LineStyle',':');
-    l2g = plot([matx(1,PmaxpM) 110],[maty(1,PmaxpM) maty(1,PmaxpM)],'LineWidth',1,'Color','k','LineStyle',':');
+    l2g = plot([matx(1,PmaxpM) str2double(selections.fieldwidth)],[maty(1,PmaxpM) maty(1,PmaxpM)],'LineWidth',1,'Color','k','LineStyle','-');
     t1g = text(matx(1,PminpM),maty(1,PminpM)+2,num2str(round(DistGoal1M(1),1)));
     t2g = text(matx(1,PmaxpM),maty(1,PmaxpM)+2,num2str(round(DistGoal2M(1),1)));
-    
+
     legend([p1,l1,l1g,l2g],'Team 1','IPA','Dist. goal 1','Dist goal 2')
     
     title({'Individual Playing Area (IPA) ';['Mean: ', num2str(round(mean(IndAreaRec),2)),' m^2'];...
@@ -180,7 +190,7 @@ hold on
    p2f(i) = plot([xdata(i,Pminp(i,:)) xdata(i,Pminp(i,:))],[ydata(i,Aminp(i,:)) ydata(i,Amaxp(i,:))],'LineWidth',1,'Color','k','LineStyle','- -');
     
    lg1(i) = plot([0 xdata(i,Pminp(i,:))]  ,[ydata(i,Pminp(i,:)) ydata(i,Pminp(i,:))],'LineWidth',1,'Color','k','LineStyle',':');
-   lg2(i) = plot([xdata(i,Pmaxp(i,:)) 110],[ydata(i,Pmaxp(i,:)) ydata(i,Pmaxp(i,:))],'LineWidth',1,'Color','k','LineStyle',':');
+   lg2(i) = plot([xdata(i,Pmaxp(i,:)) str2double(selections.fieldwidth)],[ydata(i,Pmaxp(i,:)) ydata(i,Pmaxp(i,:))],'LineWidth',1,'Color','k','LineStyle',':');
    tg1(i) = text(xdata(i,Pminp(i,:)),ydata(i,Pminp(i,:))+2,num2str(round(DistGoal1(i,1),1)));
    tg2(i) = text(xdata(i,Pmaxp(i,:)),ydata(i,Pmaxp(i,:))+2,num2str(round(DistGoal2(i,1),1)));
    
@@ -196,7 +206,7 @@ hold on
    p3a(i) = plot(xdata(i,:),ydata(i,:),'or','MarkerSize',5,'LineWidth',3);
    p3b(i) = plot(xdata(i,K),ydata(i,K),'LineWidth',1,'Color','k','LineStyle','- -');
    l2g1(i) = plot([0 xdata(i,Pminp(i,:))]  ,[ydata(i,Pminp(i,:)) ydata(i,Pminp(i,:))],'LineWidth',1,'Color','k','LineStyle',':');
-   l2g2(i) = plot([xdata(i,Pmaxp(i,:)) 110],[ydata(i,Pmaxp(i,:)) ydata(i,Pmaxp(i,:))],'LineWidth',1,'Color','k','LineStyle',':');
+   l2g2(i) = plot([xdata(i,Pmaxp(i,:)) str2double(selections.fieldwidth)],[ydata(i,Pmaxp(i,:)) ydata(i,Pmaxp(i,:))],'LineWidth',1,'Color','k','LineStyle',':');
    t2g1(i) = text(xdata(i,Pminp(i,:)),ydata(i,Pminp(i,:))+2,num2str(round(DistGoal1(i,1),1)));
    t2g2(i) = text(xdata(i,Pmaxp(i,:)),ydata(i,Pmaxp(i,:))+2,num2str(round(DistGoal2(i,1),1)));
 
