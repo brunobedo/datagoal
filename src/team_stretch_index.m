@@ -1,4 +1,4 @@
-function [res2] = TeamStretchIndex(dataraw)
+function [res2] = team_stretch_index(dataraw)
 % This file is part of DataGoal Toolbox: 
 % 
 % Author:   Bruno Luiz Souza Bedo <bruno.bedo@usp.br> 
@@ -16,6 +16,12 @@ global selections
 %   Separating data
     xdata = dataraw.X; 
     ydata = dataraw.Y;
+
+%%
+%   Time Vector
+    vtime = [(0:size(xdata,1)-1)/str2double(selections.FreqAc)]'; 
+    vtime = vtime./60; 
+        
 %%    
 %   Mean of position of each pleayser 
     PlayersMeanX = mean(xdata,1);
@@ -62,9 +68,12 @@ end
 %   Results
     res1 = [PMeanSI' PMedianSI'];
     res2 = [TMeanSI TMedianSI];
+    res3 = [vtime, TotalSI];
     t1 = {'Players','Mean','Median','Team Mean','Team Median'};
     t2 = players; 
-
+    t3 = {'time'};
+    t4 = players';
+    
 %   Saving 
     prompt = {'Enter file name:'};
     dlgtitle = 'Input title';
@@ -74,8 +83,11 @@ end
 
     xlswrite(fname,t1,1,'A1')
     xlswrite(fname,t2,1,'A2')
+    xlswrite(fname,t3,1,'F1')
+    xlswrite(fname,t4,1,'G1')
     xlswrite(fname,res1,1,'B2')
     xlswrite(fname,res2,1,'D2')
+    xlswrite(fname,res3,1,'F2')
 
     e = actxserver('Excel.Application');
     ewb = e.Workbooks.Open(fname);
@@ -88,6 +100,7 @@ end
     f1 = figure(1); clf; set(f1,'name','Players position','units','normalized','outerposition',[0 0 1 1])
     campo
     hold on
+    
 %     axis off
     p1 = plot(PlayersMeanX,PlayersMeanY,'or','MarkerSize',5,'LineWidth',3);
     p2 = plot(teamMeanX,teamMeanY,'^b','MarkerSize',5,'LineWidth',3);

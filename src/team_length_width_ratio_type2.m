@@ -1,4 +1,4 @@
-function [res] = TeamLargCompLPWRatio(dataraw)
+function [res] = team_length_width_ratio_type2(dataraw)
 % This file is part of DataGoal Toolbox: 
 % 
 % Author:   Bruno Luiz Souza Bedo <bruno.bedo@usp.br> 
@@ -25,6 +25,11 @@ global selections
 %   Team Mean 
     teamMedianX = median(PlayersMedianX);
     teamMediany = median(PlayersMedianY);
+
+%%
+%   Time Vector
+    vtime = [(0:size(xdata,1)-1)/str2double(selections.FreqAc)]'; 
+    vtime = vtime./60; 
 
 %%  Calculating Width and Length
 for i = 1:size(xdata,1)
@@ -61,7 +66,7 @@ end
     LPwRatio_Mean = mean(LpWRatio); 
     LPwRatio_Median = median(LpWRatio);
     LPwRatio_STD = std(LpWRatio);
-    
+
 %%  Creating and saving figure
     titsavef1 = ['Field_',selections.ColLinTyp];
     f1 = figure(1); clf; set(f1,'name','Players position','units','normalized','outerposition',[0 0 1 1])
@@ -101,6 +106,8 @@ end
     set(gca,'XColor', 'none','YColor','none')
     export_fig([dirsave filesep 'Results' filesep titsavef1],'-jpg')%,'-transparent'
 
+close (f1)
+     
 %%  Saving results
     prompt = {'Enter file name:'};
     dlgtitle = 'Input title';
@@ -122,8 +129,7 @@ end
     ewb.Worksheets.Item(1).Name = char(selections.ColLinTyp(1:30));
     ewb.Save 
     ewb.Close(false)
-close (f1)
-    
+
 %%  Creating a video file
 if selections.RecordVideo ==1
     prompt = {'Enter file name:'};

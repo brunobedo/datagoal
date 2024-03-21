@@ -940,15 +940,14 @@ elseif  hObject.Value == 2
                             'Centroide por setores da equipe',...
                             'Length and Width (2 teams) and Individual Playing Area',...
                             'Team separateness',...
-                            'Espaço de Jogo Efetivo – Nível da equipe',...
+                            'Team Effective Area',...
                             'Stretch index',...
                             'Team spread',...
-                            'Length and Width (1 team) and LpW ratio',...
                             'Players’ major range',...
                             'Spatial Exploration Index',...
                             'Individual Playing Area (1 team)',...
                             'Voronoi regions',...
-                            'ComprimentoLargura - Area - DistGoal',...
+                            'Length - Width - Ratio and Area',...
                             'Tactical Analysis of Team Sectors',...
                             'Video for illustrative purposes'};
         set(handles.ColLinearAnalysisType,'String',ColLinearVariables);
@@ -1085,10 +1084,10 @@ switch selections.ColLinTyp
         disp(['Done: ', selections.ColLinTyp])
         disp('---------------------------------------------------')
         
-    case 'Espaço de Jogo Efetivo – Nível da equipe'
+    case 'Team Effective Area'
         disp(' ')
         disp(['Calculating: ', selections.ColLinTyp])
-        ResTeamEffectiveArea = TeamEffectiveArea(selections.collectivedata);
+        ResTeamEffectiveArea = team_effective_area(selections.collectivedata);
         selections.ResTeamEffectiveArea = ResTeamEffectiveArea;
         disp('Saving results...')
         disp(['Done: ', selections.ColLinTyp])
@@ -1097,7 +1096,7 @@ switch selections.ColLinTyp
     case 'Stretch index'
         disp(' ')
         disp(['Calculating: ', selections.ColLinTyp])
-        ResTeamStretchIndex = TeamStretchIndex(selections.collectivedata);
+        ResTeamStretchIndex = team_stretch_index(selections.collectivedata);
         selections.ResTeamStretchIndex = ResTeamStretchIndex;
         disp('Saving results...')
         disp(['Done: ', selections.ColLinTyp])
@@ -1112,15 +1111,6 @@ switch selections.ColLinTyp
         disp(['Done: ', selections.ColLinTyp])
         disp('---------------------------------------------------')
         
-    case 'Length and Width (1 team) and LpW ratio'
-        disp(' ')
-        disp(['Calculating: ', selections.ColLinTyp])
-        ResTeamLargCompLPWRatio = TeamLargCompLPWRatio(selections.collectivedata);
-        selections.ResTeamLargCompLPWRatio = ResTeamLargCompLPWRatio;
-        disp('Saving results...')
-        disp(['Done: ', selections.ColLinTyp])
-        disp('---------------------------------------------------')
-
     case 'Players’ major range'
         disp(' ')
         disp(['Calculating: ', selections.ColLinTyp])
@@ -1133,7 +1123,7 @@ switch selections.ColLinTyp
     case 'Spatial Exploration Index'
         disp(' ')
         disp(['Calculating: ', selections.ColLinTyp])
-        ResSpatialExplorationIndex = SpatialExplorationIndex(selections.collectivedata);
+        ResSpatialExplorationIndex = spatial_exploration_index(selections.collectivedata);
         selections.ResSpatialExplorationIndex = ResSpatialExplorationIndex;
         disp('Saving results...')
         disp(['Done: ', selections.ColLinTyp])
@@ -1157,10 +1147,10 @@ switch selections.ColLinTyp
         disp(['Done: ', selections.ColLinTyp])
         disp('---------------------------------------------------')
    
-    case 'ComprimentoLargura - Area - DistGoal'
+    case 'Length - Width - Ratio and Area'
         disp(' ')
         disp(['Calculating: ', selections.ColLinTyp])
-        ResTeamCompLargAreaDist = TeamCompLargAreaDist(selections.collectivedata);
+        ResTeamCompLargAreaDist = team_length_width_ratio_area_distgoal(selections.collectivedata);
         selections.ResTeamCompLargAreaDist = ResTeamCompLargAreaDist;
         disp('Saving results...')
         disp(['Done: ', selections.ColLinTyp])

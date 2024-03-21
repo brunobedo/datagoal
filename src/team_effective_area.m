@@ -1,4 +1,4 @@
-function [res] = TeamEffectiveArea(dataraw)
+function [res1] = team_effective_area(dataraw)
 %   Calculates the area o the team 
 % This file is part of DataGoal Toolbox: 
 % 
@@ -25,6 +25,11 @@ global selections
     teamMedianX = median(PlayersMedianX);
     teamMediany = median(PlayersMedianY);
 
+%%
+%   Time Vector
+    vtime = [(0:size(xdata,1)-1)/str2double(selections.FreqAc)]'; 
+    vtime = vtime./60; 
+
 %%  Calculating Area  
 for i = 1:size(xdata,1)
     K = convhull(xdata(i,:),ydata(i,:));
@@ -35,6 +40,27 @@ end
     Area_Median = median(SufArea); 
     Area_STD = std(SufArea); 
 
+   
+%%  Saving results 
+    prompt = {'Enter file name:'};
+    dlgtitle = 'Input title';
+    definput = {['Linear_Collective_Res_',selections.ColLinTyp]};%'.csv'
+    titfil = char(inputdlg(prompt,dlgtitle,[1 60],definput));
+    fname = [dirsave filesep 'Results' filesep titfil];
+    
+    res1 = [Area_Mean Area_Median Area_STD];
+    res2 = [vtime, SufArea];
+    
+    tit = {'mean area (m^2)','median area(m^2)','standard deviation area(m^2)','time','area'};
+    xlswrite(fname,tit,1,'A1')
+    xlswrite(fname,res1,1,'A2')
+    xlswrite(fname,res2,1,'D2')
+    e = actxserver('Excel.Application');
+    ewb = e.Workbooks.Open(fname);
+    ewb.Worksheets.Item(1).Name = char(selections.ColLinTyp);
+    ewb.Save 
+    ewb.Close(false)
+    
 %%  Creating and saving figure
     titsavef1 = ['Field_',selections.ColLinTyp];
     f1 = figure(1); clf; set(f1,'name','Sectors distance','units','normalized','outerposition',[0 0 1 1])
@@ -47,6 +73,7 @@ end
         players{p,1} = playfull{p}(1:po(end)-1);
         players{p,1} = strrep(players{p},'_','-');
     end
+    
     text(PlayersMeanX+0.7,PlayersMeanY,players,'FontWeight','bold','FontSize',12);
     p1 = plot(PlayersMeanX,PlayersMeanY,'or','MarkerSize',5,'LineWidth',3);
     p2 = plot(teamMeanX,teamMeany,'^r','MarkerSize',5,'LineWidth',3);
@@ -56,23 +83,7 @@ end
     title(['Area: ',num2str(Area_Mean),'m^2']); 
     set(gca,'XColor', 'none','YColor','none')
     export_fig([dirsave filesep 'Results' filesep titsavef1],'-jpg')   %,'-transparent'
-%%  Saving results 
-    prompt = {'Enter file name:'};
-    dlgtitle = 'Input title';
-    definput = {['Linear_Collective_Res_',selections.ColLinTyp]};%'.csv'
-    titfil = char(inputdlg(prompt,dlgtitle,[1 60],definput));
-    fname = [dirsave filesep 'Results' filesep titfil];
     
-    res = [Area_Mean Area_Median Area_STD]; 
-    
-    tit = {'Mean Area (m^2)','Median Area(m^2)','Standard deviation Area(m^2)'};
-    xlswrite(fname,tit,1,'A1')
-    xlswrite(fname,res,1,'A2')
-    e = actxserver('Excel.Application');
-    ewb = e.Workbooks.Open(fname);
-    ewb.Worksheets.Item(1).Name = char(selections.ColLinTyp(1:30));
-    ewb.Save 
-    ewb.Close(false)
 close (f1) 
 
 %%  Creating a video file

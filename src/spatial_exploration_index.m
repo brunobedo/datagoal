@@ -1,4 +1,4 @@
-function [res] = SpatialExplorationIndex(dataraw)
+function [res] = spatial_exploration_index(dataraw)
 % This file is part of DataGoal Toolbox: 
 % 
 % Author:   Bruno Luiz Souza Bedo <bruno.bedo@usp.br> 
@@ -7,6 +7,7 @@ function [res] = SpatialExplorationIndex(dataraw)
 %   Effects of pitch area-restrictions on tactical behavior, physical, and physiological 
 %   performances in soccer large-sided games. J Strength Cond Res. 2017;31(9):2398–408.
 %   Author: Bruno Luiz de Souza Bedo 
+
 global selections 
     dirsave = selections.Gamedir;
     mkdir([dirsave filesep 'Results'])
@@ -19,6 +20,11 @@ global selections
 %   Separating data
     xdata = dataraw.X; 
     ydata = dataraw.Y;
+
+%%  Time Vector 
+    vtemp = [(0:size(xdata,1)-1)/str2double(selections.FreqAc)]'; 
+    vtempm = vtemp./60;
+   
 %%    
 %   Mean of position of each pleayser 
     PlayersMeanX = mean(xdata,1);
@@ -49,13 +55,13 @@ end
     SEI_P_mean = mean(SEI); 
     SEI_P_median = median(SEI);
     SEI_P_std = std(SEI);
-        
+    
+    SEI_P_full = SEI;
+    
     SEI_T_mean = mean(SEI_P_mean);
     SEI_T_median = median(SEI_P_median);
     SEI_T_std = std(SEI_P_std);
     
-    res = [SEI_P_mean];
-
 %%  Saving results
     prompt = {'Enter file name:'};
     dlgtitle = 'Input title';
@@ -65,18 +71,23 @@ end
     
     tit1 = {'Players','Mean','Median','STD','Team values'};
     tit2 = {'Mean';'Median';'STD'};
+    tit3 = {'time'};
+    tit4 = players';
     
     res1 = players;
     res2 = [SEI_P_mean' SEI_P_median' SEI_P_std'];
     res3 = [SEI_T_mean SEI_T_median SEI_T_std]';
+    res4 = [vtempm, SEI_P_full];
     
     xlswrite(fname,tit1,1,'A1')
     xlswrite(fname,tit2,1,'E2')
+    xlswrite(fname,tit3,1,'G1')
+    xlswrite(fname,tit4,1,'H1')
     xlswrite(fname,res1,1,'A2')
     xlswrite(fname,res2,1,'B2')
     xlswrite(fname,res3,1,'F2')
-    
-    
+    xlswrite(fname,res4,1,'G2')
+
     e = actxserver('Excel.Application');
     ewb = e.Workbooks.Open(fname);
     ewb.Worksheets.Item(1).Name = char(selections.ColLinTyp(1:end));
