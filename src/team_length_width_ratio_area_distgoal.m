@@ -1,4 +1,4 @@
-function [res] = TeamCompLargAreaDist(dataraw)
+function [res1] = team_length_width_ratio_area_distgoal(dataraw)
 %   Calculates the area o the team 
 % This file is part of DataGoal Toolbox: 
 % 
@@ -12,8 +12,8 @@ global selections
     ydata = dataraw.Y;
 
 %   Mean of position of each pleayser 
-PlayersMeanX = mean(xdata,1);
-PlayersMeanY = mean(ydata,1);
+    PlayersMeanX = mean(xdata,1);
+    PlayersMeanY = mean(ydata,1);
 
 %   Team Mean 
     teamMeanX = mean(PlayersMeanX);
@@ -26,7 +26,11 @@ PlayersMeanY = mean(ydata,1);
 %   Team Mean 
     teamMedianX = median(PlayersMedianX);
     teamMediany = median(PlayersMedianY);
-
+    
+%%
+%   Time Vector
+    vtime = [(0:size(xdata,1)-1)/str2double(selections.FreqAc)]'; 
+    vtime = vtime./60; 
 %%  Calculating Area  
     for i = 1:size(xdata,1)
         K = convhull(xdata(i,:),ydata(i,:));
@@ -97,7 +101,8 @@ PlayersMeanY = mean(ydata,1);
     title(['Area: ',num2str(Area_Mean),'m^2']); 
     set(gca,'XColor', 'none','YColor','none')
     export_fig([dirsave filesep 'Results' filesep titsavef1],'-jpg')   %,'-transparent'
-    
+close (f1)
+
 %%  Saving results 
     prompt = {'Enter file name:'};
     dlgtitle = 'Input title';
@@ -105,22 +110,23 @@ PlayersMeanY = mean(ydata,1);
     titfil = char(inputdlg(prompt,dlgtitle,[1 60],definput));
     fname = [dirsave filesep 'Results' filesep titfil];
     
-    res = [Area_Mean Area_Median Area_STD,...
+    res1 = [Area_Mean Area_Median Area_STD,...
            Largura_Mean,Largura_Median,Largura_STD,...
-           Comprimento_Mean,Comprimento_Median,Comprimento_STD]; 
+           Comprimento_Mean,Comprimento_Median,Comprimento_STD];
+    res2 = [vtime, dist_comp_met2, dist_larg_met2, SufArea];
 
     tit = {'Mean Area (m^2)','Median Area(m^2)','Standard deviation Area(m^2)',...
            'Mean Comprimento(m)','Median Comprimento(m)','Standard deviation Comprimento(m)',...
            'Mean Largura(m)','Median Largura(m)','Standard deviation Largura(m)',...
-           };
+           'time','Comprimento','Largura','Area'};
     xlswrite(fname,tit,1,'A1')
-    xlswrite(fname,res,1,'A2')
+    xlswrite(fname,res1,1,'A2')
+    xlswrite(fname,res2,1,'J2')
     e = actxserver('Excel.Application');
     ewb = e.Workbooks.Open(fname);
     ewb.Worksheets.Item(1).Name = char(selections.ColLinTyp(1:30));
     ewb.Save 
     ewb.Close(false)
-close (f1)
 
 %%  Creating a video file
 if selections.RecordVideo ==1
