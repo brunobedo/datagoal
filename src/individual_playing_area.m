@@ -1,0 +1,240 @@
+function [res1] = individual_playing_area(dataraw)
+% This file is part of DataGoal Toolbox: 
+% 
+% Author:   Bruno Luiz Souza Bedo <bruno.bedo@usp.br> 
+% Calculates the Individual Playing Area based on rectangle and polygon. 
+
+global selections 
+    dirsave = selections.Gamedir;
+    mkdir([dirsave filesep 'Results'])
+    
+%   Separating data
+    xdata = dataraw.X; 
+    ydata = dataraw.Y;
+%%    
+%   Mean of position of each pleayser 
+    PlayersMeanX = mean(xdata,1);
+    PlayersMeanY = mean(ydata,1);
+%   Team Mean 
+    teamMeanX = mean(PlayersMeanX);
+    teamMeanY = mean(PlayersMeanY);
+    
+%   Median of position of each pleayser
+    PlayersMedianX = median(xdata,1);
+    PlayersMedianY = median(ydata,1);
+%   Team Mean 
+    teamMedianX = median(PlayersMedianX);
+    teamMediany = median(PlayersMedianY);   
+
+%   Team mean vector
+    TMeanX = mean(xdata,2); 
+    TMeanY = mean(ydata,2);
+
+%%
+%   Time Vector
+    vtime = [(0:size(xdata,1)-1)/str2double(selections.FreqAc)]'; 
+    vtime = vtime./60; 
+%%  Calculating the Individual Playing Area
+for i = 1:size(xdata,1)
+%   Width (Largura - Latera/Lateral)
+    [Aminv(i,1) Aminp(i,:)] = min(ydata(i,:)); 
+    [Amaxv(i,1) Amaxp(i,:)] = max(ydata(i,:));     
+
+%   Length (Comprimento - Fundo/Fundo)
+    [Pminv(i,1) Pminp(i,:)] = min(xdata(i,:)); 
+    [Pmaxv(i,1) Pmaxp(i,:)] = max(xdata(i,:));
+    
+%   Calculating distances
+%   Width
+    DistW(i,1) = pdist([xdata(i,Aminp(i,:)),ydata(i,Aminp(i,:));xdata(i,Amaxp(i,:)),ydata(i,Amaxp(i,:))],'euclidean');
+%   Length
+    DistL(i,1) = pdist([xdata(i,Pminp(i,:)),ydata(i,Pminp(i,:));xdata(i,Pmaxp(i,:)),ydata(i,Pmaxp(i,:))],'euclidean');
+
+    K = convhull(xdata(i,:),ydata(i,:));
+    SufArea(i,:) = polyarea(xdata(i,K),ydata(i,K));
+
+%   Distance to the goal
+    DistGoal1(i,:) = [Pminv(i,1) Pminp(i,:)];
+    DistGoal2(i,:) = [str2double(selections.fieldwidth)-Pmaxv(i,1) Pmaxp(i,:)];
+
+%   Rectangle
+    IndAreaRec(i,1) = (DistW(i,1)*DistL(i,1))/size(xdata,2); 
+
+%   Polygon
+    IndAreaPol(i,1) = SufArea(i,:)/size(xdata,2);
+    
+end
+%%  Results 
+    res1(1,1) = mean(IndAreaRec);
+    res1(2,1) = median(IndAreaRec);
+    res1(3,1) = std(IndAreaRec);
+
+    res1(1,2) = mean(IndAreaPol);
+    res1(2,2) = median(IndAreaPol);
+    res1(3,2) = std(IndAreaPol);
+
+    res1(1,3) = mean(DistGoal1(:,1));
+    res1(2,3) = median(DistGoal1(:,1));
+    res1(3,3) = std(DistGoal1(:,1));
+
+    res1(1,4) = mean(DistGoal2(:,1));
+    res1(2,4) = median(DistGoal2(:,1));
+    res1(3,4) = std(DistGoal2(:,1));
+    
+    res2 = [vtime,DistGoal1(:,1), DistGoal2(:,1), IndAreaRec, IndAreaPol];
+%%  Saving results
+    prompt = {'Enter file name:'};
+    dlgtitle = 'Input title';
+    definput = {['Linear_Collective_Res_',selections.ColLinTyp]};%'.csv'
+    titfil = char(inputdlg(prompt,dlgtitle,[1 60],definput));
+    fname = [dirsave filesep 'Results' filesep titfil];
+
+    tit1 = {'Individual playing area(Rectangle)','Individual playing area(Polygon)','Distance Goal 1','Distance Goal 2'};
+    tit2 = {'Mean';'Median';'STD'};
+    tit3 = {'vtime','Distance Goal 1', 'Distance Goal 2', 'Area Rectangle', 'Area Polygon'};
+    
+    xlswrite(fname,tit1,1,'B1')
+    xlswrite(fname,tit2,1,'A2')
+    xlswrite(fname,tit3,1,'F1')
+    xlswrite(fname,res1,1,'B2')
+    xlswrite(fname,res2,1,'F2')
+%   Sheet's name
+    e = actxserver('Excel.Application');
+    ewb = e.Workbooks.Open(fname);
+    ewb.Worksheets.Item(1).Name = char(selections.ColLinTyp(1:23));
+    ewb.Save 
+    ewb.Close(false)
+
+%%  Creating and saving figure
+    f1 = figure(1); clf; set(f1,'name','Sectors distance','units','normalized','outerposition',[0 0 1 1])
+    campo
+%     axis off
+    titsavef1 = ['Field_',selections.ColLinTyp];
+
+    matx = [PlayersMeanX];
+    maty = [PlayersMeanY];
+
+%   Calculating variables to plot
+%   Width (Largura - Latera/Lateral)
+    [AminvM AminpM] = min(maty); 
+    [AmaxvM AmaxpM] = max(maty);     
+
+%   Length (Comprimento - Fundo/Fundo)
+    [PminvM PminpM] = min(matx); 
+    [PmaxvM PmaxpM] = max(matx);
+
+%   Calculating distance
+%   Width
+    DistWM = pdist([matx(1,AminpM),maty(1,AminpM);matx(1,AmaxpM),maty(1,AmaxpM)],'euclidean');
+%   Length
+    DistLM = pdist([matx(1,PminpM),maty(1,PminpM);matx(1,PmaxpM),maty(1,PmaxpM)],'euclidean');
+
+%   Distance to the goal
+    DistGoal1M = [PminvM PminpM];
+    DistGoal2M = [str2double(selections.fieldwidth)-PmaxvM PmaxpM];
+
+    K = convhull(matx,maty);
+    SufAreaM = polyarea(matx(1,K),maty(1,K));
+
+%%  Calculating Individual playing area 
+%   Rectangle
+    IndAreaRecM = (DistWM*DistLM)/size(matx,2); 
+
+%   Polygon
+    IndAreaPolM = SufAreaM/size(matx,2);
+
+    p1 = plot(PlayersMeanX,PlayersMeanY,'or','MarkerSize',5,'LineWidth',3);
+
+    l1 = plot([matx(1,PminpM) matx(1,PmaxpM)],[maty(1,AminpM) maty(1,AminpM)],'LineWidth',1,'Color','k','LineStyle','- -');
+    l2 = plot([matx(1,PmaxpM) matx(1,PmaxpM)],[maty(1,AminpM) maty(1,AmaxpM)],'LineWidth',1,'Color','k','LineStyle','- -');
+    l3 = plot([matx(1,PminpM) matx(1,PmaxpM)],[maty(1,AmaxpM) maty(1,AmaxpM)],'LineWidth',1,'Color','k','LineStyle','- -');
+    l4 = plot([matx(1,PminpM) matx(1,PminpM)],[maty(1,AminpM) maty(1,AmaxpM)],'LineWidth',1,'Color','k','LineStyle','- -');
+
+    l1g = plot([0 matx(1,PminpM)]  ,[maty(1,PminpM) maty(1,PminpM)],'LineWidth',1,'Color','k','LineStyle',':');
+    l2g = plot([matx(1,PmaxpM) str2double(selections.fieldwidth)],[maty(1,PmaxpM) maty(1,PmaxpM)],'LineWidth',1,'Color','k','LineStyle','-');
+    t1g = text(matx(1,PminpM),maty(1,PminpM)+2,num2str(round(DistGoal1M(1),1)));
+    t2g = text(matx(1,PmaxpM),maty(1,PmaxpM)+2,num2str(round(DistGoal2M(1),1)));
+
+    legend([p1,l1,l1g,l2g],'Team 1','IPA','Dist. goal 1','Dist goal 2')
+    
+    title({'Individual Playing Area (IPA) ';['Mean: ', num2str(round(mean(IndAreaRec),2)),' m^2'];...
+          ['Median: ' , num2str(round(median(IndAreaRec),2)),' m^2']})
+    export_fig([dirsave filesep 'Results' filesep titsavef1],'-jpg')%,'-transparent')
+close (f1)
+
+%%  Creating a video file
+if selections.RecordVideo ==1
+    prompt = {'Enter file name:'};
+    mkdir([dirsave filesep 'Results' filesep 'Videos'])
+    dlgtitle = 'Input title';
+    definput = {['Video_',selections.ColLinTyp]};%'.csv'
+    titfil = char(inputdlg(prompt,dlgtitle,[1 60],definput));
+    fname = [dirsave filesep 'Results' filesep 'Videos' filesep titfil];
+    vidObj = VideoWriter([fname,'.mp4'],'MPEG-4');
+    vidObj.Quality = 95;
+    vidObj.FrameRate = 10;
+    open(vidObj)
+
+f1 = figure(1); clf; set(f1,'name','Players position','units','normalized','outerposition',[0 0 1 1])
+pause
+for i = 1:size(xdata,1)
+subplot(1,2,1)    
+campo
+hold on
+% axis off
+   p2a(i) = plot(xdata(i,:),ydata(i,:),'or','MarkerSize',5,'LineWidth',3);
+   
+   p2c(i) = plot([xdata(i,Pminp(i,:)) xdata(i,Pmaxp(i,:))],[ydata(i,Aminp(i,:)) ydata(i,Aminp(i,:))],'LineWidth',1,'Color','k','LineStyle','- -');
+   p2d(i) = plot([xdata(i,Pmaxp(i,:)) xdata(i,Pmaxp(i,:))],[ydata(i,Aminp(i,:)) ydata(i,Amaxp(i,:))],'LineWidth',1,'Color','k','LineStyle','- -');
+   p2e(i) = plot([xdata(i,Pminp(i,:)) xdata(i,Pmaxp(i,:))],[ydata(i,Amaxp(i,:)) ydata(i,Amaxp(i,:))],'LineWidth',1,'Color','k','LineStyle','- -');
+   p2f(i) = plot([xdata(i,Pminp(i,:)) xdata(i,Pminp(i,:))],[ydata(i,Aminp(i,:)) ydata(i,Amaxp(i,:))],'LineWidth',1,'Color','k','LineStyle','- -');
+    
+   lg1(i) = plot([0 xdata(i,Pminp(i,:))]  ,[ydata(i,Pminp(i,:)) ydata(i,Pminp(i,:))],'LineWidth',1,'Color','k','LineStyle',':');
+   lg2(i) = plot([xdata(i,Pmaxp(i,:)) str2double(selections.fieldwidth)],[ydata(i,Pmaxp(i,:)) ydata(i,Pmaxp(i,:))],'LineWidth',1,'Color','k','LineStyle',':');
+   tg1(i) = text(xdata(i,Pminp(i,:)),ydata(i,Pminp(i,:))+2,num2str(round(DistGoal1(i,1),1)));
+   tg2(i) = text(xdata(i,Pmaxp(i,:)),ydata(i,Pmaxp(i,:))+2,num2str(round(DistGoal2(i,1),1)));
+   
+   legend([p2a(i),p2c(i),lg1(i),lg2(i)],'Team 1','IPA','Dist. goal 1','Dist goal 2')
+   title({'Individual Playing Area (IPA) ';['Rectangle: ', num2str(round(IndAreaRec(i,1),2)),' m^2']})
+
+subplot(1,2,2)
+campo
+hold on
+% axis off
+   K = convhull(xdata(i,:),ydata(i,:));
+   SufAreaP = polyarea(xdata(i,K),ydata(i,K));
+   p3a(i) = plot(xdata(i,:),ydata(i,:),'or','MarkerSize',5,'LineWidth',3);
+   p3b(i) = plot(xdata(i,K),ydata(i,K),'LineWidth',1,'Color','k','LineStyle','- -');
+   l2g1(i) = plot([0 xdata(i,Pminp(i,:))]  ,[ydata(i,Pminp(i,:)) ydata(i,Pminp(i,:))],'LineWidth',1,'Color','k','LineStyle',':');
+   l2g2(i) = plot([xdata(i,Pmaxp(i,:)) str2double(selections.fieldwidth)],[ydata(i,Pmaxp(i,:)) ydata(i,Pmaxp(i,:))],'LineWidth',1,'Color','k','LineStyle',':');
+   t2g1(i) = text(xdata(i,Pminp(i,:)),ydata(i,Pminp(i,:))+2,num2str(round(DistGoal1(i,1),1)));
+   t2g2(i) = text(xdata(i,Pmaxp(i,:)),ydata(i,Pmaxp(i,:))+2,num2str(round(DistGoal2(i,1),1)));
+
+   title({'Individual Playing Area (IPA) ';['Polygon: ' , num2str(round(IndAreaPol(i,1),2)),' m^2']})
+   legend([p3a(i),p3b(i),l2g1(i),l2g2(i)],'Team 1','IPA','Dist. goal 1','Dist goal 2')
+
+disp(['Processing: Frame ',num2str(i),' of ',num2str(size(xdata,1))])
+f(i) = getframe(f1);
+writeVideo(vidObj,f(i));
+   
+%    pause(0.05)
+   delete(p2a(i))
+   delete(p2c(i))
+   delete(p2d(i))
+   delete(p2e(i))
+   delete(p2f(i))
+   delete(lg1(i))
+   delete(lg2(i))
+   delete(tg1(i))
+   delete(tg2(i))
+   delete(p3a(i))
+   delete(p3b(i))
+   delete(l2g1(i))
+   delete(l2g2(i))
+   delete(t2g1(i))
+   delete(t2g2(i))
+end
+close(f1)
+end
+end
+
