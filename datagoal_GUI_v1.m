@@ -1133,7 +1133,7 @@ switch selections.ColLinTyp
     case 'Spatial Exploration Index'
         disp(' ')
         disp(['Calculating: ', selections.ColLinTyp])
-        ResSpatialExplorationIndex = SpatialExplorationIndex(selections.collectivedata);
+        ResSpatialExplorationIndex = spatial_exploration_index(selections.collectivedata);
         selections.ResSpatialExplorationIndex = ResSpatialExplorationIndex;
         disp('Saving results...')
         disp(['Done: ', selections.ColLinTyp])
