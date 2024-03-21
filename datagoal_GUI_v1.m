@@ -1097,7 +1097,7 @@ switch selections.ColLinTyp
     case 'Stretch index'
         disp(' ')
         disp(['Calculating: ', selections.ColLinTyp])
-        ResTeamStretchIndex = TeamStretchIndex(selections.collectivedata);
+        ResTeamStretchIndex = team_stretch_index(selections.collectivedata);
         selections.ResTeamStretchIndex = ResTeamStretchIndex;
         disp('Saving results...')
         disp(['Done: ', selections.ColLinTyp])
