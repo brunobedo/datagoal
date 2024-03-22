@@ -24,67 +24,67 @@ PROJECT: Research Master in signal theory and bioengineering - University of Val
 
 DATE: 15/10/2014
 
-VERSION: 1º
+VERSION: 1ï¿½
 
-AUTHOR: Jesús Monge Álvarez
+AUTHOR: Jesï¿½s Monge ï¿½lvarez
 %}
 %% Checking the ipunt parameters:
-control = ~isempty(series);
-assert(control,'The user must introduce a time series (first inpunt).');
-control = ~isempty(L);
-assert(control,'The user must introduce an embbeding dimension (second inpunt).');
-control = ~isempty(num_int);
-assert(control,'The user must introduce a number of intervals (third inpunt).');
+    control = ~isempty(series);
+    assert(control,'The user must introduce a time series (first inpunt).');
+    control = ~isempty(L);
+    assert(control,'The user must introduce an embbeding dimension (second inpunt).');
+    control = ~isempty(num_int);
+    assert(control,'The user must introduce a number of intervals (third inpunt).');
 
-%% Processing:
-% Normalization of the input time series:
-series = (series-mean(series))/std(series);
+    %% Processing:
+    % Normalization of the input time series:
+    series = (series-mean(series))/std(series);
 
-% We the values of the parameters required for the quantification:
-epsilon = (max(series)-min(series))/num_int;
-partition = min(series):epsilon:max(series);
-codebook = -1:num_int;
-% Uniform quantification of the time series:
-[~,quants] = quantiz(series, partition, codebook);
-% The minimum value of the signal quantified assert passes -1 to 0:
-quants(logical(quants == -1)) = 0;
+    % We the values of the parameters required for the quantification:
+    epsilon = (max(series)-min(series))/num_int;
+    partition = min(series):epsilon:max(series);
+    codebook = -1:num_int;
+    % Uniform quantification of the time series:
+    [~,quants] = quantiz(series, partition, codebook);
+    % The minimum value of the signal quantified assert passes -1 to 0:
+    quants(logical(quants == -1)) = 0;
 
-% We compose the patterns of length 'L':
-N = length(quants); X = quants(1:N);
-for j = 1:L-1
-   X=[X 
-       quants(j+1:N) zeros(1,j)];
-end
-% We eliminate the last 'L-1' columns of 'X' since they are not real patterns:
-X = X(:,1:N-L+1);
-
-% We get the number of repetitions of each pattern:
-num = ones(1,N-L+1); % This vector will contain the repetition of each pattern
-% This loop goes over the columns of 'X':
-for j = 1:(N-L+1)
-    for i = j+1:(N-L+1)
-        tmp = ~isnan(X(:,j));
-        if (tmp(1)) && (isequal(X(:,j),X(:,i)))
-            num(j) = num(j) + 1; % The counter is incremented one unit
-            X(:,i) = NaN(L,1); % The pattern is replace by NaN values
-        end
-        % Reset of the auxiliar variable each iteration:
-        tmp = NaN;
+    % We compose the patterns of length 'L':
+    N = length(quants); X = quants(1:N);
+    for j = 1:L-1
+        X=[X 
+        quants(j+1:N) zeros(1,j)];
     end
-end
+    % We eliminate the last 'L-1' columns of 'X' since they are not real patterns:
+    X = X(:,1:N-L+1);
 
-% We get those patterns which are not NaN:
-aux = ~isnan(X(1,:));
-% Now, we can compute the number of different patterns:
-new_num = num(logical(aux));
+    % We get the number of repetitions of each pattern:
+    num = ones(1,N-L+1); % This vector will contain the repetition of each pattern
+    % This loop goes over the columns of 'X':
+    for j = 1:(N-L+1)
+        for i = j+1:(N-L+1)
+            tmp = ~isnan(X(:,j));
+            if (tmp(1)) && (isequal(X(:,j),X(:,i)))
+                num(j) = num(j) + 1; % The counter is incremented one unit
+                X(:,i) = NaN(L,1); % The pattern is replace by NaN values
+            end
+            % Reset of the auxiliar variable each iteration:
+            tmp = NaN;
+        end
+    end
 
-% We get the number of patterns which have appeared only once:
-unique = sum(new_num == 1);
+    % We get those patterns which are not NaN:
+    aux = ~isnan(X(1,:));
+    % Now, we can compute the number of different patterns:
+    new_num = num(logical(aux));
 
-% We compute the probability of each pattern:
-p_i = new_num/(N-L+1);
+    % We get the number of patterns which have appeared only once:
+    unique = sum(new_num == 1);
 
-% Finally, the Shannon Entropy is computed as:
-SE = (-1) * ((p_i)*(log(p_i)).');
+    % We compute the probability of each pattern:
+    p_i = new_num/(N-L+1);
+
+    % Finally, the Shannon Entropy is computed as:
+    SE = (-1) * ((p_i)*(log(p_i)).');
 
 end % End of the 'ShannonEn.m' function
