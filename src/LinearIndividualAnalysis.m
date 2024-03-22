@@ -104,10 +104,10 @@ function [LinearIndividualRes] = LinearIndividualAnalysis(rawdata)
                 m1s = M(r);
                 m1m = m1s*(60*str2double(selections.FreqAc));
                 
-            if m1m >= size(vtemp,1)
+                if m1m >= size(vtemp,1)
                         % TD  
                         eval(['dist_TD_',num2str(m1s),'m(1,1) = sum(normdat);']) 
-                    
+
                         % VHIA               
                         vetVHIA = find(veldat >= (19.8/3.6));
                         eval(['dist_VHIA_',num2str(m1s),'m(1,1) = sum(normdat(vetVHIA));'])
