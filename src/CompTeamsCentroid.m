@@ -3,15 +3,15 @@ function res = CompTeamsCentroid(dataraw)
 % 
 % Author:   Bruno Luiz Souza Bedo <bruno.bedo@usp.br> 
 %   Calculating distance between two diffent teams
-global selections 
+    global selections 
     dirsave = selections.Gamedir;
     mkdir([dirsave filesep 'Results'])
-    
-%   Separating data
+        
+    %   Separating data
     xdata = dataraw.X; 
     ydata = dataraw.Y;
 
-%   Player's name
+    %   Player's name
     playfull = [selections.PlayersList.Defender;selections.PlayersList.Midfielder;selections.PlayersList.Forwards;selections.PlayersList.Opponent];
     for p = 1:size(playfull)
         po= strfind(playfull{p},'.');
@@ -27,8 +27,8 @@ global selections
     ydatat2 = dataraw.OpY;
     playt2 = players(size(xdata,2)+1:end);
 
-%%  Calculating the averages positions of both teams 
-%   Averages of each player     
+    %%  Calculating the averages positions of both teams 
+    %   Averages of each player     
     %   Team 1
     Plat1meanX = mean(xdatat1,1);
     Plat1meanY = mean(ydatat1,1);
@@ -36,7 +36,7 @@ global selections
     Plat2meanX = mean(xdatat2,1);
     Plat2meanY = mean(ydatat2,1);
 
-%   Team averages 
+    %   Team averages 
     %   Team 1
     t1meanX = mean(Plat1meanX);
     t1meanY = mean(Plat1meanY);
@@ -44,12 +44,12 @@ global selections
     t2meanX = mean(Plat2meanX);
     t2meanY = mean(Plat2meanY);
 
-%   Calculating distance between the avaregares betweem both teams
-%   (Euclidian distance)
+    %   Calculating distance between the avaregares betweem both teams
+    %   (Euclidian distance)
     distMean = pdist([t1meanX t1meanY;t2meanX t2meanY],'euclidean');
 
-%%  Calculating the averages positions of both teams 
-%   median of each player     
+    %%  Calculating the averages positions of both teams 
+    %   median of each player     
     %   Team 1
     Plat1medianX = median(xdatat1,1);
     Plat1medianY = median(ydatat1,1);
@@ -57,7 +57,7 @@ global selections
     Plat2medianX = median(xdatat2,1);
     Plat2medianY = median(ydatat2,1);
 
-%   Team median 
+    %   Team median 
     %   Team 1
     t1medianX = median(Plat1medianX);
     t1medianY = median(Plat1medianY);
@@ -65,11 +65,11 @@ global selections
     t2medianX = median(Plat2medianX);
     t2medianY = median(Plat2medianY);
 
-%   Calculating distance between the avaregares betweem both teams
+    %   Calculating distance between the avaregares betweem both teams
     distmedian= pdist([t1medianX t1medianY;t2medianX t2medianY],'euclidean');
 
-%%  Creating figure and saving 
-%   Figure 1 (field)
+    %%  Creating figure and saving 
+    %   Figure 1 (field)
     titsavef1 = ['Field_',selections.ColLinTyp];
     f1 = figure(1); clf; set(f1,'name','Players position','units','normalized','outerposition',[0 0 1 1])
     campo
@@ -97,7 +97,7 @@ global selections
     title(['Distance between centroid: ', num2str(distMean),' meters'])
     export_fig([dirsave filesep 'Results' filesep titsavef1],'-jpg')%,'-transparent'
 
-%% 	Calculating centroid based in all polygon
+    %% 	Calculating centroid based in all polygon
     for i = 1:size(xdatat1)
         %   Team 1
         convt1 = convhull(xdatat1(i,:),ydatat1(i,:));
@@ -130,7 +130,7 @@ global selections
     %   Distance
         distmedianPol= pdist([medianPolt1X medianPolt1Y;medianPolt2X medianPolt2Y],'euclidean');
 
-%%  Saving results
+    %%  Saving results
     prompt = {'Enter file name:'};
     dlgtitle = 'Input title';
     definput = {['Linear_Collective_Res_',selections.ColLinTyp]};%'.csv'
@@ -140,83 +140,83 @@ global selections
                 t1medianX t1medianY t2medianX t2medianY distmedian...
                 MeanPolt1X MeanPolt1Y MeanPolt2X MeanPolt2Y distmeanPol...
                 medianPolt1X medianPolt1Y medianPolt2X medianPolt2Y distmedianPol]; 
-       
+    
     tit = {'Team 1 mean X','Team 1 mean Y','Team 2 mean X','Team 2 mean Y','Distance (mean)'...
-              'Team 1 mediam X','Team 1 mediam Y','Team 2 mediam X','Team 2 mediam Y','Distance (median)'...
-              'Team 1 mean X (Polig)','Team 1 mean Y (Polig)','Team 2 mean X (Polig)','Team 2 mean Y (Polig)','Distance mean (Polig)'...
-              'Team 1 mediam X (Polig)','Team 1 mediam Y (Polig)','Team 2 mediam X (Polig)','Team 2 mediam Y (Polig)','Distance median(Polig)'};
+            'Team 1 mediam X','Team 1 mediam Y','Team 2 mediam X','Team 2 mediam Y','Distance (median)'...
+            'Team 1 mean X (Polig)','Team 1 mean Y (Polig)','Team 2 mean X (Polig)','Team 2 mean Y (Polig)','Distance mean (Polig)'...
+            'Team 1 mediam X (Polig)','Team 1 mediam Y (Polig)','Team 2 mediam X (Polig)','Team 2 mediam Y (Polig)','Distance median(Polig)'};
     
     xlswrite(fname,tit,1,'A1')
     xlswrite(fname,res,1,'A2')
-%   Sheet's name
+    %   Sheet's name
     e = actxserver('Excel.Application');
     ewb = e.Workbooks.Open(fname);
     ewb.Worksheets.Item(1).Name = char(selections.ColLinTyp(1:30));
     ewb.Save 
     ewb.Close(false)
 
-%%  Creating a video file
-if selections.RecordVideo ==1
-    prompt = {'Enter file name:'};
-    mkdir([dirsave filesep 'Results' filesep 'Videos'])
-    dlgtitle = 'Input title';
-    definput = {['Video_',selections.ColLinTyp]};%'.csv'
-    titfil = char(inputdlg(prompt,dlgtitle,[1 60],definput));
-    fname = [dirsave filesep 'Results' filesep 'Videos' filesep titfil];
-    vidObj = VideoWriter([fname,'.mp4'],'MPEG-4');
-    vidObj.Quality = 95;
-    vidObj.FrameRate = 10;
-    open(vidObj)
+    %%  Creating a video file
+    if selections.RecordVideo ==1
+        prompt = {'Enter file name:'};
+        mkdir([dirsave filesep 'Results' filesep 'Videos'])
+        dlgtitle = 'Input title';
+        definput = {['Video_',selections.ColLinTyp]};%'.csv'
+        titfil = char(inputdlg(prompt,dlgtitle,[1 60],definput));
+        fname = [dirsave filesep 'Results' filesep 'Videos' filesep titfil];
+        vidObj = VideoWriter([fname,'.mp4'],'MPEG-4');
+        vidObj.Quality = 95;
+        vidObj.FrameRate = 10;
+        open(vidObj)
 
-f1 = figure(1); clf; set(f1,'name','Players position','units','normalized','outerposition',[0 0 1 1])
-campo
-hold on
-% axis off
-pause
-    for i = 1:size(xdatat1)
-        %   Team 1
-        convt1 = convhull(xdatat1(i,:),ydatat1(i,:));
-        polyint1(i,:) = polyshape({xdatat1(i,convt1)},{ydatat1(i,convt1)});
-        [polxt1(i,:),polyt1(i,:)] = centroid(polyint1(i,:));
-        [xt1,yt1] = centroid(polyint1(i,:));
+        f1 = figure(1); clf; set(f1,'name','Players position','units','normalized','outerposition',[0 0 1 1])
+        campo
+        hold on
+        % axis off
+        pause
+        for i = 1:size(xdatat1)
+            %   Team 1
+            convt1 = convhull(xdatat1(i,:),ydatat1(i,:));
+            polyint1(i,:) = polyshape({xdatat1(i,convt1)},{ydatat1(i,convt1)});
+            [polxt1(i,:),polyt1(i,:)] = centroid(polyint1(i,:));
+            [xt1,yt1] = centroid(polyint1(i,:));
 
-        p1t1(i) = plot(xdatat1(i,:),ydatat1(i,:),'ob','MarkerSize',5,'LineWidth',3);
-        p2t1(i) = plot(xdatat1(i,convt1),ydatat1(i,convt1),'b-');
-        p3t1(i) = plot(xt1,yt1,'b^','MarkerSize',5,'LineWidth',3);
-       
-        %   Team 2
-        convt2 = convhull(xdatat2(i,:),ydatat2(i,:));
-        polyint2(i,:) = polyshape({xdatat2(i,convt2)},{ydatat2(i,convt2)});
-        [polxt2(i,:),polyt2(i,:)] = centroid(polyint2(i,:));
-        [xt2,yt2] = centroid(polyint2(i,:));
-
-        p1t2(i) = plot(xdatat2(i,:),ydatat2(i,:),'or','MarkerSize',5,'LineWidth',3);
-        p2t2(i) = plot(xdatat2(i,convt2),ydatat2(i,convt2),'r-');
-        p3t2(i) = plot(xt2,yt2,'r^','MarkerSize',5,'LineWidth',3);
- 
-%       Calcualting distance
-        distpoly= pdist([xt1 yt1; xt2 yt2],'euclidean');
-        pld(i) = plot([xt1 xt2],[yt1 yt2],'LineWidth',1.5,'Color','k','LineStyle','- -');
+            p1t1(i) = plot(xdatat1(i,:),ydatat1(i,:),'ob','MarkerSize',5,'LineWidth',3);
+            p2t1(i) = plot(xdatat1(i,convt1),ydatat1(i,convt1),'b-');
+            p3t1(i) = plot(xt1,yt1,'b^','MarkerSize',5,'LineWidth',3);
         
-        title(['Distance between centroids: ', num2str(distpoly),' meters'])
-        
-    	legend([p1t1(i),p1t2(i),p3t1(i),p3t2(i),pld(i)],'Team 1','Team 2','Team 1 centroid','Team 2 centroid','Distance of centroids');
-        
-        disp(['Processing: Frame ',num2str(i),' of ',num2str(size(xdata,1))])
-        f(i) = getframe(f1);
-        writeVideo(vidObj,f(i));
+            %   Team 2
+            convt2 = convhull(xdatat2(i,:),ydatat2(i,:));
+            polyint2(i,:) = polyshape({xdatat2(i,convt2)},{ydatat2(i,convt2)});
+            [polxt2(i,:),polyt2(i,:)] = centroid(polyint2(i,:));
+            [xt2,yt2] = centroid(polyint2(i,:));
 
-        pause(0.2)
-        delete(p1t1(i))
-        delete(p2t1(i))
-        delete(p3t1(i))
-        delete(p1t2(i))
-        delete(p2t2(i))
-        delete(p3t2(i))
-        delete(pld)
+            p1t2(i) = plot(xdatat2(i,:),ydatat2(i,:),'or','MarkerSize',5,'LineWidth',3);
+            p2t2(i) = plot(xdatat2(i,convt2),ydatat2(i,convt2),'r-');
+            p3t2(i) = plot(xt2,yt2,'r^','MarkerSize',5,'LineWidth',3);
+    
+    %       Calcualting distance
+            distpoly= pdist([xt1 yt1; xt2 yt2],'euclidean');
+            pld(i) = plot([xt1 xt2],[yt1 yt2],'LineWidth',1.5,'Color','k','LineStyle','- -');
+            
+            title(['Distance between centroids: ', num2str(distpoly),' meters'])
+            
+            legend([p1t1(i),p1t2(i),p3t1(i),p3t2(i),pld(i)],'Team 1','Team 2','Team 1 centroid','Team 2 centroid','Distance of centroids');
+            
+            disp(['Processing: Frame ',num2str(i),' of ',num2str(size(xdata,1))])
+            f(i) = getframe(f1);
+            writeVideo(vidObj,f(i));
+
+            pause(0.2)
+            delete(p1t1(i))
+            delete(p2t1(i))
+            delete(p3t1(i))
+            delete(p1t2(i))
+            delete(p2t2(i))
+            delete(p3t2(i))
+            delete(pld)
+        end
+    close(f1)
     end
-close(f1)
-end
 end
 
 
