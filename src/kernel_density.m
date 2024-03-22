@@ -43,74 +43,73 @@
 % % http://www.xplore-stat.de/ebooks/scripts/spm/html/spmhtmlframe73.html
 
 function z = kernel_density(eval_points, data, bandwidth, do_cv, nslaves, debug, bandwith_matrix, kernel)
+    if nargin < 3; error("kernel_density: at least 3 arguments are required"); end
 
-if nargin < 3; error("kernel_density: at least 3 arguments are required"); end
-
-% set defaults for optional args
-% default ordinary density, not leave-1-out
-if (nargin < 4)	do_cv = false; end
-% default serial
-if (nargin < 5)	nslaves = 0; end
-% debug or not (default)
-if (nargin < 6)	debug = false; end;
-% default bandwidth matrix (up to factor of proportionality)
-if (nargin < 7) bandwidth_matrix = chol(cov(data)); end % default bandwidth matrix
-% default kernel
-if (nargin < 8) kernel = "__kernel_epanechnikov"; end 	% default kernel
+    % set defaults for optional args
+    % default ordinary density, not leave-1-out
+    if (nargin < 4)	do_cv = false; end
+    % default serial
+    if (nargin < 5)	nslaves = 0; end
+    % debug or not (default)
+    if (nargin < 6)	debug = false; end;
+    % default bandwidth matrix (up to factor of proportionality)
+    if (nargin < 7) bandwidth_matrix = chol(cov(data)); end % default bandwidth matrix
+    % default kernel
+    if (nargin < 8) kernel = "__kernel_epanechnikov"; end 	% default kernel
 
 
-nn = rows(eval_points);
-n = rows(data);
+    nn = rows(eval_points);
+    n = rows(data);
 
-% Inverse bandwidth matrix H_inv
-H = bandwidth_matrix*bandwidth;
-H_inv = inv(H);
+    % Inverse bandwidth matrix H_inv
+    H = bandwidth_matrix*bandwidth;
+    H_inv = inv(H);
 
-% weight by inverse bandwidth matrix
-eval_points = eval_points*H_inv;
-data = data*H_inv;
+    % weight by inverse bandwidth matrix
+    eval_points = eval_points*H_inv;
+    data = data*H_inv;
 
-% check if doing this parallel or serial
-global PARALLEL NSLAVES NEWORLD NSLAVES TAG
-PARALLEL = 0;
+    % check if doing this parallel or serial
+    global PARALLEL NSLAVES NEWORLD NSLAVES TAG
+    PARALLEL = 0;
 
-if nslaves > 0
-    PARALLEL = 1;
-    NSLAVES = nslaves;
-    LAM_Init(nslaves, debug);
-end
-
-if  points_per_node == nn;%PARALLEL % ordinary serial version
-%     points_per_node = nn; % do the all on this node
-    z = kernel_density_nodes(eval_points, data, do_cv, kernel, points_per_node, nslaves, debug);
-else % parallel version
-    z = zeros(nn,1);
-    points_per_node = floor(nn/(NSLAVES + 1)); % number of obsns per slave
-    % The command that the slave nodes will execute
-    cmd=['z_on_node = kernel_density_nodes(eval_points, data, do_cv, kernel, points_per_node, nslaves, debug); ',...
-    'MPI_Send(z_on_node, 0, TAG, NEWORLD);'];
-
-    % send items to slaves
-
-    NumCmds_Send({"eval_points", "data", "do_cv", "kernel", "points_per_node", "nslaves", "debug","cmd"}, {eval_points, data, do_cv, kernel, points_per_node, nslaves, debug, cmd});
-
-    % evaluate last block on master while slaves are busy
-    z_on_node = kernel_density_nodes(eval_points, data, do_cv, kernel, points_per_node, nslaves, debug);
-    startblock = NSLAVES*points_per_node + 1;
-    endblock = nn;
-    z(startblock:endblock,:) = z(startblock:endblock,:) + z_on_node;
-
-    % collect slaves' results
-    z_on_node = zeros(points_per_node,1); % size may differ between master and compute nodes - reset here
-    for i = 1:NSLAVES
-        MPI_Recv(z_on_node,i,TAG,NEWORLD);
-        startblock = i*points_per_node - points_per_node + 1;
-        endblock = i*points_per_node;
-        z(startblock:endblock,:) = z(startblock:endblock,:) + z_on_node;
+    if nslaves > 0
+        PARALLEL = 1;
+        NSLAVES = nslaves;
+        LAM_Init(nslaves, debug);
     end
 
-    % clean up after parallel
-    LAM_Finalize;
-end
-z = z*det(H_inv);
+    if  points_per_node == nn;%PARALLEL % ordinary serial version
+        %     points_per_node = nn; % do the all on this node
+        z = kernel_density_nodes(eval_points, data, do_cv, kernel, points_per_node, nslaves, debug);
+    else % parallel version
+        z = zeros(nn,1);
+        points_per_node = floor(nn/(NSLAVES + 1)); % number of obsns per slave
+        % The command that the slave nodes will execute
+        cmd=['z_on_node = kernel_density_nodes(eval_points, data, do_cv, kernel, points_per_node, nslaves, debug); ',...
+        'MPI_Send(z_on_node, 0, TAG, NEWORLD);'];
+
+        % send items to slaves
+
+        NumCmds_Send({"eval_points", "data", "do_cv", "kernel", "points_per_node", "nslaves", "debug","cmd"}, {eval_points, data, do_cv, kernel, points_per_node, nslaves, debug, cmd});
+
+        % evaluate last block on master while slaves are busy
+        z_on_node = kernel_density_nodes(eval_points, data, do_cv, kernel, points_per_node, nslaves, debug);
+        startblock = NSLAVES*points_per_node + 1;
+        endblock = nn;
+        z(startblock:endblock,:) = z(startblock:endblock,:) + z_on_node;
+
+        % collect slaves' results
+        z_on_node = zeros(points_per_node,1); % size may differ between master and compute nodes - reset here
+        for i = 1:NSLAVES
+            MPI_Recv(z_on_node,i,TAG,NEWORLD);
+            startblock = i*points_per_node - points_per_node + 1;
+            endblock = i*points_per_node;
+            z(startblock:endblock,:) = z(startblock:endblock,:) + z_on_node;
+        end
+
+            % clean up after parallel
+            LAM_Finalize;
+    end
+    z = z*det(H_inv);
 end

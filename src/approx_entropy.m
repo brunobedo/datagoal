@@ -47,13 +47,13 @@ for i=1:(length(data))-m+1,
         end
     end
     if(set==0) 
-         count = count+1; % this measures how many sliding_windows are similar to the current_window
+        count = count+1; % this measures how many sliding_windows are similar to the current_window
     end
     set = 0; % reseting 'set'
     
     end
-   counter(i)=count/(length(data)-m+1); % we need the number of similar windows for every cuurent_window
-   count=0;
+    counter(i)=count/(length(data)-m+1); % we need the number of similar windows for every cuurent_window
+    count=0;
 i;
 end  %  for i=1:(length(data))-m+1, ends here
 
@@ -65,9 +65,7 @@ counter;  % this tells how many similar windows are present for each window of l
 correlation(m-n+1) = ((sum(counter))/(length(data)-m+1));
 
 
- end % for m=n:n+1; % run it twice   
-   correlation(1);
-   correlation(2);
+end % for m=n:n+1; % run it twice   
+correlation(1);
+correlation(2);
 apen = log(correlation(1)/correlation(2));
-    
-

@@ -4,7 +4,7 @@ function res = organizedatacollective(dataraw)
 % Author:   Bruno Luiz Souza Bedo <bruno.bedo@usp.br> 
 %   Organize all the collective data
     
-global selections
+    global selections
     sects = fieldnames(selections.PlayersList);   
     for i = 1:size(sects)
         sct = sects{i};
