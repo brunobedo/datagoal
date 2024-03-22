@@ -10,7 +10,6 @@ function [x_coord_nova, y_coord_nova, lat_origin, long_origin] = GPS2Cart_GPSpor
 % calculation of x_coord/y_coord accordingly
 % lat_origin = min(lat);
 % long_origin = min(long);
-
     lat_origin = mcampo(1,1);
     long_origin = mcampo(1,2);
     % lat = -lat; 
