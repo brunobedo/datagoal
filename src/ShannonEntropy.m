@@ -7,7 +7,6 @@ function [res] = ShannonEntropy(dataraw)
 %   outflow". 
 %   This code was based in the code wrote by Jes�s Monge �lvarez
 %   PROJECT: Research Master in signal theory and bioengineering - University of Valladolid
-%   Author: Bruno Luiz Souza Bedo
     global selections 
     dirsave = selections.Gamedir;
     mkdir([dirsave filesep 'Results'])
