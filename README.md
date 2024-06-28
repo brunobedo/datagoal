@@ -52,6 +52,10 @@ The GUI output function (`datagoal_GUI_v1_OutputFcn`) ensures that the main GUI 
 
 An example of the saved video can be accessed [HERE](https://drive.google.com/file/d/1TmOMntLm8MYTCVX0oTqYWH5nGCvSKI-9/view?usp=drive_link). The main execution code for the GUI can be found below.
 
+## License 📜
+
+The proposed tool is released under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0) to encourage its use. This license allows for both personal and commercial use, modification, and distribution, ensuring that the tool remains freely accessible to the broader community. We strongly encourage contributions and improvements from the research community to enhance the functionality and applicability of this tool in the field of sports science.
+
 ```matlab
 % This file is part of DataGoal: a Matlab Toolbox to Linear and Non-linear Soccer Positional Data Analysis.
 % Copyright (C) 2024 Bruno L. S. Bedo, Felipe A. Moura, Rodrigo Aquino, Sergio A. Cunha, Paulo R. P. Santiago
