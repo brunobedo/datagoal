@@ -1,12 +1,12 @@
-# DataGoal: A MATLAB Toolbox for Soccer Positional Data Analysis
+# DataGoal : A MATLAB Toolbox for Soccer Positional Data Analysis ⚽
 
-## Introduction
+## Introduction 🚀
 
 The rapid advancements in computational sciences, including computer vision and image processing, have introduced new methods for data collection, aiding in the understanding of technical and tactical aspects of sports. In collective sports, there has been a notable increase in scientific and technical data production, particularly in invasion sports like soccer. Despite this, professional development in computational methods for sports professionals has not kept pace. 
 
 This ongoing project, aligned with the initial schedule, aims to develop a technical-scientific tool for processing and analyzing positional data in soccer. This tool is designed to help sports professionals in processing soccer data efficiently.
 
-## Context
+## Context 🌐
 
 Significant advancements in computational sciences, image processing, and computer vision offer emerging methods for acquiring crucial information when applied to sports. These advancements enable the application of diverse knowledge from fields like mathematics, physics, and computer science to objectively quantify athletes' performance and adjust training programs for optimal decision-making in sports.
 
@@ -16,33 +16,31 @@ With the increasing use of tracking systems in sports, new techniques for perfor
 
 Several toolboxes have been developed to facilitate data acquisition, processing, and analysis. Examples include MOCAP, ADAT, biomechZoo, MotoNMS, and BOPS. These tools offer numerous advantages, such as large-scale data processing, application of complex techniques by professionals with limited computational knowledge, and optimization of data processing for generating various types of analyses with low operational and computational costs.
 
-## Objective
+## Objective 🎯
 
 This research project aims to develop an open-source tool for analyzing positional data in soccer. This tool is intended for both the scientific community and professionals directly involved in practice, promoting the development and application of open-source tools in sports.
 
-## Materials and Methods
+## Materials and Methods 🛠️
 
 The toolbox was developed in MATLAB (Mathworks Inc., Natick, USA), a widely used language among research groups for developing and sharing tools through scripts or Graphical User Interfaces (GUI), simplifying and providing flexibility during data processing.
 
-### Toolbox Organization
+### Toolbox Organization 🗂️
 
 The main goal of developing the tool was to automate all data processing steps with minimal user interaction, enabling use by professionals with limited computational programming knowledge. The toolbox is organized into the following sections:
 
-### Configurations
+### Configurations ⚙️
 
 Users should select the game for analysis by choosing the folder where the game information is stored. They can also select the type of GPS used for data collection. The toolbox also processes tracking data from the Dvideow software.
 
-### Data
+### Data 📊
 
 Users can select the number of athletes of interest and their positions (defenders, midfielders, and forwards). Depending on the metric and data acquisition of the opponent, it is possible to analyze data from two teams.
 
-### Calibration and Data Processing Information
+### Calibration and Data Processing Information 🧩
 
 Each equipment has unique characteristics, such as different acquisition frequencies. Users can input the frequency in the graphical interface. All data is smoothed by a fourth-order Butterworth low-pass filter, with the cutoff frequency chosen by the user in the toolbox graphical interface. Data calibration is based on corner kick information, as used in various studies. Users should input the latitude and longitude values of each corner.
 
-## Partial Results
-
-### Code Structure
+## Code Structure 📝
 
 The main function `datagoal_GUI_v1` forms the basis of the DataGoal main file. This file creates the GUI and initializes the functions comprising the toolbox. It ensures that only one instance of the GUI is active at any given time. The GUI state is managed by a structure that includes the GUI name, its uniqueness, the opening function (`OpeningFcn`), the output function (`OutputFcn`), the layout function, and the callback function. This modular design allows the GUI to effectively respond to user actions and interface interactions.
 
@@ -78,4 +76,3 @@ An example of the saved video can be accessed [HERE](https://drive.google.com/fi
 %              a Matlab Toolbox to Linear and Non-linear                  %
 %                    Soccer Positional Data Analysis                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-```
