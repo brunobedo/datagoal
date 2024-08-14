@@ -39,6 +39,7 @@ function [res2] = team_stretch_index(dataraw)
     %   Mean of position of each pleayser 
     PlayersMeanX = mean(xdata,1);
     PlayersMeanY = mean(ydata,1);
+    
     %   Team Mean 
     teamMeanX = mean(PlayersMeanX);
     teamMeanY = mean(PlayersMeanY);

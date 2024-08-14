@@ -1,4 +1,4 @@
-function [res] = tacticalanalysisteamectors(dataraw)
+function [res] = distanceteamsectors(dataraw)
 %   This file is part of DataGoal: a Matlab Toolbox to Linear and Non-linear Soccer Positional Data Analysis.
 %   Copyright (C) 2024 Bruno L. S. Bedo, Felipe A. Moura, Rodrigo Aquino, Sérgio A. Cunha, Paulo R. P. Santiago
 % 
@@ -23,8 +23,6 @@ function [res] = tacticalanalysisteamectors(dataraw)
     %%	Separating data
     xdata = dataraw.X; 
     ydata = dataraw.Y;
-    
-    
 
     %%  Player's name
     playfull = [selections.PlayersList.Defender;selections.PlayersList.Midfielder;selections.PlayersList.Forwards];
@@ -77,7 +75,7 @@ function [res] = tacticalanalysisteamectors(dataraw)
         FMatXY = [linXF' linYF']; 
         FMean(i,:) = [FMeanX FMeanY];
         
-        %%% Strech Index 
+        %%% Distance
         % SI - Defenders
         for w = 1:size(DMatXY,1)
             SI_D(i,w) = pdist([DMatXY(w,:); DMean(i,:)]);

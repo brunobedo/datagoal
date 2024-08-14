@@ -1182,8 +1182,8 @@ switch selections.ColLinTyp
     case 'Tactical Analysis of Team Sectors'
         disp(' ')
         disp(['Creating: ', selections.ColLinTyp])
-        ResTeamTacticalAnalysisSectors = tacticalanalysisteamectors(selections.collectivedata);
-        selections.ResTeamCompLargAreaDist = ResTeamTacticalAnalysisSectors;
+        Resdistanceteamsectors = distanceteamsectors(selections.collectivedata);
+        selections.Resdistanceteamsectors = Resdistanceteamsectors;
         disp('Saving video...')
         disp(['Done: ', selections.ColLinTyp])
         disp('---------------------------------------------------')
@@ -1235,7 +1235,8 @@ elseif  hObject.Value == 3
                             'Cross-sample entropy (Cross-SampEn)',...
                             'Vector coding',...
                             'Mutual information',...
-                            'Cluster phase analysis'};
+                            'Cluster phase analysis',...
+                            'Sectors Coordenation',};
         set(handles.NLColLinearAnalysisType,'String',ColNonLinearVariables);
 end
 
@@ -1415,6 +1416,14 @@ elseif strcmp(selections.NLTacticalComponentType,'Sincronização')
         disp(['Calculating: ', selections.ColNonLinTyp])
         ResClusterPhase = ClusterPhase(selections.collectivedata);
         selections.ResClusterPhase = ResClusterPhase;
+        disp('Saving results...')
+        disp(['Done: ', selections.ColNonLinTyp])
+        disp('---------------------------------------------------')
+    case 'Sectors Coordenation'
+        disp(' ')
+        disp(['Calculating: ', selections.ColNonLinTyp])
+        Ressectors_coordenation = sectors_coordenation(selections.collectivedata);
+        selections.ResClusterPhase = Ressectors_coordenation;
         disp('Saving results...')
         disp(['Done: ', selections.ColNonLinTyp])
         disp('---------------------------------------------------')
