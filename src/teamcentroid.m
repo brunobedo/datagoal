@@ -161,7 +161,7 @@ function res = teamcentroid(dataraw)
 
         f1 = figure(1); clf; set(f1,'name','Players position','units','normalized','outerposition',[0 0 1 1])
         campo
-        axis off
+%         axis off
         pause
         hold on
         for i = 1:size(xdata)

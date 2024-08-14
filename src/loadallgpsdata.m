@@ -155,7 +155,7 @@ function [allGPSdata] = loadallgpsdata(matcalib,timeS,timeF,freq,lowpass)
                     disp('This GPS brand is not available yet.')
                     disp('We are working to release it as soon as possible.')
                     error ('----- Select the GPS type ---- ')
-        x'
+        
             end
 
             %       Cropping based on the game time

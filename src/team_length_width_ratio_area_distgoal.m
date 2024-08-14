@@ -92,7 +92,7 @@ function [res1] = team_length_width_ratio_area_distgoal(dataraw)
         players{p,1} = strcat('\leftarrow ',players{p});
     end
     
-    text(PlayersMeanX+0.7,PlayersMeanY,players,'FontWeight','bold','FontSize',12);
+%     text(PlayersMeanX+0.7,PlayersMeanY,players,'FontWeight','bold','FontSize',12);
     p1 = plot(PlayersMeanX,PlayersMeanY,'or','MarkerSize',5,'LineWidth',3);
     p2 = plot(teamMeanX,teamMeany,'^r','MarkerSize',5,'LineWidth',3);
 
@@ -112,7 +112,7 @@ function [res1] = team_length_width_ratio_area_distgoal(dataraw)
     p5 = plot([0,0],PlayersMeanY([MeanLarg_y_min_c,MeanLarg_y_max_c]),'-R','LineWidth',3.5);
     text(-2,mean(PlayersMeanY([MeanLarg_y_min_c,MeanLarg_y_max_c])),['L: ',num2str(round(Largura_Mean,2)),'m'],'FontWeight','bold','FontSize',12,'HorizontalAlignment','Center','Rotation',90);
 
-    legend ([p1,p2,p3,p4,p5],'Players','Centroid','Mean Area','(C)-Comprimento','(L)-Largura')
+%     legend ([p1,p2,p3,p4,p5],'Players','Centroid','Mean Area','(C)-Comprimento','(L)-Largura')
     title(['Area: ',num2str(Area_Mean),'m^2']); 
     set(gca,'XColor', 'none','YColor','none')
     export_fig([dirsave filesep 'Results' filesep titsavef1],'-jpg')   %,'-transparent'
