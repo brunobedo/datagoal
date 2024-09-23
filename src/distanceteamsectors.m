@@ -98,48 +98,88 @@ function [res] = distanceteamsectors(dataraw)
         MF_dist(i,1) =  pdist([MMean(i,:); FMean(i,:)]);
 
     end
+%   Distance Average
+    DM_dist_mean = mean(DM_dist); 
+    DF_dist_mean = mean(DF_dist); 
+    MF_dist_mean = mean(MF_dist);
+    res_mean_dist = [DM_dist_mean; DF_dist_mean; MF_dist_mean]; 
+    
     %  Strech Index (SI) - Mean 
     si_defenders = mean(SI_D,2);
     si_midfields = mean(SI_M,2);
     si_forwards  = mean(SI_F,2); 
-
-
+    si_defenders_mean = mean(si_defenders);
+    si_midfields_mean = mean(si_midfields);
+    si_forwards_mean = mean(si_forwards); 
+    si_mean = [si_defenders_mean; si_midfields_mean; si_forwards_mean];
+    
     % Calculating Vector Coding (VC)
     %   Defenders(SI)  vs  Midfields(SI) 
-    vc_DM = calculate_vc(si_defenders,si_midfields);
+    [vc_DM, vc_phase_DM] = calculate_vc(si_defenders,si_midfields);
 
     %   Defenders(SI)  vs  Forwards (SI) 
-    vc_DF = calculate_vc(si_defenders,si_forwards);
+    [vc_DF, vc_phase_DF] = calculate_vc(si_defenders,si_forwards);
 
     %   Midfields(SI)  vs  Forwards (SI) 
-    vc_MF = calculate_vc(si_midfields,si_forwards);
-
-
-    %
-    % Figures
-    % figure(1); clf
-    % campo()    
-    %     p1a = plot(DMatXY(:,1),DMatXY(:,2), 'ro','MarkerSize',5,'LineWidth',3); 
-    %     p1b = plot(DMean(:,1),DMean(:,2), 'r^','MarkerSize',5,'LineWidth',3);
-    % %     convD = convhull(linXD,linYD);
-    % %     p1c = plot(linXD(1,convD),linYD(1,convD),'-r');  
-    %         p1d(w) = plot([DMatXY(w,1),DMean(1,1)],[DMatXY(w,2),DMean(1,2)],'--r');
-
-    %     p2a = plot(MMatXY(:,1),MMatXY(:,2), 'bo','MarkerSize',5,'LineWidth',3); 
-    %     p2b = plot(MMean(:,1),MMean(:,2), 'b^','MarkerSize',5,'LineWidth',3);   
-    %         p2c(m) = plot([MMatXY(m,1),MMean(1,1)],[MMatXY(m,2),MMean(1,2)],'--b');
-
-    %     pause(0.25)
-    %     delete(p1a)
-    %     delete(p1b)
-    % %     delete(p1c)
-    %     delete(p1d)
-    %     delete(p2a)
-    %     delete(p2b)
-    %     delete(p2c)
-
-
-    end
+    [vc_MF, vc_phase_MF] = calculate_vc(si_midfields,si_forwards);
+    
+    res_si_raw = [si_defenders, si_midfields, si_forwards];
+    res_dist_taw = [DM_dist, DF_dist, MF_dist];
+    
+    res_vc_raw = [vc_DM, vc_DF, vc_MF];
+    res_vc_mean = [vc_phase_DM; vc_phase_DF; vc_phase_MF];
+    
+    %%  Saving results
+    prompt = {'Enter file name:'};
+    dlgtitle = 'Input title';
+    definput = {['Linear_Collective_Res_',selections.ColLinTyp]};%'.csv'
+    titfil = char(inputdlg(prompt,dlgtitle,[1 60],definput));
+    fname = [dirsave filesep 'Results' filesep titfil];
+    
+    % Saving means
+    tit1 = {'Strech Index (m)'}; 
+    titSI = {'Defeders'; 'Midfields';'Forwards'};
+    xlswrite(fname,tit1,1,'A1')
+    xlswrite(fname,titSI,1,'A2')
+    xlswrite(fname,si_mean,1,'B2')
+    
+    tit2 = {'Sector Distances(m)'}; 
+    titDist = {'D-M'; 'D-F';'M-D'};
+    xlswrite(fname,tit2,1,'C1')
+    xlswrite(fname,titDist,1,'C2')
+    xlswrite(fname,si_mean,1,'D2')
+    
+    tit3 = {'Coordenação (%)'}; 
+    tit1VC = {'D-M'; 'D-F';'M-D'};
+    tit2VC = {'InPhase', 'Anti-Phase','Phase 1', 'Phase 2'};
+    xlswrite(fname,tit3,1,'E1')
+    xlswrite(fname,tit1VC,1,'E2')
+    xlswrite(fname,tit2VC,1,'F1')
+    xlswrite(fname,res_vc_mean,1,'F2')
+    
+    % Saving Raw Results
+    % SI
+    tit4 = {'Strech Index (m)'}; 
+    titSI = {'Defeders', 'Midfields','Forwards'};
+    xlswrite(fname,tit4,1,'J1')
+    xlswrite(fname,titSI,1,'K1')
+    xlswrite(fname,res_si_raw,1,'K2')
+    
+    % Sector Distance
+    tit5 = {'Sector Distance (m)'}; 
+    titDist = {'D-M', 'D-F','M-D'};
+    xlswrite(fname,tit5,1,'N1')
+    xlswrite(fname,titDist,1,'O1')
+    xlswrite(fname,res_dist_taw,1,'O2')
+    
+    % Vector Coding
+    tit6 = {'Vector Coding (°)'}; 
+    titDist = {'D-M', 'D-F','M-D'};
+    xlswrite(fname,tit6,1,'R1')
+    xlswrite(fname,titDist,1,'S1')
+    xlswrite(fname,res_vc_raw,1,'S2')
+    
+end
 
 
     %  Functions 
@@ -170,14 +210,15 @@ function [res] = distanceteamsectors(dataraw)
                 phase(row,1)=4;
             end
         end
-            % Calculating the frequency for each pattern of coordination
+        
+        % Calculating the frequency for each pattern of coordination
             
-%         arrumar depois!!! 
-%         
-%         vc_phase_1 = length(find(phase==1))/length(phase)*100; % Serie 1 Phase
-%         vc_phase_2 = length(find(phase==2))/length(phase)*100; % In-phase
-%         vc_phase_3 = length(find(phase==3))/length(phase)*100; % Serie 2 Phase
-%         vc_phase_4 = length(find(phase==4))/length(phase)*100; % Anti-phase
+        vc_phase_1 = length(find(phase==1))/length(phase)*100; % Serie 1 Phase
+        vc_phase_2 = length(find(phase==2))/length(phase)*100; % In-phase
+        vc_phase_3 = length(find(phase==3))/length(phase)*100; % Serie 2 Phase
+        vc_phase_4 = length(find(phase==4))/length(phase)*100; % Anti-phase
+        
+        vc_phase = [vc_phase_1, vc_phase_2, vc_phase_3, vc_phase_4];
     end
 
 
