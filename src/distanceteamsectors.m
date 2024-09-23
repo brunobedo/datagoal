@@ -20,11 +20,11 @@ function [res] = distanceteamsectors(dataraw)
     dirsave = selections.Gamedir;
     mkdir([dirsave filesep 'Results'])
     
-    %%	Separating data
+    %	Separating data
     xdata = dataraw.X; 
     ydata = dataraw.Y;
 
-    %%  Player's name
+    %  Player's name
     playfull = [selections.PlayersList.Defender;selections.PlayersList.Midfielder;selections.PlayersList.Forwards];
     for p = 1:size(playfull)
         po= strfind(playfull{p},'.');
@@ -32,7 +32,7 @@ function [res] = distanceteamsectors(dataraw)
         players{p,1} = strrep(players{p},'_','-');
     end
 
-    %%  Separating sectors  
+    %  Separating sectors  
     %   Defender
     sD = size(selections.PlayersList.Defender,1); 
     xdataD = xdata(:,1:sD); 
@@ -49,7 +49,7 @@ function [res] = distanceteamsectors(dataraw)
     ydataF = ydata(:,1+sD+sM:sM+sD+sF);
 
 
-    %%  Calculating variable frame by frame 
+    %  Calculating variable frame by frame 
     for i = 1:size(xdata,1)
         % Defender 
         linXD = xdataD(i,:); 
@@ -75,7 +75,7 @@ function [res] = distanceteamsectors(dataraw)
         FMatXY = [linXF' linYF']; 
         FMean(i,:) = [FMeanX FMeanY];
         
-        %%% Distance
+        % Distance
         % SI - Defenders
         for w = 1:size(DMatXY,1)
             SI_D(i,w) = pdist([DMatXY(w,:); DMean(i,:)]);
@@ -91,7 +91,7 @@ function [res] = distanceteamsectors(dataraw)
             SI_F(i,f) = pdist([FMatXY(f,:); FMean(i,:)]);
         end
             
-        %%% Sector Distances 
+        % Sector Distances 
         % Defender - Midfielder
         DM_dist(i,1) =  pdist([DMean(i,:); MMean(i,:)]);
         DF_dist(i,1) =  pdist([DMean(i,:); FMean(i,:)]);
@@ -104,7 +104,7 @@ function [res] = distanceteamsectors(dataraw)
     si_forwards  = mean(SI_F,2); 
 
 
-    %% Calculating Vector Coding (VC)
+    % Calculating Vector Coding (VC)
     %   Defenders(SI)  vs  Midfields(SI) 
     vc_DM = calculate_vc(si_defenders,si_midfields);
 
@@ -115,7 +115,7 @@ function [res] = distanceteamsectors(dataraw)
     vc_MF = calculate_vc(si_midfields,si_forwards);
 
 
-    %%
+    %
     % Figures
     % figure(1); clf
     % campo()    
@@ -142,7 +142,7 @@ function [res] = distanceteamsectors(dataraw)
     end
 
 
-    %%  Functions 
+    %  Functions 
     function [VC,vc_phase] = calculate_vc(series1,series2)
         hypotenuse=sqrt((diff(series1).^2)+(diff(series2).^2));
         sine=diff(series2)./hypotenuse;
@@ -172,12 +172,12 @@ function [res] = distanceteamsectors(dataraw)
         end
             % Calculating the frequency for each pattern of coordination
             
-        arrumar depois!!! 
-        
-        vc_phase_1 = length(find(phase==1))/length(phase)*100; % Serie 1 Phase
-        vc_phase_2 = length(find(phase==2))/length(phase)*100; % In-phase
-        vc_phase_3 = length(find(phase==3))/length(phase)*100; % Serie 2 Phase
-        vc_phase_4 = length(find(phase==4))/length(phase)*100; % Anti-phase
+%         arrumar depois!!! 
+%         
+%         vc_phase_1 = length(find(phase==1))/length(phase)*100; % Serie 1 Phase
+%         vc_phase_2 = length(find(phase==2))/length(phase)*100; % In-phase
+%         vc_phase_3 = length(find(phase==3))/length(phase)*100; % Serie 2 Phase
+%         vc_phase_4 = length(find(phase==4))/length(phase)*100; % Anti-phase
     end
 
 
