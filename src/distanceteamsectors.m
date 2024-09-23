@@ -1,4 +1,4 @@
-function [res] = distanceteamsectors(dataraw)
+function [res_vc_raw] = distanceteamsectors(dataraw)
 %   This file is part of DataGoal: a Matlab Toolbox to Linear and Non-linear Soccer Positional Data Analysis.
 %   Copyright (C) 2024 Bruno L. S. Bedo, Felipe A. Moura, Rodrigo Aquino, Sérgio A. Cunha, Paulo R. P. Santiago
 % 
@@ -147,7 +147,7 @@ function [res] = distanceteamsectors(dataraw)
     titDist = {'D-M'; 'D-F';'M-D'};
     xlswrite(fname,tit2,1,'C1')
     xlswrite(fname,titDist,1,'C2')
-    xlswrite(fname,si_mean,1,'D2')
+    xlswrite(fname,res_mean_dist,1,'D2')
     
     tit3 = {'Coordenação (%)'}; 
     tit1VC = {'D-M'; 'D-F';'M-D'};
