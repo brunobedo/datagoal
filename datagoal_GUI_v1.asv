@@ -889,7 +889,7 @@ function LinearIndividual_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 global selections
-[LinearIndividualRes] = linearindividualanalysis(selections.allGPSdata);
+[LinearIndividualRes] = LinearIndividualAnalysis(selections.allGPSdata);
 selections.LinearIndividualRes = LinearIndividualRes; 
 disp(' ')
 disp('Done Individual Linear Analysis.')
@@ -1093,7 +1093,7 @@ switch selections.ColLinTyp
     case 'Team separateness'
         disp(' ')
         disp(['Calculating: ', selections.ColLinTyp])
-        ResTeamSeparateness = teamseparateness(selections.collectivedata);
+        ResTeamSeparateness = TeamSeparateness(selections.collectivedata);
         selections.ResTeamSeparateness = ResTeamSeparateness;
         disp('Saving results...')
         disp(['Done: ', selections.ColLinTyp])
@@ -1120,7 +1120,7 @@ switch selections.ColLinTyp
     case 'Team spread'
         disp(' ')
         disp(['Calculating: ', selections.ColLinTyp])
-        ResTeamSpread = teamspread(selections.collectivedata);
+        ResTeamSpread = teamSpread(selections.collectivedata);
         selections.ResTeamSpread = ResTeamSpread;
         disp('Saving results...')
         disp(['Done: ', selections.ColLinTyp])
@@ -1129,7 +1129,7 @@ switch selections.ColLinTyp
     case 'Players’ major range'
         disp(' ')
         disp(['Calculating: ', selections.ColLinTyp])
-        ResPlayersMajorRange = playersmajorrange(selections.collectivedata);
+        ResPlayersMajorRange = PlayersMajorRange(selections.collectivedata);
         selections.ResPlayersMajorRange = ResPlayersMajorRange;
         disp('Saving results...')
         disp(['Done: ', selections.ColLinTyp])
@@ -1156,7 +1156,7 @@ switch selections.ColLinTyp
     case 'Voronoi regions'
         disp(' ')
         disp(['Calculating: ', selections.ColLinTyp])
-        ResVoronoiRegions = voronoiregions(selections.collectivedata);
+        ResVoronoiRegions = VoronoiRegions(selections.collectivedata);
         selections.ResVoronoiRegions = ResVoronoiRegions;
         disp('Saving results...')
         disp(['Done: ', selections.ColLinTyp])
@@ -1194,7 +1194,7 @@ elseif strcmp(selections.TacticalComponentType,'Comunicação de Ação')
     case 'Vilars proposal'
         disp(' ')
         disp(['Calculating: ', selections.ColLinTyp])
-        ResVilarsProposal = vilarproposal(selections.collectivedata);
+        ResVilarsProposal = VilarsProposal(selections.collectivedata);
         selections.ResVilarsProposal = ResVilarsProposal;
         disp('Saving results...')
         disp(['Done: ', selections.ColLinTyp])
@@ -1342,7 +1342,7 @@ switch selections.ColNonLinTyp
     case 'Sample entropy (SampEn)'
         disp(' ')
         disp(['Calculating: ', selections.ColNonLinTyp])
-        ResSampEnt = sampleentropy(selections.collectivedata);
+        ResSampEnt = SampleEntropy(selections.collectivedata);
         selections.ResSampEnt = ResSampEnt;
         disp('Saving results...')
         disp(['Done: ', selections.ColNonLinTyp])
@@ -1350,7 +1350,7 @@ switch selections.ColNonLinTyp
     case 'Shannon entropy (ShanEn)'
         disp(' ')
         disp(['Calculating: ', selections.ColNonLinTyp])
-        ResShanEn = shannonentropy(selections.collectivedata);
+        ResShanEn = ShannonEntropy(selections.collectivedata);
         selections.ResShanEn = ResShanEn;
         disp('Saving results...')
         disp(['Done: ', selections.ColNonLinTyp])
@@ -1367,7 +1367,7 @@ elseif strcmp(selections.NLTacticalComponentType,'Sincronização')
     case 'Relative phase'
         disp(' ')
         disp(['Calculating: ', selections.ColNonLinTyp])
-        ResRelPhase = relativephase(selections.collectivedata);
+        ResRelPhase = RelativePhase(selections.collectivedata);
         selections.ResRelPhase = ResRelPhase;
         disp('Saving results...')
         disp(['Done: ', selections.ColNonLinTyp])
