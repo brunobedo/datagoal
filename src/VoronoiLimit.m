@@ -1,4 +1,4 @@
-function [V,C,XY]=VoronoiLimit(varargin)
+function [V,C,XY]=voronoilimit(varargin)
 % --------------------------------------------------------------
 % [V,C,XY]=VoronoiLimit(x,y,additional_variables)
 % Provides the Voronoi decomposition of a set of (x,y) data, but with all

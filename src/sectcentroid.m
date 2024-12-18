@@ -1,4 +1,4 @@
-function [res] = CompSectCentroid(dataraw)
+function [res] = sectcentroid(dataraw)
 %   This file is part of DataGoal: a Matlab Toolbox to Linear and Non-linear Soccer Positional Data Analysis.
 %   Copyright (C) 2024 Bruno L. S. Bedo, Felipe A. Moura, Rodrigo Aquino, Sérgio A. Cunha, Paulo R. P. Santiago
 % 

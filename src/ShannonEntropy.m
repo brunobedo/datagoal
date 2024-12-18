@@ -1,4 +1,4 @@
-function [res] = ShannonEntropy(dataraw)
+function [res] = shannonentropy(dataraw)
 %   Calculates the Shannon Entropy
 %   Function which computes the Shannon Entropy (SE) of a time series of length
 %   'N' using an embedding dimension 'L' and 'Num_int' uniform intervals of

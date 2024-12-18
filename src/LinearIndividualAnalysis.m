@@ -1,4 +1,4 @@
-function [LinearIndividualRes] = LinearIndividualAnalysis(rawdata)
+function [LinearIndividualRes] = linearindividualanalysis(rawdata)
 %   This file is part of DataGoal: a Matlab Toolbox to Linear and Non-linear Soccer Positional Data Analysis.
 %   Copyright (C) 2024 Bruno L. S. Bedo, Felipe A. Moura, Rodrigo Aquino, S�rgio A. Cunha, Paulo R. P. Santiago
 % 
