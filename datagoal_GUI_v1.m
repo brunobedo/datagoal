@@ -916,7 +916,7 @@ set(handles.NLColLinearAnalysisType,'Enable','off')
 set(handles.RunColletiveNonLinearAnalysis,'Enable','off')
 
 
-ColLinearTypeAll = {' ','Estruturação do Espaço','Comunicação de Ação'};
+ColLinearTypeAll = {' ','Centrality Metrics','Dispersion Metrics','Tactical Behavior Metrics'};
 set(handles.TacticalComponentType,'String',ColLinearTypeAll);
 
 selections.ColLinearTypeAll = ColLinearTypeAll;
@@ -947,29 +947,37 @@ if      hObject.Value == 1
         set(handles.RunColletiveLinearAnalysis,'Enable','off')
         set(handles.RecordVideo,'Value',0)
         set(handles.RecordVideo,'Enable','off')
+
 elseif  hObject.Value == 2 
         set(handles.ColLinearAnalysisType,'Enable','on')
-        ColLinearVariables = {' ',...
-                            'Centroide da equipe',...
-                            'Distância entre centroide de duas equipes',...
-                            'Centroide por setores da equipe',...
-                            'Length and Width (2 teams) and Individual Playing Area',...
-                            'Team separateness',...
-                            'Team Effective Area',...
-                            'Stretch index',...
-                            'Team spread',...
-                            'Players’ major range',...
-                            'Spatial Exploration Index',...
-                            'Individual Playing Area',...
-                            'Voronoi regions',...
-                            'Length - Width - Ratio and Area',...
-                            'Tactical Analysis of Team Sectors',...
-                            'Video for illustrative purposes'};
+        ColLinearVariables = {' ', ...
+                              'Team Centroid (1 team)', ...
+                              'Distance Between Teams’ Centroids (2 teams)'};
         set(handles.ColLinearAnalysisType,'String',ColLinearVariables);
+
 elseif  hObject.Value == 3
         set(handles.ColLinearAnalysisType,'Enable','on')
-        ColLinearVariables = {' ','Vilars proposal'};
+        ColLinearVariables = {' ', ...
+                              'Effective Area | Length | Width | Ratio (1 team)', ...
+                              'Team Separateness (1 team)', ...
+                              'Team Effective Area (1 team)', ...
+                              'Stretch Index (1 team)', ...
+                              'Team Spread (1 team)', ...
+                              'Spatial Exploration Index (1 team)', ...
+                              'Individual Playing Area (1 team)', ...
+                              };
+                            
         set(handles.ColLinearAnalysisType,'String',ColLinearVariables);
+
+elseif  hObject.Value == 4
+        set(handles.ColLinearAnalysisType,'Enable','on')
+        ColLinearVariables = {' ', ...
+                              'Distance Between Team Sectors (1 team)', ...
+                              'Individual Playing Area | Length | Width (2 teams)', ...
+                              'Players’ Maximum Range (1 team)', ...
+                              'Spatial Exploration Index (1 team)', ...
+                              'Voronoi Regions (2 teams)'};
+        set(handles.ColLinearAnalysisType,'String',ColLinearVariables);        
 end
 
 
@@ -1049,10 +1057,10 @@ function RunColletiveLinearAnalysis_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 global selections
 
-if strcmp(selections.TacticalComponentType,'Estruturação do Espaço') 
+if strcmp(selections.TacticalComponentType,'Centrality Metrics') 
 
 switch selections.ColLinTyp
-    case 'Centroide da equipe'
+    case 'Team Centroid (1 team)'
         disp(' ')
         disp(['Calculating: ', selections.ColLinTyp])
         ResTeamCentroid = teamcentroid(selections.collectivedata); 
@@ -1061,7 +1069,7 @@ switch selections.ColLinTyp
         disp(['Done: ', selections.ColLinTyp])
         disp('---------------------------------------------------')
         
-    case 'Distância entre centroide de duas equipes'
+    case 'Distance Between Teams’ Centroids (2 teams)'
         disp(' ')
         disp(['Calculating: ', selections.ColLinTyp])
         ResCompTeamCentroid = teamscentroid(selections.collectivedata);
@@ -1070,7 +1078,97 @@ switch selections.ColLinTyp
         disp(['Done: ', selections.ColLinTyp])
         disp('---------------------------------------------------')
         
-    case 'Centroide por setores da equipe'
+end
+
+
+elseif strcmp(selections.TacticalComponentType,'Dispersion Metrics')  
+    switch selections.ColLinTyp
+    case 'Team Separateness (1 team)'
+        disp(' ')
+        disp(['Calculating: ', selections.ColLinTyp])
+        ResTeamSeparateness = teamseparateness(selections.collectivedata);
+        selections.ResTeamSeparateness = ResTeamSeparateness;
+        disp('Saving results...')
+        disp(['Done: ', selections.ColLinTyp])
+        disp('---------------------------------------------------')
+        
+    case 'Team Effective Area (1 team)'
+        disp(' ')
+        disp(['Calculating: ', selections.ColLinTyp])
+        ResTeamEffectiveArea = team_effective_area(selections.collectivedata);
+        selections.ResTeamEffectiveArea = ResTeamEffectiveArea;
+        disp('Saving results...')
+        disp(['Done: ', selections.ColLinTyp])
+        disp('---------------------------------------------------')
+    
+    case 'Stretch Index (1 team)'
+        disp(' ')
+        disp(['Calculating: ', selections.ColLinTyp])
+        ResTeamStretchIndex = team_stretch_index(selections.collectivedata);
+        selections.ResTeamStretchIndex = ResTeamStretchIndex;
+        disp('Saving results...')
+        disp(['Done: ', selections.ColLinTyp])
+        disp('---------------------------------------------------')
+    
+    case 'Team Spread (1 team)'
+        disp(' ')
+        disp(['Calculating: ', selections.ColLinTyp])
+        ResTeamSpread = teamspread(selections.collectivedata);
+        selections.ResTeamSpread = ResTeamSpread;
+        disp('Saving results...')
+        disp(['Done: ', selections.ColLinTyp])
+        disp('---------------------------------------------------')
+        
+    case 'Spatial Exploration Index (1 team)'
+        disp(' ')
+        disp(['Calculating: ', selections.ColLinTyp])
+        ResSpatialExplorationIndex = spatial_exploration_index(selections.collectivedata);
+        selections.ResSpatialExplorationIndex = ResSpatialExplorationIndex;
+        disp('Saving results...')
+        disp(['Done: ', selections.ColLinTyp])
+        disp('---------------------------------------------------')
+        
+    case 'Individual Playing Area (1 team)'
+        disp(' ')
+        disp(['Calculating: ', selections.ColLinTyp])
+        ResIndividualPlayingArea = individual_playing_area(selections.collectivedata);
+        selections.ResIndividualPlayingArea = ResIndividualPlayingArea;
+        disp('Saving results...')
+        disp(['Done: ', selections.ColLinTyp])
+        disp('---------------------------------------------------')
+    
+    case 'Effective Area | Length | Width | Ratio (1 team)'
+        disp(' ')
+        disp(['Calculating: ', selections.ColLinTyp])
+        ResTeamCompLargAreaDist = team_length_width_ratio_area_distgoal(selections.collectivedata);
+        selections.ResTeamCompLargAreaDist = ResTeamCompLargAreaDist;
+        disp('Saving results...')
+        disp(['Done: ', selections.ColLinTyp])
+        disp('---------------------------------------------------')
+        
+    case 'Video for Illustrative Purposes (1 team)'
+        disp(' ')
+        disp(['Creating: ', selections.ColLinTyp])
+        IllustrativeFigure(selections.collectivedata);
+        disp('Saving video...')
+        disp(['Done: ', selections.ColLinTyp])
+        disp('---------------------------------------------------')
+    
+    case 'Team Sectors Analysis (1 team)'
+        disp(' ')
+        disp(['Creating: ', selections.ColLinTyp])
+        Resdistanceteamsectors = distanceteamsectors(selections.collectivedata);
+        selections.Resdistanceteamsectors = Resdistanceteamsectors;
+        disp('Saving video...')
+        disp(['Done: ', selections.ColLinTyp])
+        disp('---------------------------------------------------')
+        
+    end
+    
+
+elseif strcmp(selections.TacticalComponentType,'Tactical Behavior Metrics')  
+    switch selections.ColLinTyp
+    case 'Distance Between Team Sectors (1 team)'
         disp(' ')
         disp(['Calculating: ', selections.ColLinTyp])
         ResCompSectCentroid = sectcentroid(selections.collectivedata);
@@ -1079,7 +1177,7 @@ switch selections.ColLinTyp
         disp(['Done: ', selections.ColLinTyp])
         disp('---------------------------------------------------')
         
-    case 'Length and Width (2 teams) and Individual Playing Area'
+    case 'Individual Playing Area | Length | Width (2 teams)'
         disp(' ')
         disp(['Calculating: ', selections.ColLinTyp])
         ResDistHorVertLines = comphorvertteamslines(selections.collectivedata);
@@ -1089,44 +1187,8 @@ switch selections.ColLinTyp
         disp('Saving results...')
         disp(['Done: ', selections.ColLinTyp])
         disp('---------------------------------------------------')
-
-    case 'Team separateness'
-        disp(' ')
-        disp(['Calculating: ', selections.ColLinTyp])
-        ResTeamSeparateness = teamseparateness(selections.collectivedata);
-        selections.ResTeamSeparateness = ResTeamSeparateness;
-        disp('Saving results...')
-        disp(['Done: ', selections.ColLinTyp])
-        disp('---------------------------------------------------')
         
-    case 'Team Effective Area'
-        disp(' ')
-        disp(['Calculating: ', selections.ColLinTyp])
-        ResTeamEffectiveArea = team_effective_area(selections.collectivedata);
-        selections.ResTeamEffectiveArea = ResTeamEffectiveArea;
-        disp('Saving results...')
-        disp(['Done: ', selections.ColLinTyp])
-        disp('---------------------------------------------------')
-        
-    case 'Stretch index'
-        disp(' ')
-        disp(['Calculating: ', selections.ColLinTyp])
-        ResTeamStretchIndex = team_stretch_index(selections.collectivedata);
-        selections.ResTeamStretchIndex = ResTeamStretchIndex;
-        disp('Saving results...')
-        disp(['Done: ', selections.ColLinTyp])
-        disp('---------------------------------------------------')
-
-    case 'Team spread'
-        disp(' ')
-        disp(['Calculating: ', selections.ColLinTyp])
-        ResTeamSpread = teamspread(selections.collectivedata);
-        selections.ResTeamSpread = ResTeamSpread;
-        disp('Saving results...')
-        disp(['Done: ', selections.ColLinTyp])
-        disp('---------------------------------------------------')
-        
-    case 'Players’ major range'
+    case 'Players’ Maximum Range (1 team)'
         disp(' ')
         disp(['Calculating: ', selections.ColLinTyp])
         ResPlayersMajorRange = playersmajorrange(selections.collectivedata);
@@ -1135,70 +1197,15 @@ switch selections.ColLinTyp
         disp(['Done: ', selections.ColLinTyp])
         disp('---------------------------------------------------')
         
-    case 'Spatial Exploration Index'
-        disp(' ')
-        disp(['Calculating: ', selections.ColLinTyp])
-        ResSpatialExplorationIndex = spatial_exploration_index(selections.collectivedata);
-        selections.ResSpatialExplorationIndex = ResSpatialExplorationIndex;
-        disp('Saving results...')
-        disp(['Done: ', selections.ColLinTyp])
-        disp('---------------------------------------------------')
-        
-    case 'Individual Playing Area'
-        disp(' ')
-        disp(['Calculating: ', selections.ColLinTyp])
-        ResIndividualPlayingArea = individual_playing_area(selections.collectivedata);
-        selections.ResIndividualPlayingArea = ResIndividualPlayingArea;
-        disp('Saving results...')
-        disp(['Done: ', selections.ColLinTyp])
-        disp('---------------------------------------------------')
-        
-    case 'Voronoi regions'
+    case 'Players’ Maximum Range (1 team)'
         disp(' ')
         disp(['Calculating: ', selections.ColLinTyp])
         ResVoronoiRegions = voronoiregions(selections.collectivedata);
         selections.ResVoronoiRegions = ResVoronoiRegions;
         disp('Saving results...')
         disp(['Done: ', selections.ColLinTyp])
-        disp('---------------------------------------------------')
-   
-    case 'Length - Width - Ratio and Area'
-        disp(' ')
-        disp(['Calculating: ', selections.ColLinTyp])
-        ResTeamCompLargAreaDist = team_length_width_ratio_area_distgoal(selections.collectivedata);
-        selections.ResTeamCompLargAreaDist = ResTeamCompLargAreaDist;
-        disp('Saving results...')
-        disp(['Done: ', selections.ColLinTyp])
         disp('---------------------------------------------------')  
-        
-    case 'Video for illustrative purposes'
-        disp(' ')
-        disp(['Creating: ', selections.ColLinTyp])
-        IllustrativeFigure(selections.collectivedata);
-        disp('Saving video...')
-        disp(['Done: ', selections.ColLinTyp])
-        disp('---------------------------------------------------')
-    
-    case 'Tactical Analysis of Team Sectors'
-        disp(' ')
-        disp(['Creating: ', selections.ColLinTyp])
-        Resdistanceteamsectors = distanceteamsectors(selections.collectivedata);
-        selections.Resdistanceteamsectors = Resdistanceteamsectors;
-        disp('Saving video...')
-        disp(['Done: ', selections.ColLinTyp])
-        disp('---------------------------------------------------')
-end
 
-elseif strcmp(selections.TacticalComponentType,'Comunicação de Ação')  
-    switch selections.ColLinTyp
-    case 'Vilars proposal'
-        disp(' ')
-        disp(['Calculating: ', selections.ColLinTyp])
-        ResVilarsProposal = vilarproposal(selections.collectivedata);
-        selections.ResVilarsProposal = ResVilarsProposal;
-        disp('Saving results...')
-        disp(['Done: ', selections.ColLinTyp])
-        disp('---------------------------------------------------')
     end
 end
 
