@@ -105,7 +105,7 @@ function [res4] = spatial_exploration_index(dataraw)
 
     e = actxserver('Excel.Application');
     ewb = e.Workbooks.Open(fname);
-    ewb.Worksheets.Item(1).Name = char(selections.ColLinTyp(1:end));
+    ewb.Worksheets.Item(1).Name = char(selections.ColLinTyp(1:25));
     ewb.Save 
     ewb.Close(false)
 
