@@ -916,7 +916,7 @@ set(handles.NLColLinearAnalysisType,'Enable','off')
 set(handles.RunColletiveNonLinearAnalysis,'Enable','off')
 
 
-ColLinearTypeAll = {' ','Centrality Metrics','Dispersion Metrics','Tactical Behavior Metrics'};
+ColLinearTypeAll = {' ','Centrality Metrics','Dispersion Metrics','Tactical Behavior Metrics','Video for Illustrative Purposes'};
 set(handles.TacticalComponentType,'String',ColLinearTypeAll);
 
 selections.ColLinearTypeAll = ColLinearTypeAll;
@@ -976,7 +976,14 @@ elseif  hObject.Value == 4
                               'Individual Playing Area - Length - Width (2 teams)', ...
                               'Players’ Maximum Range (1 team)', ...
                               'Voronoi Regions (2 teams)'};
-        set(handles.ColLinearAnalysisType,'String',ColLinearVariables);        
+        set(handles.ColLinearAnalysisType,'String',ColLinearVariables);
+        
+elseif  hObject.Value == 5
+        set(handles.ColLinearAnalysisType,'Enable','on')
+        ColLinearVariables = {' ', ...
+                              'Video for Illustrative Purposes (1 team)', ...
+                              };
+        set(handles.ColLinearAnalysisType,'String',ColLinearVariables); 
 end
 
 
@@ -1144,14 +1151,6 @@ elseif strcmp(selections.TacticalComponentType,'Dispersion Metrics')
         disp('Saving results...')
         disp(['Done: ', selections.ColLinTyp])
         disp('---------------------------------------------------')
-        
-    case 'Video for Illustrative Purposes (1 team)'
-        disp(' ')
-        disp(['Creating: ', selections.ColLinTyp])
-        IllustrativeFigure(selections.collectivedata);
-        disp('Saving video...')
-        disp(['Done: ', selections.ColLinTyp])
-        disp('---------------------------------------------------')
     
     case 'Team Sectors Analysis (1 team)'
         disp(' ')
@@ -1204,7 +1203,17 @@ elseif strcmp(selections.TacticalComponentType,'Tactical Behavior Metrics')
         disp('Saving results...')
         disp(['Done: ', selections.ColLinTyp])
         disp('---------------------------------------------------')  
+    end
 
+elseif strcmp(selections.TacticalComponentType,'Video for Illustrative Purposes')  
+    switch selections.ColLinTyp
+    case 'Video for Illustrative Purposes (1 team)'
+        disp(' ')
+        disp(['Creating: ', selections.ColLinTyp])
+        IllustrativeFigure(selections.collectivedata);
+        disp('Saving video...')
+        disp(['Done: ', selections.ColLinTyp])
+        disp('---------------------------------------------------')
     end
 end
 
