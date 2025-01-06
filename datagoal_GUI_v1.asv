@@ -1236,11 +1236,11 @@ if      hObject.Value == 1
 elseif  hObject.Value == 2 
         set(handles.NLColLinearAnalysisType,'Enable','on')
         ColNonLinearVariables = {' ',...
-                            'Approximate entropy (ApEn) (1 team)',...
-                            'Sample entropy (SampEn) (1 team)',...
-                            'Shannon entropy (ShanEn) (1 team)',...
+                            'Approximate entropy (ApEn)',...
+                            'Sample entropy (SampEn)',...
+                            'Shannon entropy (ShanEn)',...
 %                             'Dynamic overlap'};
-                            };
+};
         set(handles.NLColLinearAnalysisType,'String',ColNonLinearVariables);
 elseif  hObject.Value == 3
         set(handles.NLColLinearAnalysisType,'Enable','on')
@@ -1347,7 +1347,7 @@ global selections
 
 if strcmp(selections.NLTacticalComponentType,'Regularity') 
 switch selections.ColNonLinTyp
-    case 'Approximate entropy (ApEn) (1 team)'
+    case 'Approximate entropy (ApEn)'
         disp(' ')
         disp(['Calculating: ', selections.ColNonLinTyp])
         ResApEn = approximateentropy(selections.collectivedata);
@@ -1355,7 +1355,7 @@ switch selections.ColNonLinTyp
         disp('Saving results...')
         disp(['Done: ', selections.ColNonLinTyp])
         disp('---------------------------------------------------')
-    case 'Sample entropy (SampEn) (1 team)'
+    case 'Sample entropy (SampEn)'
         disp(' ')
         disp(['Calculating: ', selections.ColNonLinTyp])
         ResSampEnt = sampleentropy(selections.collectivedata);
@@ -1363,7 +1363,7 @@ switch selections.ColNonLinTyp
         disp('Saving results...')
         disp(['Done: ', selections.ColNonLinTyp])
         disp('---------------------------------------------------')
-    case 'Shannon entropy (ShanEn) (1 team)'
+    case 'Shannon entropy (ShanEn)'
         disp(' ')
         disp(['Calculating: ', selections.ColNonLinTyp])
         ResShanEn = shannonentropy(selections.collectivedata);

@@ -87,7 +87,7 @@ function [res] = shannonentropy(dataraw)
     xlswrite(fname,res,1,'B2')
     e = actxserver('Excel.Application');
     ewb = e.Workbooks.Open(fname);
-    ewb.Worksheets.Item(1).Name = char(selections.ColNonLinTyp(1:end));
+    ewb.Worksheets.Item(1).Name = char(selections.ColNonLinTyp(1:15));
     ewb.Save 
     ewb.Close(false)
 end
