@@ -384,5 +384,12 @@ function [LinearIndividualRes] = linearindividualanalysis(rawdata)
 
             end
     end
+    
+    % Running - Spatial Exploration Index
+    disp(' ')
+    disp('Processing: Spatial Exploration Index')
+    ResSpatialExplorationIndex = spatial_exploration_index(selections.collectivedata);
+
+    
 end
 

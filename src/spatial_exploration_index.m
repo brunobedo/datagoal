@@ -80,7 +80,7 @@ function [res4] = spatial_exploration_index(dataraw)
     %%  Saving results
     prompt = {'Enter file name:'};
     dlgtitle = 'Input title';
-    definput = {['Linear_Collective_Res_',selections.ColLinTyp]};%'.csv'
+    definput = {['Individual_SEI_',selections.ColLinTyp]};%'.csv'
     titfil = char(inputdlg(prompt,dlgtitle,[1 60],definput));
     fname = [dirsave filesep 'Results' filesep titfil];
     
@@ -105,7 +105,7 @@ function [res4] = spatial_exploration_index(dataraw)
 
     e = actxserver('Excel.Application');
     ewb = e.Workbooks.Open(fname);
-    ewb.Worksheets.Item(1).Name = char(selections.ColLinTyp(1:25));
+    ewb.Worksheets.Item(1).Name = 'SEI';
     ewb.Save 
     ewb.Close(false)
 

@@ -963,7 +963,6 @@ elseif  hObject.Value == 3
                               'Team Effective Area (1 team)', ...
                               'Stretch Index (1 team)', ...
                               'Team Spread (1 team)', ...
-                              'Spatial Exploration Index (1 team)', ...
                               'Individual Playing Area (1 team)', ...
                               };
                             
@@ -1121,15 +1120,6 @@ elseif strcmp(selections.TacticalComponentType,'Dispersion Metrics')
         disp(['Calculating: ', selections.ColLinTyp])
         ResTeamSpread = teamspread(selections.collectivedata);
         selections.ResTeamSpread = ResTeamSpread;
-        disp('Saving results...')
-        disp(['Done: ', selections.ColLinTyp])
-        disp('---------------------------------------------------')
-        
-    case 'Spatial Exploration Index (1 team)'
-        disp(' ')
-        disp(['Calculating: ', selections.ColLinTyp])
-        ResSpatialExplorationIndex = spatial_exploration_index(selections.collectivedata);
-        selections.ResSpatialExplorationIndex = ResSpatialExplorationIndex;
         disp('Saving results...')
         disp(['Done: ', selections.ColLinTyp])
         disp('---------------------------------------------------')
