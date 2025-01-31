@@ -360,8 +360,11 @@ function [LinearIndividualRes] = linearindividualanalysis(dataraw)
                     p1 = datap(gapsspm(q,1),:);
                     p2 = datap(gapsspm(q,2),:);
                     dp = p2-p1;
-%                     p6_f5(q,1) =  plot(gapsspm(q,1)),datap(gapsspm(q,2)),'k.','MarkerSize',2);
-                    p6_f5(q,1) = quiver(p1(1),p1(2),dp(1),dp(2),0,'r','LineWidth',2,'MaxHeadSize',1.5);
+                    
+                    sprintx = datap(gapsspm(q,1):gapsspm(q,2),1);
+                    sprinty = datap(gapsspm(q,1):gapsspm(q,2),2);
+                    p6_f5(q,1) = plot(sprintx, sprinty, 'r-', 'LineWidth', 2);
+                    p6_f5(q,1) = quiver(p1(1),p1(2),dp(1),dp(2),0,'r', 'LineWidth', 2, 'MaxHeadSize', 1);
                     dist_t = sum(normdat(gapsspm(q,1):gapsspm(q,2)));
                     t61(q,1) = text(p2(1,1),p2(1,2)+2,[num2str(round(dist_t,2)),' m'],'Color','Blue','FontWeight','bold','FontSize',20);
                     title({['Sprints direction'];[char(sct),' - ',ppname];['The athlete peformed ', num2str(round(d_range5,2)),' m sprinting']});
@@ -391,7 +394,8 @@ function [LinearIndividualRes] = linearindividualanalysis(dataraw)
     disp('Processing: Spatial Exploration Index')
     CollectiveAllData = organizedatacollective(selections.allGPSdata);
     ResSpatialExplorationIndex = spatial_exploration_index(CollectiveAllData);
-
     
+    disp(' ')
+    disp('Done individual analysis!')    
 end
 
