@@ -80,7 +80,7 @@ function [res4] = spatial_exploration_index(dataraw)
     %%  Saving results
     prompt = {'Enter file name:'};
     dlgtitle = 'Input title';
-    definput = {['Individual_SEI_',selections.ColLinTyp]};%'.csv'
+    definput = {['Individual_SEI_']};%'.csv'
     titfil = char(inputdlg(prompt,dlgtitle,[1 60],definput));
     fname = [dirsave filesep 'Results' filesep titfil];
     
