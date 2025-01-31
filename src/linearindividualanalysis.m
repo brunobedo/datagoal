@@ -341,7 +341,7 @@ function [LinearIndividualRes] = linearindividualanalysis(dataraw)
     hold on
     set(gca,'XColor', 'none','YColor','none')
     set(gca,'XTick',[], 'YTick', [],'XColor','none','YColor','none')
-    %         p1_f5 =  plot(datap(:,1),datap(:,2),'k.','MarkerSize',0.05);
+%     p1_f5 =  plot(datap(:,1),datap(:,2),'k.','MarkerSize',0.05);
     if size(Ra,1)>=1
             gaps = find(n_s_local(:) == 1);
             clear gapsspm
@@ -360,11 +360,12 @@ function [LinearIndividualRes] = linearindividualanalysis(dataraw)
                     p1 = datap(gapsspm(q,1),:);
                     p2 = datap(gapsspm(q,2),:);
                     dp = p2-p1;
+%                     p6_f5(q,1) =  plot(gapsspm(q,1)),datap(gapsspm(q,2)),'k.','MarkerSize',2);
                     p6_f5(q,1) = quiver(p1(1),p1(2),dp(1),dp(2),0,'r','LineWidth',2,'MaxHeadSize',1.5);
                     dist_t = sum(normdat(gapsspm(q,1):gapsspm(q,2)));
                     t61(q,1) = text(p2(1,1),p2(1,2)+2,[num2str(round(dist_t,2)),' m'],'Color','Blue','FontWeight','bold','FontSize',20);
                     title({['Sprints direction'];[char(sct),' - ',ppname];['The athlete peformed ', num2str(round(d_range5,2)),' m sprinting']});
-                    legend ([p6_f5(1,1)],'Dire��o e dist�ncia do Sprint')
+                    legend ([p6_f5(1,1)],'Sprint Direction')
             end
             else
                     title({['Sprints'];[char(sct),' - ',ppname];['The athlete has not sprinted']});
