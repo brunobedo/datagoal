@@ -1,4 +1,4 @@
-function [res4] = spatial_exploration_index(dataraw)
+function [res4] = spatial_exploration_index(dataraw, definput)
 %   This file is part of DataGoal: a Matlab Toolbox to Linear and Non-linear Soccer Positional Data Analysis.
 %   Copyright (C) 2024 Bruno L. S. Bedo, Felipe A. Moura, Rodrigo Aquino, Sérgio A. Cunha, Paulo R. P. Santiago
 % 
@@ -80,8 +80,10 @@ function [res4] = spatial_exploration_index(dataraw)
     %%  Saving results
     prompt = {'Enter file name:'};
     dlgtitle = 'Input title';
-    definput = {['Individual_SEI_']};%'.csv'
-    titfil = char(inputdlg(prompt,dlgtitle,[1 60],definput));
+%     definput = {['Individual_SEI_']};%'.csv'
+%     titfil = char(inputdlg(prompt,dlgtitle,[1 60],definput));
+%     titfil = char(prompt,dlgtitle,[1 60],definput);
+    titfil = char(definput);
     fname = [dirsave filesep 'Results' filesep titfil];
     
     tit1 = {'Players','Mean','Median','STD','Team values'};
@@ -110,7 +112,7 @@ function [res4] = spatial_exploration_index(dataraw)
     ewb.Close(false)
 
     %%  Creating and saving figure
-    titsavef1 = ['Field_',selections.ColLinTyp];
+    titsavef1 = ['Field_SEI'];
     f1 = figure(1); clf; set(f1,'name','Players position','units','normalized','outerposition',[0 0 1 1])
     subplot(1,2,1)
     campo
@@ -133,46 +135,46 @@ function [res4] = spatial_exploration_index(dataraw)
     close (f1)
 
     %%  Creating a video file
-    if selections.RecordVideo ==1
-        prompt = {'Enter file name:'};
-        mkdir([dirsave filesep 'Results' filesep 'Videos'])
-        dlgtitle = 'Input title';
-        definput = {['Video_',selections.ColLinTyp]};%'.csv'
-        titfil = char(inputdlg(prompt,dlgtitle,[1 60],definput));
-        fname = [dirsave filesep 'Results' filesep 'Videos' filesep titfil];
-        vidObj = VideoWriter([fname,'.mp4'],'MPEG-4');
-        vidObj.Quality = 95;
-        vidObj.FrameRate = 10;
-        open(vidObj)
-
-        f1 = figure(1); clf; set(f1,'name','Players position','units','normalized','outerposition',[0 0 1 1])
-        campo
-        hold on
-        % axis off
-        pause
-        p1 = plot(PlayersMeanX,PlayersMeanY,'or','MarkerSize',5,'LineWidth',3);
-
-        for i = 1:size(xdata,1)
-            for p = 1:size(PlayersMeanX,2)
-                p2(i,p) = plot(xdata(i,p),ydata(i,p),'ob','MarkerSize',5,'LineWidth',3);
-                p3(i,p) = plot([xdata(i,p) PlayersMeanX(1,p)],[ydata(i,p) PlayersMeanY(1,p)],'LineWidth',1.5,'Color','k','LineStyle',':');       
-                t1(i,p) = text(xdata(i,p)+2,ydata(i,p)+2,num2str(round(SEI(i,p),1))); 
-            end
-            
-            legend([p1,p2(i,p),p3(i,p)],'Mean position','Current position','Indivisual SEI')
-            title({'Spatial Exploration Index (SEI)';['Mean: ', num2str(round(mean(SEI(i,:)),1)),' m'];...
-                ['Median: ',num2str(round(median(SEI(i,:)),1)),' m']})
-
-            disp(['Processing: Frame ',num2str(i),' of ',num2str(size(xdata,1))])
-            f(i) = getframe(f1);
-            writeVideo(vidObj,f(i))
-            
-            pause(0.25)
-            delete(p2)
-            delete(p3)
-            delete(t1)
-        end
-    close(f1)
-    end
+%     if selections.RecordVideo ==1
+%         prompt = {'Enter file name:'};
+%         mkdir([dirsave filesep 'Results' filesep 'Videos'])
+%         dlgtitle = 'Input title';
+%         definput = ['Video_SEI'];%'.csv'
+%         titfil = char(inputdlg(prompt,dlgtitle,[1 60],definput));
+%         fname = [dirsave filesep 'Results' filesep 'Videos' filesep titfil];
+%         vidObj = VideoWriter([fname,'.mp4'],'MPEG-4');
+%         vidObj.Quality = 95;
+%         vidObj.FrameRate = 10;
+%         open(vidObj)
+% 
+%         f1 = figure(1); clf; set(f1,'name','Players position','units','normalized','outerposition',[0 0 1 1])
+%         campo
+%         hold on
+%         % axis off
+%         pause
+%         p1 = plot(PlayersMeanX,PlayersMeanY,'or','MarkerSize',5,'LineWidth',3);
+% 
+%         for i = 1:size(xdata,1)
+%             for p = 1:size(PlayersMeanX,2)
+%                 p2(i,p) = plot(xdata(i,p),ydata(i,p),'ob','MarkerSize',5,'LineWidth',3);
+%                 p3(i,p) = plot([xdata(i,p) PlayersMeanX(1,p)],[ydata(i,p) PlayersMeanY(1,p)],'LineWidth',1.5,'Color','k','LineStyle',':');       
+%                 t1(i,p) = text(xdata(i,p)+2,ydata(i,p)+2,num2str(round(SEI(i,p),1))); 
+%             end
+%             
+%             legend([p1,p2(i,p),p3(i,p)],'Mean position','Current position','Indivisual SEI')
+%             title({'Spatial Exploration Index (SEI)';['Mean: ', num2str(round(mean(SEI(i,:)),1)),' m'];...
+%                 ['Median: ',num2str(round(median(SEI(i,:)),1)),' m']})
+% 
+%             disp(['Processing: Frame ',num2str(i),' of ',num2str(size(xdata,1))])
+%             f(i) = getframe(f1);
+%             writeVideo(vidObj,f(i))
+%             
+%             pause(0.25)
+%             delete(p2)
+%             delete(p3)
+%             delete(t1)
+%         end
+%     close(f1)
+%     end
 end
 

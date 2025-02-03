@@ -393,7 +393,7 @@ function [LinearIndividualRes] = linearindividualanalysis(dataraw)
     disp(' ')
     disp('Processing: Spatial Exploration Index')
     CollectiveAllData = organizedatacollective(selections.allGPSdata);
-    ResSpatialExplorationIndex = spatial_exploration_index(CollectiveAllData);
+    ResSpatialExplorationIndex = spatial_exploration_index(CollectiveAllData, definput);
     
     disp(' ')
     disp('Done individual analysis!')    
