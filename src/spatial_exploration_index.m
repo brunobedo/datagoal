@@ -96,18 +96,18 @@ function [res4] = spatial_exploration_index(dataraw, definput)
     res3 = [SEI_T_mean SEI_T_median SEI_T_std]';
     res4 = [vtempm, SEI_P_full];
     
-    xlswrite(fname,tit1,1,'A1')
-    xlswrite(fname,tit2,1,'E2')
-    xlswrite(fname,tit3,1,'G1')
-    xlswrite(fname,tit4,1,'H1')
-    xlswrite(fname,res1,1,'A2')
-    xlswrite(fname,res2,1,'B2')
-    xlswrite(fname,res3,1,'F2')
-    xlswrite(fname,res4,1,'G2')
+    xlswrite(fname,tit1,4,'A1')
+    xlswrite(fname,tit2,4,'E2')
+    xlswrite(fname,tit3,4,'G1')
+    xlswrite(fname,tit4,4,'H1')
+    xlswrite(fname,res1,4,'A2')
+    xlswrite(fname,res2,4,'B2')
+    xlswrite(fname,res3,4,'F2')
+    xlswrite(fname,res4,4,'G2')
 
     e = actxserver('Excel.Application');
     ewb = e.Workbooks.Open(fname);
-    ewb.Worksheets.Item(1).Name = 'SEI';
+    ewb.Worksheets.Item(4).Name = 'SEI';
     ewb.Save 
     ewb.Close(false)
 
