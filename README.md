@@ -80,3 +80,7 @@ The proposed tool is released under the [Apache License 2.0](https://www.apache.
 %              a Matlab Toolbox to Linear and Non-linear                  %
 %                    Soccer Positional Data Analysis                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+```
+
+## Tutorial Video 🎬🎥
+The tutorial video is available [here](https://youtu.be/RBs5-m0Gknw?si=PjVAwBU3mmRkyN-X). It provides a step-by-step guide, covering everything from installation and running the software to creating figures and videos.
