@@ -175,7 +175,6 @@ function [res2] = team_stretch_index(dataraw)
         disp(['Processing: Frame ',num2str(i),' of ',num2str(size(xdata,1))])
         f(i) = getframe(f1);
         writeVideo(vidObj,f(i));
-
         pause(0.25)
         delete(p2a)
         delete(p2b)
