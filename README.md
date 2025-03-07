@@ -2,7 +2,9 @@
 
 ## Introduction 🚀
 
-The rapid advancements in computational sciences, including computer vision and image processing, have introduced new methods for data collection, aiding in the understanding of technical and tactical aspects of sports. In collective sports, there has been a notable increase in scientific and technical data production, particularly in invasion sports like soccer. Despite this, professional development in computational methods for sports professionals has not kept pace. 
+The rapid advancements in computational sciences, including computer vision and image processing, have introduced new methods for data collection, aiding in the understanding of technical and tactical aspects of sports. 
+
+In collective sports, there has been a notable increase in scientific and technical data production, particularly in invasion sports like soccer. Despite this, professional development in computational methods for sports professionals has not kept pace. 
 
 This ongoing project, aligned with the initial schedule, aims to develop a technical-scientific tool for processing and analyzing positional data in soccer. This tool is designed to help sports professionals in processing soccer data efficiently.
 
