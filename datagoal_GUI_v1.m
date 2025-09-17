@@ -959,12 +959,13 @@ elseif  hObject.Value == 3
         set(handles.ColLinearAnalysisType,'Enable','on')
         ColLinearVariables = {' ', ...
                               'Effective Area - Length - Width - Ratio (1 team)', ...
-                              'Team Separateness (1 team)', ...
+                              'Espatial Exploration Index (1 team)',...
                               'Team Effective Area (1 team)', ...
                               'Stretch Index (1 team)', ...
                               'Team Spread (1 team)', ...
                               'Individual Playing Area (1 team)', ...
                               };
+        
                             
         set(handles.ColLinearAnalysisType,'String',ColLinearVariables);
 
@@ -1088,11 +1089,11 @@ end
 
 elseif strcmp(selections.TacticalComponentType,'Dispersion Metrics')  
     switch selections.ColLinTyp
-    case 'Team Separateness (1 team)'
+    case 'Espatial Exploration Index (1 team)'
         disp(' ')
         disp(['Calculating: ', selections.ColLinTyp])
-        ResTeamSeparateness = teamseparateness(selections.collectivedata);
-        selections.ResTeamSeparateness = ResTeamSeparateness;
+        res_spatial_exploration_index = spatial_exploration_index(selections.collectivedata);
+        selections.res_spatial_exploration_index = res_spatial_exploration_index;
         disp('Saving results...')
         disp(['Done: ', selections.ColLinTyp])
         disp('---------------------------------------------------')
