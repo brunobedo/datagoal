@@ -1,6 +1,6 @@
 function [LinearIndividualRes] = linearindividualanalysis(dataraw)
 %   This file is part of DataGoal: a Matlab Toolbox to Linear and Non-linear Soccer Positional Data Analysis.
-%   Copyright (C) 2024 Bruno L. S. Bedo, Felipe A. Moura, Rodrigo Aquino, S�rgio A. Cunha, Paulo R. P. Santiago
+%   Copyright (C) 2024 Bruno L. S. Bedo, Felipe A. Moura, Rodrigo Aquino, Sérgio A. Cunha, Paulo R. P. Santiago
 % 
 %   Licensed under the Apache License, Version 2.0 (the "License");
 %   you may not use this file except in compliance with the License.
@@ -92,14 +92,20 @@ function [LinearIndividualRes] = linearindividualanalysis(dataraw)
 
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    % Yanci J, Castillo D, Iturricastillo A, Reina R. 
-    % Evaluation of the Official Match External Load in Soccer Players With Cerebral Palsy. J Strength Cond Res. 2019 Mar
-    velrange1 = find(0       <= veldat & veldat <= (3/3.6));        % 0-3 km�h-1 (walking), 
-    velrange2 = find((3.01/3.6) <  veldat & veldat <= (9/3.6));     % 3.1-9 km�h-1 (low-speed running - LSR)
-    velrange3 = find((9.01/3.6)<  veldat & veldat <= (13/3.6));     % 9.1-13km�h-1 (moderate-speed running - MSR)
-    velrange4 = find((13.01/3.6)<  veldat & veldat <= (18/3.6));    % 13;01-18 km�h-1 (high-speed running - HSR)
-    velrange5 = find(veldat > (18.01/3.6) );                        % >18.1 km�h-1 (sprinting - SPR);
+    % % Yanci J, Castillo D, Iturricastillo A, Reina R. 
+    % % Evaluation of the Official Match External Load in Soccer Players With Cerebral Palsy. J Strength Cond Res. 2019 Mar
+    % velrange1 = find(0       <= veldat & veldat <= (3/3.6));        % 0-3 km�h-1 (walking), 
+    % velrange2 = find((3.01/3.6) <  veldat & veldat <= (9/3.6));     % 3.1-9 km�h-1 (low-speed running - LSR)
+    % velrange3 = find((9.01/3.6)<  veldat & veldat <= (13/3.6));     % 9.1-13km�h-1 (moderate-speed running - MSR)
+    % velrange4 = find((13.01/3.6)<  veldat & veldat <= (18/3.6));    % 13;01-18 km�h-1 (high-speed running - HSR)
+    % velrange5 = find(veldat > (18.01/3.6) );                        % >18.1 km�h-1 (sprinting - SPR);
 
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Female Soccer
+    velrange1 = find(0       <= veldat & veldat <= (6.99/3.6));        
+    velrange2 = find((7.01/3.6) <  veldat & veldat <= (12.99/3.6));     
+    velrange3 = find((13.00/3.6)<  veldat & veldat <= (18.99/3.6));     
+    velrange4 = find((20.00/3.6)<  veldat & veldat <= (22.99/3.6));    
+    velrange5 = find(veldat > (23.00/3.6) );                        
 
     %       Number of sprints 
     n_s_local = diff(velrange5)~=1;
