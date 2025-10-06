@@ -81,13 +81,25 @@ function [LinearIndividualRes] = linearindividualanalysis(dataraw)
 
 
 %       Distance in different speed ranges (meters)
-    velrange1 = find(0       <= veldat & veldat <= (7.1/3.6));      % 0-7.1 km�h-1 (walking), 
-    velrange2 = find((7.2/3.6) <  veldat & veldat <= (14.399/3.6)); % 7.2-14.3 km�h-1 (low-speed running - LSR)
-    velrange3 = find((14.4/3.6)<  veldat & veldat <= (19.79/3.6));  % 14.4-19.7km�h-1 (moderate-speed running - MSR)
-    velrange4 = find((19.9/3.6)<  veldat & veldat <= (25.2/3.6));   % 19.8-25.2 km�h-1 (high-speed running - HSR)
-    velrange5 = find(veldat > (25.21/3.6) );                        % >25.2 km�h-1 (sprinting - SPR);
-                                                                    % >14.4 km�h-1 (high-intensity activities - HIA)
-                                                                    % - >19.8 km�h-1 (very-high-intensity activities - VHIA) 
+    % 
+    % velrange1 = find(0       <= veldat & veldat <= (7.1/3.6));      % 0-7.1 km�h-1 (walking), 
+    % velrange2 = find((7.2/3.6) <  veldat & veldat <= (14.399/3.6)); % 7.2-14.3 km�h-1 (low-speed running - LSR)
+    % velrange3 = find((14.4/3.6)<  veldat & veldat <= (19.79/3.6));  % 14.4-19.7km�h-1 (moderate-speed running - MSR)
+    % velrange4 = find((19.9/3.6)<  veldat & veldat <= (25.2/3.6));   % 19.8-25.2 km�h-1 (high-speed running - HSR)
+    % velrange5 = find(veldat > (25.21/3.6) );                        % >25.2 km�h-1 (sprinting - SPR);
+    %                                                                 % >14.4 km�h-1 (high-intensity activities - HIA)
+    %                                                                 % - >19.8 km�h-1 (very-high-intensity activities - VHIA) 
+
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Yanci J, Castillo D, Iturricastillo A, Reina R. 
+    % Evaluation of the Official Match External Load in Soccer Players With Cerebral Palsy. J Strength Cond Res. 2019 Mar
+    velrange1 = find(0       <= veldat & veldat <= (3/3.6));        % 0-3 km�h-1 (walking), 
+    velrange2 = find((3.01/3.6) <  veldat & veldat <= (9/3.6));     % 3.1-9 km�h-1 (low-speed running - LSR)
+    velrange3 = find((9.01/3.6)<  veldat & veldat <= (13/3.6));     % 9.1-13km�h-1 (moderate-speed running - MSR)
+    velrange4 = find((13.01/3.6)<  veldat & veldat <= (18/3.6));    % 13;01-18 km�h-1 (high-speed running - HSR)
+    velrange5 = find(veldat > (18.01/3.6) );                        % >18.1 km�h-1 (sprinting - SPR);
+
 
     %       Number of sprints 
     n_s_local = diff(velrange5)~=1;
