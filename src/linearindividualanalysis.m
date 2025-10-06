@@ -101,6 +101,8 @@ function [LinearIndividualRes] = linearindividualanalysis(dataraw)
     % velrange5 = find(veldat > (18.01/3.6) );                        % >18.1 km�h-1 (sprinting - SPR);
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Female Soccer
+    % Bradley PS. 'Setting the Benchmark' Part 4: Contextualising the Match Demands of Teams at the FIFA [Women's World Cup Australia and New Zealand 2023.' ...
+    % Biol Sport. 2025 Apr;42(2):57-69. doi: 10.5114/biolsport.2025.142638. Epub 2024 Aug 30. PMID: 40182706; PMCID: PMC11963141.]
     velrange1 = find(0       <= veldat & veldat <= (6.99/3.6));        
     velrange2 = find((7.01/3.6) <  veldat & veldat <= (12.99/3.6));     
     velrange3 = find((13.00/3.6)<  veldat & veldat <= (18.99/3.6));     
