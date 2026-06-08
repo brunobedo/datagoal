@@ -414,7 +414,7 @@ The following articles have used DataGoal in their research:
 
 If you use DataGoal in your research, please cite the article:
 
-```
+```bibtex
 @article{bedo2026datagoal,
   author       = {Bedo, Bruno L. S. and Moura, Felipe A. and Santiago, Paulo R. P. and Cunha, Sergio A. and Assis, Ronaldo D. and Machado, João C. and Aquino, Rodrigo},
   title        = {DataGoal: A MATLAB Toolbox to Linear and Non-Linear Soccer Positional Data Analysis},
