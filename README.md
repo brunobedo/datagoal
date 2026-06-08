@@ -414,8 +414,17 @@ The following articles have used DataGoal in their research:
 
 If you use DataGoal in your research, please cite the article:
 
-_soon_
-
+```
+@article{bedo2026datagoal,
+  author       = {Bedo, Bruno L. S. and Moura, Felipe A. and Santiago, Paulo R. P. and Cunha, Sergio A. and Assis, Ronaldo D. and Machado, João C. and Aquino, Rodrigo},
+  title        = {DataGoal: A MATLAB Toolbox to Linear and Non-Linear Soccer Positional Data Analysis},
+  journaltitle = {Proceedings of the Institution of Mechanical Engineers, Part P: Journal of Sports Engineering and Technology},
+  year         = {2026},
+  pages        = {1--15},
+  doi          = {10.1177/17543371261455525},
+  publisher    = {SAGE Publications}
+}
+```
 
 ## Tutorial Video 🎬🎥
 The tutorial video is available [here](https://youtu.be/RBs5-m0Gknw?si=PjVAwBU3mmRkyN-X). It provides a step-by-step guide, covering everything from installation and running the software to creating figures and videos.
