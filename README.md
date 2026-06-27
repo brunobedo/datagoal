@@ -414,15 +414,19 @@ The following articles have used DataGoal in their research:
 
 If you use DataGoal in your research, please cite the article:
 
+[DataGoal: A MATLAB toolbox to linear and non-linear soccer positional data analysis]([https://github.com](https://journals.sagepub.com/doi/10.1177/17543371261455525))
+
 ```bibtex
 @article{bedo2026datagoal,
-  author       = {Bedo, Bruno L. S. and Moura, Felipe A. and Santiago, Paulo R. P. and Cunha, Sergio A. and Assis, Ronaldo D. and Machado, João C. and Aquino, Rodrigo},
-  title        = {DataGoal: A MATLAB Toolbox to Linear and Non-Linear Soccer Positional Data Analysis},
-  journaltitle = {Proceedings of the Institution of Mechanical Engineers, Part P: Journal of Sports Engineering and Technology},
-  year         = {2026},
-  pages        = {1--15},
-  doi          = {10.1177/17543371261455525},
-  publisher    = {SAGE Publications}
+  title = {DataGoal: A MATLAB toolbox to linear and non-linear soccer positional data analysis},
+  ISSN = {1754-338X},
+  url = {http://dx.doi.org/10.1177/17543371261455525},
+  DOI = {10.1177/17543371261455525},
+  journal = {Proceedings of the Institution of Mechanical Engineers,  Part P: Journal of Sports Engineering and Technology},
+  publisher = {SAGE Publications},
+  author = {Bedo,  Bruno L. S. and Moura,  Felipe A. and Santiago,  Paulo R. P. and Cunha,  Sergio A. and Assis,  Ronaldo D. and Machado,  João C. and Aquino,  Rodrigo},
+  year = {2026},
+  month = June 
 }
 ```
 
