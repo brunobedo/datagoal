@@ -87,7 +87,136 @@ The proposed tool is released under the [Apache License 2.0](https://www.apache.
 
 ## Articles 📚
 
-### 1. Academic Sources - Research Foundation
+### 1. Citing DataGoal
+
+If you use DataGoal in your research, please cite the article:
+
+- 📄 [Published Article](https://journals.sagepub.com/doi/10.1177/17543371261455525)
+  
+```bibtex
+@article{bedo2026datagoal,
+  title = {DataGoal: A MATLAB toolbox to linear and non-linear soccer positional data analysis},
+  ISSN = {1754-338X},
+  url = {http://dx.doi.org/10.1177/17543371261455525},
+  DOI = {10.1177/17543371261455525},
+  journal = {Proceedings of the Institution of Mechanical Engineers,  Part P: Journal of Sports Engineering and Technology},
+  publisher = {SAGE Publications},
+  author = {Bedo,  Bruno L. S. and Moura,  Felipe A. and Santiago,  Paulo R. P. and Cunha,  Sergio A. and Assis,  Ronaldo D. and Machado,  João C. and Aquino,  Rodrigo},
+  year = {2026},
+  month = June 
+}
+```
+
+### 2. Articles that used dataGoal
+
+The following articles have used DataGoal in their research:
+
+```bibtex
+@article{Sagaz2021,
+  title = {Influ\^encias do mando de jogo,  nível competitivo e resultado da partida sobre o desempenho físico em jogadores profissionais de futebol},
+  volume = {20},
+  ISSN = {1677-8510},
+  url = {http://dx.doi.org/10.33233/rbfex.v20i3.4178},
+  DOI = {10.33233/rbfex.v20i3.4178},
+  number = {3},
+  journal = {Revista Brasileira de Fisiologia do exerc&amp;iacute cio},
+  publisher = {Convergences Editorial},
+  author = {Sagaz,  Gabriel Colatto and Aresi,  Louren\c{c}o Zini Moreira and Bedo,  Bruno Luiz Souza and Mesquita,  Filipe and Santiago,  Paulo Roberto Pereira and Azevedo,  Angelo Melim and Souza,  Helder and Gon\c{c}alves,  Eder and Aquino,  Rodrigo},
+  year = {2021},
+  month = nov,
+  pages = {325–334}
+}
+
+@article{Machado2022,
+  title = {Applying Different Strategies of Task Constraint Manipulation in Small-Sided and Conditioned Games: How Do They Impact Physical and Tactical Demands?},
+  volume = {22},
+  ISSN = {1424-8220},
+  url = {http://dx.doi.org/10.3390/s22124435},
+  DOI = {10.3390/s22124435},
+  number = {12},
+  journal = {Sensors},
+  publisher = {MDPI AG},
+  author = {Machado,  João Cláudio and Góes,  Alberto and Aquino,  Rodrigo and Bedo,  Bruno L. S. and Viana,  Ronélia and Rossato,  Mateus and Scaglia,  Alcides and Ibáñez,  Sérgio J.},
+  year = {2022},
+  month = jun,
+  pages = {4435}
+}
+
+@article{Augusto2022,
+  title = {Contextual variables affect peak running performance in elite soccer players: A brief report},
+  volume = {4},
+  ISSN = {2624-9367},
+  url = {http://dx.doi.org/10.3389/fspor.2022.966146},
+  DOI = {10.3389/fspor.2022.966146},
+  journal = {Frontiers in Sports and Active Living},
+  publisher = {Frontiers Media SA},
+  author = {Augusto,  Di\^ego and Brito,  João and Aquino,  Rodrigo and Paulucio,  Dailson and Figueiredo,  Pedro and Bedo,  Bruno Luiz Souza and Touguinhó,  Deborah and Vasconcellos,  Fabrício},
+  year = {2022},
+  month = sep 
+}
+
+@article{Ueda2025,
+  title = {Influence of manipulating pitch size and game format in small-sided soccer games on tactical creativity and exploratory behavior of young players},
+  volume = {55},
+  ISSN = {1871-1871},
+  url = {http://dx.doi.org/10.1016/j.tsc.2024.101690},
+  DOI = {10.1016/j.tsc.2024.101690},
+  journal = {Thinking Skills and Creativity},
+  publisher = {Elsevier BV},
+  author = {Ueda,  Lucas Shoiti Carvalho and Aquino,  Rodrigo and Morais,  Cristiano Zarbato and Bedo,  Bruno and Teixeira,  Anderson Santiago and da Silva,  Juliano Fernandes and Borges,  Paulo Henrique},
+  year = {2025},
+  month = mar,
+  pages = {101690}
+}
+
+@article{Kunrath2024,
+  title = {Youth soccer team’s match dynamics with and without the ball when in both conditions of advantage and disadvantage},
+  volume = {25},
+  ISSN = {1474-8185},
+  url = {http://dx.doi.org/10.1080/24748668.2024.2419759},
+  DOI = {10.1080/24748668.2024.2419759},
+  number = {3},
+  journal = {International Journal of Performance Analysis in Sport},
+  publisher = {Informa UK Limited},
+  author = {Kunrath,  Caito A. and Bedo,  Bruno L. S. and Aquino,  Rodrigo and Laporta,  Lorenzo and De Conti Teixeira Costa,  Gustavo and Araújo,  Duarte and Leonardi,  Thiago},
+  year = {2024},
+  month = oct,
+  pages = {462–478}
+}
+
+@article{Costa2024,
+  title = {The impact of different game formats on players’ and team performance in youth soccer competitions},
+  volume = {19},
+  ISSN = {2048-397X},
+  url = {http://dx.doi.org/10.1177/17479541241252946},
+  DOI = {10.1177/17479541241252946},
+  number = {5},
+  journal = {International Journal of Sports Science &amp; Coaching},
+  publisher = {SAGE Publications},
+  author = {Costa,  Tobias dos Santos and Rossato,  Mateus and Rodrigues,  Obadias and Aquino,  Rodrigo and Bedo,  Bruno Souza and Leonardo,  Lucas and Machado,  João Cláudio},
+  year = {2024},
+  month = may,
+  pages = {2016–2023}
+}
+
+@article{Gonalves2024,
+  title = {Attack,  defense,  and transitions in soccer: analyzing the running performance of match-play},
+  volume = {20},
+  ISSN = {1825-1234},
+  url = {http://dx.doi.org/10.1007/s11332-024-01210-y},
+  DOI = {10.1007/s11332-024-01210-y},
+  number = {3},
+  journal = {Sport Sciences for Health},
+  publisher = {Springer Science and Business Media LLC},
+  author = {Gon\c{c}alves,  Luiz Guilherme and Silva,  Ana Filipa and Augusto,  Diego and Pasquarelli,  Bruno and Pastor,  Alejandro and de Okato Plato,  Felipe and Bedo,  Bruno L. S. and Vasconcellos,  Fabrício and Aquino,  Rodrigo},
+  year = {2024},
+  month = apr,
+  pages = {1087–1100}
+}
+
+```
+
+### 3. Academic Sources - Research Foundation
 
 The following articles were academic sources that based our research to develop the codes:
 
@@ -298,136 +427,6 @@ The following articles were academic sources that based our research to develop 
   pages = {173–182}
 }
 
-
-```
-
-### 2. Articles that used dataGoal
-
-The following articles have used DataGoal in their research:
-
-```bibtex
-@article{Sagaz2021,
-  title = {Influ\^encias do mando de jogo,  nível competitivo e resultado da partida sobre o desempenho físico em jogadores profissionais de futebol},
-  volume = {20},
-  ISSN = {1677-8510},
-  url = {http://dx.doi.org/10.33233/rbfex.v20i3.4178},
-  DOI = {10.33233/rbfex.v20i3.4178},
-  number = {3},
-  journal = {Revista Brasileira de Fisiologia do exerc&amp;iacute cio},
-  publisher = {Convergences Editorial},
-  author = {Sagaz,  Gabriel Colatto and Aresi,  Louren\c{c}o Zini Moreira and Bedo,  Bruno Luiz Souza and Mesquita,  Filipe and Santiago,  Paulo Roberto Pereira and Azevedo,  Angelo Melim and Souza,  Helder and Gon\c{c}alves,  Eder and Aquino,  Rodrigo},
-  year = {2021},
-  month = nov,
-  pages = {325–334}
-}
-
-@article{Machado2022,
-  title = {Applying Different Strategies of Task Constraint Manipulation in Small-Sided and Conditioned Games: How Do They Impact Physical and Tactical Demands?},
-  volume = {22},
-  ISSN = {1424-8220},
-  url = {http://dx.doi.org/10.3390/s22124435},
-  DOI = {10.3390/s22124435},
-  number = {12},
-  journal = {Sensors},
-  publisher = {MDPI AG},
-  author = {Machado,  João Cláudio and Góes,  Alberto and Aquino,  Rodrigo and Bedo,  Bruno L. S. and Viana,  Ronélia and Rossato,  Mateus and Scaglia,  Alcides and Ibáñez,  Sérgio J.},
-  year = {2022},
-  month = jun,
-  pages = {4435}
-}
-
-@article{Augusto2022,
-  title = {Contextual variables affect peak running performance in elite soccer players: A brief report},
-  volume = {4},
-  ISSN = {2624-9367},
-  url = {http://dx.doi.org/10.3389/fspor.2022.966146},
-  DOI = {10.3389/fspor.2022.966146},
-  journal = {Frontiers in Sports and Active Living},
-  publisher = {Frontiers Media SA},
-  author = {Augusto,  Di\^ego and Brito,  João and Aquino,  Rodrigo and Paulucio,  Dailson and Figueiredo,  Pedro and Bedo,  Bruno Luiz Souza and Touguinhó,  Deborah and Vasconcellos,  Fabrício},
-  year = {2022},
-  month = sep 
-}
-
-@article{Ueda2025,
-  title = {Influence of manipulating pitch size and game format in small-sided soccer games on tactical creativity and exploratory behavior of young players},
-  volume = {55},
-  ISSN = {1871-1871},
-  url = {http://dx.doi.org/10.1016/j.tsc.2024.101690},
-  DOI = {10.1016/j.tsc.2024.101690},
-  journal = {Thinking Skills and Creativity},
-  publisher = {Elsevier BV},
-  author = {Ueda,  Lucas Shoiti Carvalho and Aquino,  Rodrigo and Morais,  Cristiano Zarbato and Bedo,  Bruno and Teixeira,  Anderson Santiago and da Silva,  Juliano Fernandes and Borges,  Paulo Henrique},
-  year = {2025},
-  month = mar,
-  pages = {101690}
-}
-
-@article{Kunrath2024,
-  title = {Youth soccer team’s match dynamics with and without the ball when in both conditions of advantage and disadvantage},
-  volume = {25},
-  ISSN = {1474-8185},
-  url = {http://dx.doi.org/10.1080/24748668.2024.2419759},
-  DOI = {10.1080/24748668.2024.2419759},
-  number = {3},
-  journal = {International Journal of Performance Analysis in Sport},
-  publisher = {Informa UK Limited},
-  author = {Kunrath,  Caito A. and Bedo,  Bruno L. S. and Aquino,  Rodrigo and Laporta,  Lorenzo and De Conti Teixeira Costa,  Gustavo and Araújo,  Duarte and Leonardi,  Thiago},
-  year = {2024},
-  month = oct,
-  pages = {462–478}
-}
-
-@article{Costa2024,
-  title = {The impact of different game formats on players’ and team performance in youth soccer competitions},
-  volume = {19},
-  ISSN = {2048-397X},
-  url = {http://dx.doi.org/10.1177/17479541241252946},
-  DOI = {10.1177/17479541241252946},
-  number = {5},
-  journal = {International Journal of Sports Science &amp; Coaching},
-  publisher = {SAGE Publications},
-  author = {Costa,  Tobias dos Santos and Rossato,  Mateus and Rodrigues,  Obadias and Aquino,  Rodrigo and Bedo,  Bruno Souza and Leonardo,  Lucas and Machado,  João Cláudio},
-  year = {2024},
-  month = may,
-  pages = {2016–2023}
-}
-
-@article{Gonalves2024,
-  title = {Attack,  defense,  and transitions in soccer: analyzing the running performance of match-play},
-  volume = {20},
-  ISSN = {1825-1234},
-  url = {http://dx.doi.org/10.1007/s11332-024-01210-y},
-  DOI = {10.1007/s11332-024-01210-y},
-  number = {3},
-  journal = {Sport Sciences for Health},
-  publisher = {Springer Science and Business Media LLC},
-  author = {Gon\c{c}alves,  Luiz Guilherme and Silva,  Ana Filipa and Augusto,  Diego and Pasquarelli,  Bruno and Pastor,  Alejandro and de Okato Plato,  Felipe and Bedo,  Bruno L. S. and Vasconcellos,  Fabrício and Aquino,  Rodrigo},
-  year = {2024},
-  month = apr,
-  pages = {1087–1100}
-}
-
-```
-
-### 3. Citing DataGoal
-
-If you use DataGoal in your research, please cite the article:
-
-[DataGoal: A MATLAB toolbox to linear and non-linear soccer positional data analysis]([https://github.com](https://journals.sagepub.com/doi/10.1177/17543371261455525))
-
-```bibtex
-@article{bedo2026datagoal,
-  title = {DataGoal: A MATLAB toolbox to linear and non-linear soccer positional data analysis},
-  ISSN = {1754-338X},
-  url = {http://dx.doi.org/10.1177/17543371261455525},
-  DOI = {10.1177/17543371261455525},
-  journal = {Proceedings of the Institution of Mechanical Engineers,  Part P: Journal of Sports Engineering and Technology},
-  publisher = {SAGE Publications},
-  author = {Bedo,  Bruno L. S. and Moura,  Felipe A. and Santiago,  Paulo R. P. and Cunha,  Sergio A. and Assis,  Ronaldo D. and Machado,  João C. and Aquino,  Rodrigo},
-  year = {2026},
-  month = June 
-}
 ```
 
 ## Tutorial Video 🎬🎥
