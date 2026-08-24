@@ -52,7 +52,7 @@ The GUI opening function (`datagoal_GUI_v1_OpeningFcn`) is invoked just before t
 
 The GUI output function (`datagoal_GUI_v1_OutputFcn`) ensures that the main GUI result is returned appropriately, completing the interaction cycle efficiently.
 
-An example of the saved video can be accessed [HERE](https://drive.google.com/file/d/1TmOMntLm8MYTCVX0oTqYWH5nGCvSKI-9/view?usp=drive_link). The main execution code for the GUI can be found below.
+The main execution code for the GUI can be found below.
 
 ## License 📜
 
