@@ -84,5 +84,350 @@ The proposed tool is released under the [Apache License 2.0](https://www.apache.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 ```
 
+
+## Articles 📚
+
+### 1. Citing DataGoal
+
+If you use DataGoal in your research, please cite the article:
+
+- 📄 [Published Article](https://journals.sagepub.com/doi/10.1177/17543371261455525)
+  
+```bibtex
+@article{bedo2026datagoal,
+  title = {DataGoal: A MATLAB toolbox to linear and non-linear soccer positional data analysis},
+  ISSN = {1754-338X},
+  url = {http://dx.doi.org/10.1177/17543371261455525},
+  DOI = {10.1177/17543371261455525},
+  journal = {Proceedings of the Institution of Mechanical Engineers,  Part P: Journal of Sports Engineering and Technology},
+  publisher = {SAGE Publications},
+  author = {Bedo,  Bruno L. S. and Moura,  Felipe A. and Santiago,  Paulo R. P. and Cunha,  Sergio A. and Assis,  Ronaldo D. and Machado,  João C. and Aquino,  Rodrigo},
+  year = {2026},
+  month = June 
+}
+```
+
+### 2. Articles that used dataGoal
+
+The following articles have used DataGoal in their research:
+
+```bibtex
+@article{Sagaz2021,
+  title = {Influ\^encias do mando de jogo,  nível competitivo e resultado da partida sobre o desempenho físico em jogadores profissionais de futebol},
+  volume = {20},
+  ISSN = {1677-8510},
+  url = {http://dx.doi.org/10.33233/rbfex.v20i3.4178},
+  DOI = {10.33233/rbfex.v20i3.4178},
+  number = {3},
+  journal = {Revista Brasileira de Fisiologia do exerc&amp;iacute cio},
+  publisher = {Convergences Editorial},
+  author = {Sagaz,  Gabriel Colatto and Aresi,  Louren\c{c}o Zini Moreira and Bedo,  Bruno Luiz Souza and Mesquita,  Filipe and Santiago,  Paulo Roberto Pereira and Azevedo,  Angelo Melim and Souza,  Helder and Gon\c{c}alves,  Eder and Aquino,  Rodrigo},
+  year = {2021},
+  month = nov,
+  pages = {325–334}
+}
+
+@article{Machado2022,
+  title = {Applying Different Strategies of Task Constraint Manipulation in Small-Sided and Conditioned Games: How Do They Impact Physical and Tactical Demands?},
+  volume = {22},
+  ISSN = {1424-8220},
+  url = {http://dx.doi.org/10.3390/s22124435},
+  DOI = {10.3390/s22124435},
+  number = {12},
+  journal = {Sensors},
+  publisher = {MDPI AG},
+  author = {Machado,  João Cláudio and Góes,  Alberto and Aquino,  Rodrigo and Bedo,  Bruno L. S. and Viana,  Ronélia and Rossato,  Mateus and Scaglia,  Alcides and Ibáñez,  Sérgio J.},
+  year = {2022},
+  month = jun,
+  pages = {4435}
+}
+
+@article{Augusto2022,
+  title = {Contextual variables affect peak running performance in elite soccer players: A brief report},
+  volume = {4},
+  ISSN = {2624-9367},
+  url = {http://dx.doi.org/10.3389/fspor.2022.966146},
+  DOI = {10.3389/fspor.2022.966146},
+  journal = {Frontiers in Sports and Active Living},
+  publisher = {Frontiers Media SA},
+  author = {Augusto,  Di\^ego and Brito,  João and Aquino,  Rodrigo and Paulucio,  Dailson and Figueiredo,  Pedro and Bedo,  Bruno Luiz Souza and Touguinhó,  Deborah and Vasconcellos,  Fabrício},
+  year = {2022},
+  month = sep 
+}
+
+@article{Ueda2025,
+  title = {Influence of manipulating pitch size and game format in small-sided soccer games on tactical creativity and exploratory behavior of young players},
+  volume = {55},
+  ISSN = {1871-1871},
+  url = {http://dx.doi.org/10.1016/j.tsc.2024.101690},
+  DOI = {10.1016/j.tsc.2024.101690},
+  journal = {Thinking Skills and Creativity},
+  publisher = {Elsevier BV},
+  author = {Ueda,  Lucas Shoiti Carvalho and Aquino,  Rodrigo and Morais,  Cristiano Zarbato and Bedo,  Bruno and Teixeira,  Anderson Santiago and da Silva,  Juliano Fernandes and Borges,  Paulo Henrique},
+  year = {2025},
+  month = mar,
+  pages = {101690}
+}
+
+@article{Kunrath2024,
+  title = {Youth soccer team’s match dynamics with and without the ball when in both conditions of advantage and disadvantage},
+  volume = {25},
+  ISSN = {1474-8185},
+  url = {http://dx.doi.org/10.1080/24748668.2024.2419759},
+  DOI = {10.1080/24748668.2024.2419759},
+  number = {3},
+  journal = {International Journal of Performance Analysis in Sport},
+  publisher = {Informa UK Limited},
+  author = {Kunrath,  Caito A. and Bedo,  Bruno L. S. and Aquino,  Rodrigo and Laporta,  Lorenzo and De Conti Teixeira Costa,  Gustavo and Araújo,  Duarte and Leonardi,  Thiago},
+  year = {2024},
+  month = oct,
+  pages = {462–478}
+}
+
+@article{Costa2024,
+  title = {The impact of different game formats on players’ and team performance in youth soccer competitions},
+  volume = {19},
+  ISSN = {2048-397X},
+  url = {http://dx.doi.org/10.1177/17479541241252946},
+  DOI = {10.1177/17479541241252946},
+  number = {5},
+  journal = {International Journal of Sports Science &amp; Coaching},
+  publisher = {SAGE Publications},
+  author = {Costa,  Tobias dos Santos and Rossato,  Mateus and Rodrigues,  Obadias and Aquino,  Rodrigo and Bedo,  Bruno Souza and Leonardo,  Lucas and Machado,  João Cláudio},
+  year = {2024},
+  month = may,
+  pages = {2016–2023}
+}
+
+@article{Gonalves2024,
+  title = {Attack,  defense,  and transitions in soccer: analyzing the running performance of match-play},
+  volume = {20},
+  ISSN = {1825-1234},
+  url = {http://dx.doi.org/10.1007/s11332-024-01210-y},
+  DOI = {10.1007/s11332-024-01210-y},
+  number = {3},
+  journal = {Sport Sciences for Health},
+  publisher = {Springer Science and Business Media LLC},
+  author = {Gon\c{c}alves,  Luiz Guilherme and Silva,  Ana Filipa and Augusto,  Diego and Pasquarelli,  Bruno and Pastor,  Alejandro and de Okato Plato,  Felipe and Bedo,  Bruno L. S. and Vasconcellos,  Fabrício and Aquino,  Rodrigo},
+  year = {2024},
+  month = apr,
+  pages = {1087–1100}
+}
+
+```
+
+### 3. Academic Sources - Research Foundation
+
+The following articles were academic sources that based our research to develop the codes:
+
+```bibtex
+
+@article{Frencken2011,
+  title = {Oscillations of centroid position and surface area of soccer teams in small‐sided games},
+  volume = {11},
+  ISSN = {1536-7290},
+  url = {http://dx.doi.org/10.1080/17461391.2010.499967},
+  DOI = {10.1080/17461391.2010.499967},
+  number = {4},
+  journal = {European Journal of Sport Science},
+  publisher = {Wiley},
+  author = {Frencken,  Wouter and Lemmink,  Koen and Delleman,  Nico and Visscher,  Chris},
+  year = {2011},
+  month = jun,
+  pages = {215–223}
+}
+
+@article{Low2019,
+  title = {A Systematic Review of Collective Tactical Behaviours in Football Using Positional Data},
+  volume = {50},
+  ISSN = {1179-2035},
+  url = {http://dx.doi.org/10.1007/s40279-019-01194-7},
+  DOI = {10.1007/s40279-019-01194-7},
+  number = {2},
+  journal = {Sports Medicine},
+  publisher = {Springer Science and Business Media LLC},
+  author = {Low,  Benedict and Coutinho,  Diogo and Gon\c{c}alves,  Bruno and Rein,  Robert and Memmert,  Daniel and Sampaio,  Jaime},
+  year = {2019},
+  month = sep,
+  pages = {343–385}
+}
+
+@article{Moura2011,
+  title = {Quantitative analysis of Brazilian football players’ organisation on the pitch},
+  volume = {11},
+  ISSN = {1752-6116},
+  url = {http://dx.doi.org/10.1080/14763141.2011.637123},
+  DOI = {10.1080/14763141.2011.637123},
+  number = {1},
+  journal = {Sports Biomechanics},
+  publisher = {Informa UK Limited},
+  author = {Moura,  Felipe Arruda and Martins,  Luiz Eduardo Barreto and Anido,  Ricardo De Oliveira and De Barros,  Ricardo Machado Leite and Cunha,  Sergio Augusto},
+  year = {2011},
+  month = dec,
+  pages = {85–96}
+}
+
+@article{Duarte2013,
+  title = {Capturing complex,  non-linear team behaviours during competitive football performance},
+  volume = {26},
+  ISSN = {1559-7067},
+  url = {http://dx.doi.org/10.1007/s11424-013-2290-3},
+  DOI = {10.1007/s11424-013-2290-3},
+  number = {1},
+  journal = {Journal of Systems Science and Complexity},
+  publisher = {Springer Science and Business Media LLC},
+  author = {Duarte,  Ricardo and Araújo,  Duarte and Folgado,  Hugo and Esteves,  Pedro and Marques,  Pedro and Davids,  Keith},
+  year = {2013},
+  month = feb,
+  pages = {62–72}
+}
+
+@article{Silva2014,
+  title = {Numerical Relations and Skill Level Constrain Co-Adaptive Behaviors of Agents in Sports Teams},
+  volume = {9},
+  ISSN = {1932-6203},
+  url = {http://dx.doi.org/10.1371/journal.pone.0107112},
+  DOI = {10.1371/journal.pone.0107112},
+  number = {9},
+  journal = {PLoS ONE},
+  publisher = {Public Library of Science (PLoS)},
+  author = {Silva,  Pedro and Travassos,  Bruno and Vilar,  Luís and Aguiar,  Paulo and Davids,  Keith and Araújo,  Duarte and Garganta,  Júlio},
+  editor = {Balasubramaniam,  Ramesh},
+  year = {2014},
+  month = sep,
+  pages = {e107112}
+}
+
+@article{Gonalves2020,
+  title = {Effects of Match-Related Contextual Factors on Weekly Load Responses in Professional Brazilian Soccer Players},
+  volume = {17},
+  ISSN = {1660-4601},
+  url = {http://dx.doi.org/10.3390/ijerph17145163},
+  DOI = {10.3390/ijerph17145163},
+  number = {14},
+  journal = {International Journal of Environmental Research and Public Health},
+  publisher = {MDPI AG},
+  author = {Gon\c{c}alves,  Luiz Guilherme Cruz and Kalva-Filho,  Carlos Augusto and Nakamura,  Fábio Yuzo and Rago,  Vincenzo and Afonso,  José and Bedo,  Bruno Luiz de Souza and Aquino,  Rodrigo},
+  year = {2020},
+  month = jul,
+  pages = {5163}
+}
+
+@article{Zubillaga2013,
+  title = {Influence of Ball Position on Playing Space in Spanish Elite Women’s Football Match-Play},
+  volume = {8},
+  ISSN = {2048-397X},
+  url = {http://dx.doi.org/10.1260/1747-9541.8.4.713},
+  DOI = {10.1260/1747-9541.8.4.713},
+  number = {4},
+  journal = {International Journal of Sports Science &amp; Coaching},
+  publisher = {SAGE Publications},
+  author = {Zubillaga,  Asier and Gabbett,  Tim J. and Fradua,  Luis and Ruiz-Ruiz,  Carlos and Caro,  Óscar and Ervilla,  Raúl},
+  year = {2013},
+  month = dec,
+  pages = {713–722}
+}
+
+@article{Fonseca2012,
+  title = {Spatial dynamics of team sports exposed by Voronoi diagrams},
+  volume = {31},
+  ISSN = {0167-9457},
+  url = {http://dx.doi.org/10.1016/j.humov.2012.04.006},
+  DOI = {10.1016/j.humov.2012.04.006},
+  number = {6},
+  journal = {Human Movement Science},
+  publisher = {Elsevier BV},
+  author = {Fonseca,  Sofia and Milho,  João and Travassos,  Bruno and Araújo,  Duarte},
+  year = {2012},
+  month = dec,
+  pages = {1652–1659}
+}
+
+@article{barros2007analysis,
+  title={Analysis of the distances covered by first division Brazilian soccer players obtained with an automatic tracking method},
+  author={Barros, Ricardo ML and Misuta, Milton S and Menezes, Rafael P and Figueroa, Pascual J and Moura, Felipe A and Cunha, Sergio A and Anido, Ricardo and Leite, Neucimar J},
+  journal={Journal of sports science \& medicine},
+  volume={6},
+  number={2},
+  pages={233},
+  year={2007}
+}
+
+@article{Moura2013,
+  title = {A spectral analysis of team dynamics and tactics in Brazilian football},
+  volume = {31},
+  ISSN = {1466-447X},
+  url = {http://dx.doi.org/10.1080/02640414.2013.789920},
+  DOI = {10.1080/02640414.2013.789920},
+  number = {14},
+  journal = {Journal of Sports Sciences},
+  publisher = {Informa UK Limited},
+  author = {Moura,  Felipe Arruda and Martins,  Luiz Eduardo Barreto and Anido,  Ricardo O. and Ruffino,  Paulo Régis C. and Barros,  Ricardo M. L. and Cunha,  Sergio Augusto},
+  year = {2013},
+  month = oct,
+  pages = {1568–1577}
+}
+
+@article{Moura2016,
+  title = {Coordination analysis of players’ distribution in football using cross-correlation and vector coding techniques},
+  volume = {34},
+  ISSN = {1466-447X},
+  url = {http://dx.doi.org/10.1080/02640414.2016.1173222},
+  DOI = {10.1080/02640414.2016.1173222},
+  number = {24},
+  journal = {Journal of Sports Sciences},
+  publisher = {Informa UK Limited},
+  author = {Moura,  Felipe Arruda and van Emmerik,  Richard E. A. and Santana,  Juliana Exel and Martins,  Luiz Eduardo Barreto and Barros,  Ricardo Machado Leite de and Cunha,  Sergio Augusto},
+  year = {2016},
+  month = apr,
+  pages = {2224–2232}
+}
+
+@article{Nakamura2017,
+  title = {Repeated-Sprint Sequences During Female Soccer Matches Using Fixed and Individual Speed Thresholds},
+  volume = {31},
+  ISSN = {1064-8011},
+  url = {http://dx.doi.org/10.1519/JSC.0000000000001659},
+  DOI = {10.1519/jsc.0000000000001659},
+  number = {7},
+  journal = {Journal of Strength and Conditioning Research},
+  publisher = {Ovid Technologies (Wolters Kluwer Health)},
+  author = {Nakamura,  Fábio Y. and Pereira,  Lucas A. and Loturco,  Irineu and Rosseti,  Marcelo and Moura,  Felipe A. and Bradley,  Paul S.},
+  year = {2017},
+  month = jul,
+  pages = {1802–1810}
+}
+
+@article{Souza2018,
+  title = {Space configuration and numerical relationship during professional soccer matches: a proposal for small-sided games design},
+  volume = {2018},
+  ISSN = {1899-1955},
+  url = {http://dx.doi.org/10.5114/hm.2018.83386},
+  DOI = {10.5114/hm.2018.83386},
+  number = {5},
+  journal = {Human Movement},
+  publisher = {Termedia Sp. z.o.o.},
+  author = {Souza,  Nicolau Melo de and Caetano,  Fabio Giuliano and Santiago,  Paulo Roberto Pereira and Cunha,  Sergio Augusto and Torres,  Ricardo da Silva and Moura,  Felipe Arruda},
+  year = {2018},
+  pages = {121–128}
+}
+
+@article{Caetano2019,
+  title = {Analysis of Match Dynamics of Different Soccer Competition Levels Based on The Player Dyads},
+  volume = {70},
+  ISSN = {1899-7562},
+  url = {http://dx.doi.org/10.2478/hukin-2019-0030},
+  DOI = {10.2478/hukin-2019-0030},
+  number = {1},
+  journal = {Journal of Human Kinetics},
+  publisher = {Termedia Sp. z.o.o.},
+  author = {Caetano,  Fabio Giuliano and Silva,  Vitor Panula da and Torres,  Ricardo da Silva and Anido,  Ricardo de Oliveira and Cunha,  Sergio Augusto and Moura,  Felipe Arruda},
+  year = {2019},
+  month = nov,
+  pages = {173–182}
+}
+
+```
+
 ## Tutorial Video 🎬🎥
 The tutorial video is available [here](https://youtu.be/RBs5-m0Gknw?si=PjVAwBU3mmRkyN-X). It provides a step-by-step guide, covering everything from installation and running the software to creating figures and videos.
