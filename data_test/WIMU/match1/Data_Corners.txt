@@ -1,0 +1,11 @@
+Horário de início: 15:42
+Horário de término: 15:52
+10 min de atividade
+
+Jogo reduzido 3 vs. 3
+
+local: 
+Corner 01: Lat -3.052653 e Longe -60.104191
+Corner 02: Lat -3.052790 e long -60.104052
+Corner 03: Lat -3.052557 e long -60.103807
+Corner 04: Lat -3.052432 e long -60.103953
